@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/SweetAlert2.props" />
+</Project>

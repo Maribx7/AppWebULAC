@@ -1,0 +1,700 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+    int IDEmpresa = (int)Session["IDEmpresa"];
+
+
+}
+
+<head>
+    <meta charset="utf-8">
+    <title>ULAC S.A. - Vinculando Sueños, Entregando Confinza</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="~/Content/img/logo.ico" rel="icon">
+   
+
+    <!-- Google API -->
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc7MDG1kw7viND43cXXo2lS8t45M14qjA&libraries=places"></script>
+
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="~/Content/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="~/Content/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Cargando...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0">
+        <a href="index.html" class="navbar-brand bg-primary d-flex align-items-center px-4 px-lg-5">
+            <h2 class="mb-2 text-white">Transportes ULAC </h2>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="inicio.html" class="nav-item nav-link active">Inicio</a>
+                <a href="~/Home/SeguimientoNormal" class="nav-item nav-link">Seguimiento de Envíos</a>
+                <a href="Operaciones.html" class="nav-item nav-link">Detalles de Operación</a>
+                <a href="perfil.html" class="nav-item nav-link">Perfil</a>
+                <a href="index.html" class="nav-item nav-link">Cerrar Sesión</a>
+                <!-- Mostrar IDEmpresa en la barra de navegación -->
+                <div class="nav-item">
+                    <span class="nav-link">
+                        @if (Session["IDEmpresa"] != null)
+                        {
+                            <span name="IDEmpresa">IDEmpresa: @Session["IDEmpresa"]</span>
+                        }
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0 pb-5">
+        <div class="owl-carousel header-carousel position-relative mb-5">
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="img/1hd.jpg" alt="">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(6, 3, 21, .5);">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-10 col-lg-8">
+                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">Transportes por carretera nacional e internacional</h5>
+                                <h1 class="display-3 text-white animated slideInDown mb-4">ULAC #1 EN <span class="text-primary">TRANSPORTE</span> POR CARRETERA</h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vinculando sueños, entregando confianza. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="img/carousel-2.jpg" alt="">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(6, 3, 21, .5);">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-10 col-lg-8">
+                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">Transportes por carretera nacional e internacional</h5>
+                                <h1 class="display-3 text-white animated slideInDown mb-4">SOMOS LOS #1 EN SERVICIOS DE <span class="text-primary">CONFIANZA</span></h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vinculando sueños, entregando confianza.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Carousel End -->
+    <!-- Contrato de Servicios -->
+    <form id="formularioConfirmarServicio">
+        <div class="container py-5">
+            <h2 class="text-center mb-4">Selecciona tu servicio de transporte</h2>
+            <div class="row justify-content-center">
+                <!-- Opción 1: TenTons -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 name="Tentons" class="card-title text-center">Servicio TenTons</h5>
+                            <p class="card-text">Transporta hasta 10 a 15 toneladas de mercancía.</p>
+                            <p class="card-text">Marca de camión: Kenworth.</p>
+                            <p class="card-text">No incluye seguro de carga.</p>
+                            <p class="card-text">Costo: $2000</p>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" value="1" type="checkbox" id="tentonsCheckbox">
+                                <label class="form-check-label" for="tentonsCheckbox">
+                                    Seleccionar
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Opción 2: ULAC HeavyHaul -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 name="HeavyHaul" class="card-title text-center">Servicio HeavyHaul</h5>
+                            <p class="card-text">Transporta hasta 30 a 40 toneladas de mercancía.</p>
+                            <p class="card-text">Marca de camión: Freightliner.</p>
+                            <p class="card-text">Incluye seguro de carga.</p>
+                            <p class="card-text">Seguro de responsabilidad civil.</p>
+                            <p class="card-text">Costo: $3500</p>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="2" id="heavyhaulCheckbox">
+                                <label class="form-check-label" for="heavyhaulCheckbox">
+                                    Seleccionar
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Opción 3: HeavyTruck -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 name="HeavyTruck" class="card-title text-center">Servicio HeavyTruck</h5>
+                            <p class="card-text">Transporta hasta 40 a 60 toneladas de mercancía.</p>
+                            <p class="card-text">Marcas de camión: International y Kenworth.</p>
+                            <p class="card-text">Incluye seguro de carga.</p>
+                            <p class="card-text">Servicio de atención al cliente las 24 horas.</p>
+                            <p class="card-text">Documentación y trámites aduaneros</p>
+                            <p class="card-text">Seguro de responsabilidad civil.</p>
+                            <p class="card-text">Costo: $5000</p>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="3" id="heavytruckCheckbox">
+                                <label class="form-check-label" for="heavytruckCheckbox">
+                                    Seleccionar
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container py-5">
+                <h2 class="text-center mb-4">Confirmar Servicio de Transporte</h2>
+
+                <!-- Campos de origen y destino -->
+                <div class="mb-3">
+                    <label for="origenInput" class="form-label">Origen:</label>
+                    <select class="form-select" id="origenInput" required>
+                        <option value="">Selecciona el origen</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="destinoInput" class="form-label">Destino:</label>
+                    <select class="form-select" id="destinoInput" required>
+                        <option value="">Selecciona el destino</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" id="botonCalcularTiempo">Calular Tiempo Estimado</button>
+                <!-- Campo de tiempo estimado (se completará automáticamente) -->
+                <div class="mb-3">
+                    <label for="tiempoEstimado" class="form-label">Tiempo Estimado:</label>
+                    <input type="text" class="form-control" id="tiempoEstimado" readonly>
+                </div>
+
+                <!-- Subtotal del servicio -->
+                <div class="mb-3">
+                    <label for="subtotal" class="form-label">Subtotal:</label>
+                    <input type="text" class="form-control" id="subtotal" value="" readonly>
+                </div>
+                <!-- Total del servicio -->
+                <div class="mb-3">
+                    <label for="total" class="form-label">total:</label>
+                    <input type="text" class="form-control" id="total" value="" readonly>
+                </div>
+
+                <!-- Método de pago -->
+                <div class="mb-3">
+                    <label for="metodoPago" class="form-label">Método de Pago:</label>
+                    <select class="form-select" id="metodoPago" required>
+                        <option value="">Seleccione un método de pago</option>
+                        <option value="pagoCompleto">Pago Completo</option>
+                        <option value="pagoFraccionado">Pago Fraccionado</option>
+                    </select>
+                </div>
+
+                <!-- Detalles de Tarjeta de Crédito -->
+                <div id="detallesTarjeta" style="display: none;" margin-bottom: 1rem;>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="numeroTarjeta">Número de tarjeta:</label>
+                            <input type="text" class="form-control" name="NumeroTarjeta" id="numeroTarjeta" placeholder="Ingrese el número de tarjeta">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="fechaVencimiento">Fecha de Vencimiento:</label>
+                            <input type="text" class="form-control" name="FechaVencimiento" id="fechaVencimiento" placeholder="MM/AA">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="codigoSeguridad">Código de Seguridad:</label>
+                            <input type="text" class="form-control" name="CodigoSeguridad" id="codigoSeguridad" placeholder="Ingrese el código de seguridad">
+                        </div>
+                        <input type="hidden" name="idEmpresa" value="@Session["IDEmpresa"]"/>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Botón de confirmar servicio -->
+            <button type="submit" class="btn btn-primary" id="botonConfirmar">Confirmar Servicio</button>
+        </div>
+      </form>
+    
+
+
+
+
+
+    <!-- About Start -->
+    <div class="container-fluid overflow-hidden py-5 px-lg-0">
+        <div class="container about py-5 px-lg-0">
+            <div class="row g-5 mx-lg-0">
+                <div class="col-lg-6 ps-lg-0 wow fadeInLeft" data-wow-delay="0.1s" style="min-height: 400px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute img-fluid w-100 h-100" src="~/Content/img/DELI.jpg" style="object-fit: cover;" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 about-text wow fadeInUp" data-wow-delay="0.3s">
+                    <h6 class="text-secondary text-uppercase mb-3">Sobre nosotros</h6>
+                    <h1 class="mb-5">Rapido transporte y soluciones a su alcance</h1>
+                    <p class="mb-5">Transportes ULAC S.A., líderes en transporte nacional e internacional desde 2013. Nos destacamos por la eficiencia, la innovación y la entrega de confianza. Con sede en Caldera, Costa Rica, somos la elección preferida para tejer conexiones humanas a través de cada entrega.</p>
+                    <div class="row g-4 mb-5">
+                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
+                            <i class="fa fa-globe fa-3x text-primary mb-3"></i>
+                            <h5>Cobertura Internacional</h5>
+                            <p class="m-0">Con rutas que conectan Costa Rica con destinos clave en El Salvador, Nicaragua, Honduras, Guatemala y Panamá, garantizamos entregas eficientes y seguras en todo el ámbito internacional.</p>
+                        </div>
+                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
+                            <i class="fa fa-shipping-fast fa-3x text-primary mb-3"></i>
+                            <h5>Entregas de confianza</h5>
+                            <p class="m-0">En Transportes ULAC, cada entrega es una promesa cumplida. Nuestra dedicación se traduce en "Entregas de Confianza", asegurando la seguridad y puntualidad que nuestros clientes merecen.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+    <!-- Fact Start -->
+    <div class="container-xxl py-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="text-secondary text-uppercase mb-3">Confirmado por nuestros clientes</h6>
+                    <h1 class="mb-5">El mejor lugar para gestionar todos sus envíos</h1>
+                    <p class="mb-5">Nuestra plataforma brinda una experiencia integral, permitiéndote supervisar y coordinar cada aspecto de tus envíos de manera eficiente y segura. Desde herramientas de seguimiento en tiempo real hasta opciones de gestión de operaciones, estamos comprometidos a proporcionar una solución integral para todas tus necesidades logísticas.</p>
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-headphones fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
+                        <div class="ps-4">
+                            <h6>¡Llamanos para cualquier consulta!</h6>
+                            <h3 class="text-primary m-0">+506 25348448</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-sm-6">
+                            <div class="bg-primary p-4 mb-4 wow fadeIn" data-wow-delay="0.3s">
+                                <i class="fa fa-users fa-2x text-white mb-3"></i>
+                                <h2 class="text-white mb-2" data-toggle="counter-up">2734</h2>
+                                <p class="text-white mb-0">Clientes satisfechos</p>
+                            </div>
+                            <div class="bg-secondary p-4 wow fadeIn" data-wow-delay="0.5s">
+                                <i class="fa fa-ship fa-2x text-white mb-3"></i>
+                                <h2 class="text-white mb-2" data-toggle="counter-up">2734</h2>
+                                <p class="text-white mb-0">Entregas realizadas</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="bg-success p-4 wow fadeIn" data-wow-delay="0.7s">
+                                <i class="fa fa-star fa-2x text-white mb-3"></i>
+                                <h2 class="text-white mb-2" data-toggle="counter-up">2027</h2>
+                                <p class="text-white mb-0">Reseñas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fact End -->
+    <!-- Service Start -->
+    <div class="container-xxl py-5">
+        <div class="container py-5">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="text-secondary text-uppercase">Nuestras Unidades</h6>
+                <h1 class="mb-5">Explore nuestras unidades</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item p-4">
+                        <div class="overflow-hidden mb-4">
+                            <img class="img-fluid" src="~/Content/img/lolita.jpeg" alt="">
+                        </div>
+                        <h4 class="mb-3">Freightliner</h4>
+                        <p>Freightliner es un fabricante líder de camiones y vehículos comerciales, conocido por su calidad, durabilidad y rendimiento excepcionales.</p>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item p-4">
+                        <div class="overflow-hidden mb-4">
+                            <img class="img-fluid" src="~/Content/img/kwcr.jpeg" alt="">
+                        </div>
+                        <h4 class="mb-3">Kenworth</h4>
+                        <p>Kenworth es un destacado fabricante de camiones y vehículos comerciales, reconocido por su compromiso con la excelencia, durabilidad sobresaliente y rendimiento confiable.</p>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item p-4">
+                        <div class="overflow-hidden mb-4">
+                            <img class="img-fluid" src="~/Content/img/mmk.jpg" alt="">
+                        </div>
+                        <h4 class="mb-3">MACK</h4>
+                        <p>MACK se destaca como un fabricante líder en la industria de camiones y vehículos comerciales, renombrado por su sólida construcción, innovación tecnológica y una tradición centenaria de proporcionar soluciones de transporte robustas y eficientes.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item p-4">
+                        <div class="overflow-hidden mb-4">
+                            <img class="img-fluid" src="~/Content/img/inter.png" alt="">
+                        </div>
+                        <h4 class="mb-3">International</h4>
+                        <p>Con una larga historia de excelencia, International Truck se ha ganado la confianza de la industria por ofrecer soluciones de transporte duraderas y avanzadas.</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+    <!-- Ubicación Start -->
+    <div class="container-fluid overflow-hidden py-5 px-lg-0">
+        <div class="container ubicacion py-5 px-lg-0">
+            <div class="row g-5 mx-lg-0">
+                <div class="col-lg-6 ps-lg-0 wow fadeInLeft" data-wow-delay="0.1s" style="min-height: 400px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute img-fluid w-100 h-100" src="~/Content/img/Puerto-Caldera.12.gif" style="object-fit: cover;" alt="Mapa de la ubicación">
+                    </div>
+                </div>
+                <div class="col-lg-6 ubicacion-text wow fadeInUp" data-wow-delay="0.3s">
+                    <h6 class="text-secondary text-uppercase mb-3">Nuestra Ubicación</h6>
+                    <h1 class="mb-5">Sede en Caldera, Costa Rica</h1>
+                    <p class="mb-5">Nos encontramos estratégicamente ubicados en Caldera, Costa Rica. Esta ubicación nos permite ofrecer servicios de transporte eficientes y conectividad a nivel nacional e internacional.</p>
+                    <div class="row g-4 mb-5">
+                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
+                            <i class="bi bi-geo-alt-fill text-primary fa-3x mb-3"></i>
+                            <h5>Dirección</h5>
+                            <p class="m-0">Caldera, Costa Rica</p>
+                        </div>
+                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
+                            <i class="bi bi-telephone-fill text-primary fa-3x mb-3"></i>
+                            <h5>Contacto</h5>
+                            <p class="m-0">Teléfono: +506 89884512</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ubicación End -->
+    <!-- Testimonial Start -->
+    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="text-center">
+                <h6 class="text-secondary text-uppercase">Reseñas</h6>
+                <h1 class="mb-0">Nuestros clientes hablan!</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                <div class="testimonial-item p-4 my-5">
+                    <i class="fa fa-quote-right fa-3x text-light position-absolute top-0 end-0 mt-n3 me-4"></i>
+                    <div class="d-flex align-items-end mb-4">
+                        <img class="img-fluid flex-shrink-0" src="~/Content/img/testimonial-1.jpg" style="width: 80px; height: 80px;">
+                        <div class="ms-4">
+                            <h5 class="mb-1">Laura Gómez</h5>
+                            <p class="m-0">Gerente de Operaciones de ImportaGlobal Ltd.</p>
+                        </div>
+                    </div>
+                    <p class="mb-0">"Como gerente de operaciones de ImportaGlobal Ltd., nuestra experiencia con ULAC ha sido más allá de transportar mercancías. Su dedicación a la puntualidad y seguridad ha superado nuestras expectativas, convirtiéndolos en socios comerciales esenciales."</p>
+                </div>
+                <div class="testimonial-item p-4 my-5">
+                    <i class="fa fa-quote-right fa-3x text-light position-absolute top-0 end-0 mt-n3 me-4"></i>
+                    <div class="d-flex align-items-end mb-4">
+                        <img class="img-fluid flex-shrink-0" src="~/Content/img/testimonial-2.jpg" style="width: 80px; height: 80px;">
+                        <div class="ms-4">
+                            <h5 class="mb-1">Jose Pérez</h5>
+                            <p class="m-0">Director de logística de LogiTech Solutions</p>
+                        </div>
+                    </div>
+                    <p class="mb-0">"Trabajar con Transportes ULAC S.A. ha sido fundamental para nuestro negocio. Puedo decir que en Transportes ULAC han demostrado ser socios confiables, brindándonos un servicio excepcional en cada entrega. Su compromiso y profesionalismo son inigualables."</p>
+                </div>
+                <div class="testimonial-item p-4 my-5">
+                    <i class="fa fa-quote-right fa-3x text-light position-absolute top-0 end-0 mt-n3 me-4"></i>
+                    <div class="d-flex align-items-end mb-4">
+                        <img class="img-fluid flex-shrink-0" src="~/Content/img/testimonial-3.jpg" style="width: 80px; height: 80px;">
+                        <div class="ms-4">
+                            <h5 class="mb-1">Javier Castillo</h5>
+                            <p class="m-0">Gerente de Operaciones de CostaGlobal Imports.</p>
+                        </div>
+                    </div>
+                    <p class="mb-0">"Como empresa que depende del transporte internacional para nuestras importaciones y exportaciones, hemos encontrado en ULAC S.A. un socio invaluable. Sus cabezales modernos y bien mantenidos nos brinda la seguridad de que nuestras mercancías llegarán a destino a tiempo y en perfectas condiciones."</p>
+                </div>
+                <div class="testimonial-item p-4 my-5">
+                    <i class="fa fa-quote-right fa-3x text-light position-absolute top-0 end-0 mt-n3 me-4"></i>
+                    <div class="d-flex align-items-end mb-4">
+                        <img class="img-fluid flex-shrink-0" src="~/Content/img/testimonial-4.jpg" style="width: 80px; height: 80px;">
+                        <div class="ms-4">
+                            <h5 class="mb-1">Karla Rojas</h5>
+                            <p class="m-0">Gerente de Compras de CostaMarine Logistics.</p>
+                        </div>
+                    </div>
+                    <p class="mb-0">"La conexión directa entre Caldera y destinos internacionales se ha vuelto más fluida y eficiente gracias a Transportes ULAC S.A. La puntualidad y seguridad que ofrecen son vitales para nuestro negocio, y su atención personalizada nos hace sentir respaldados."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+        <div class="container py-5">
+            <div class="row g-5 justify-content-center">
+                <!-- Modificación: Agregar la clase justify-content-center -->
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Dirección</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Caldera, Costa Rica</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+506 89884512</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>gerenciatransulac@transulac.cr</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href="https://twitter.com/?lang=es"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/?locale=es_LA"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Servicio de transporte por carretera</h4>
+                    <a class="btn btn-link" href="">Kenworth</a>
+                    <a class="btn btn-link" href="">Freightliner</a>
+                    <a class="btn btn-link" href="">MACK</a>
+                    <a class="btn btn-link" href="">International</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Links Rápidos</h4>
+                    <a class="btn btn-link" href="about.html">Sobre Nosotros</a>
+                    <a class="btn btn-link" href="contact.html">Contáctenos</a>
+                    <a class="btn btn-link" href="registro.html">Registro</a>
+                    <a class="btn btn-link" href="login.html">Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">Transportes ULAC</a>, Todos los derechos reservados.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-0 back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/lib/wow/wow.min.js"></script>
+    <script src="~/Content/lib/easing/easing.min.js"></script>
+    <script src="~/Content/lib/waypoints/waypoints.min.js"></script>
+    <script src="~/Content/lib/counterup/counterup.min.js"></script>
+    <script src="~/Content/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="~/Content/js/main.js"></script>
+
+
+    <!-- APIS -->
+    <script>
+        $(document).ready(function () {
+            var username = "marilyn"; // Reemplaza con tu nombre de usuario de Geonames
+            var apiUrl = "http://api.geonames.org/searchJSON";
+
+            // Función para cargar ciudades en un elemento select
+            function cargarCiudades(selectElement) {
+                $.getJSON(apiUrl, {
+                    country: 'CR,SV,GT,HN,NI,PA', // Códigos de países de Centroamérica
+                    featureClass: 'P', // Solo ciudades
+                    username: username // Tu nombre de usuario de Geonames
+                }, function (data) {
+                    // Limpiar el select
+                    selectElement.find('option').remove();
+                    // Agregar una opción predeterminada
+                    selectElement.append($('<option>').text('Selecciona una ciudad').val(''));
+                    // Agregar cada ciudad devuelta por la API al select
+                    $.each(data.geonames, function (i, city) {
+                        selectElement.append($('<option>').text(city.name).val(city.name));
+                    });
+                });
+            }
+
+            // Función para generar el tiempo estimado y mostrarlo en el campo correspondiente
+            function generarTiempoEstimado() {
+                // Generar un número aleatorio entre 1 y 10 para las horas
+                var horas = Math.floor(Math.random() * 10) + 1;
+                // Generar un número aleatorio entre 1 y 59 para los minutos
+                var minutos = Math.floor(Math.random() * 59) + 1;
+                // Concatenar los valores para formar el tiempo estimado
+                var tiempoEstimado = horas + ' horas ' + minutos + ' minutos';
+                // Devolver el tiempo estimado generado
+                return tiempoEstimado;
+            }
+
+            // Manejar el clic en el botón para calcular el tiempo estimado y el total
+            $('#botonCalcularTiempo').click(function () {
+                // Generar el tiempo estimado
+                var tiempoEstimado = generarTiempoEstimado();
+
+                // Obtener el subtotal
+                var subtotal = parseFloat($('#subtotal').val());
+
+                // Calcular el total sumando el subtotal y un valor aleatorio entre 1000 y 2000
+                var total = subtotal + Math.floor(Math.random() * (2000 - 1000 + 1) + 1000);
+
+                // Mostrar el tiempo estimado en el campo correspondiente
+                $('#tiempoEstimado').val(tiempoEstimado);
+                // Mostrar el total en el campo correspondiente
+                $('#total').val(total.toFixed(2));
+            });
+
+            $('.form-check-input').on('click', function () {
+                // Inicializar el subtotal en 0
+                var subtotal = 0;
+
+                // Recorrer todas las casillas de verificación
+                $('.form-check-input').each(function () {
+                    // Si una casilla está marcada, sumar su valor al subtotal
+                    if ($(this).is(':checked')) {
+                        // Obtener el valor del checkbox
+                        var valorCheckbox = parseFloat($(this).val());
+                        // Asociar el valor del checkbox con el costo correspondiente
+                        var costo;
+                        if (valorCheckbox === 1) {
+                            costo = 2000; // Costo para la opción 1
+                        } else if (valorCheckbox === 2) {
+                            costo = 3500; // Costo para la opción 2
+                        } else if (valorCheckbox === 3) {
+                            costo = 5000; // Costo para la opción 3
+                        }
+                        subtotal += costo;
+                    }
+                });
+
+                // Mostrar el subtotal en el campo correspondiente
+                $('#subtotal').val(subtotal.toFixed(2));
+            });
+
+            // Cargar ciudades en los select de origen y destino utilizando Places Autocomplete de Google
+            cargarCiudades($('#origenInput, #destinoInput'));
+        });
+    </script>
+    <script>
+        // Función para mostrar u ocultar los detalles de la tarjeta de crédito según el método de pago seleccionado
+        document.getElementById('metodoPago').addEventListener('change', function () {
+            var detallesTarjeta = document.getElementById('detallesTarjeta');
+            if (this.value === 'pagoFraccionado' || this.value === 'pagoCompleto') {
+                detallesTarjeta.style.display = 'block';
+            } else {
+                detallesTarjeta.style.display = 'none';
+            }
+
+        });
+
+    </script>
+
+    <script>
+        var idEmpresa = @Session["IDEmpresa"];
+        // Función para enviar el formulario
+        function enviarFormulario() {
+
+            // Obtener los valores de los campos del formulario
+            var idEmpresa = @Session["IDEmpresa"];
+            var idTipoPaquete = obtenerIdTipoPaqueteSeleccionado();
+            var origen = $("#origenInput").val();
+            var destino = $("#destinoInput").val();
+            var tiempoEstimado = $("#tiempoEstimado").val();
+            var subtotal = parseFloat($("#subtotal").val());
+            var metodoPago = $("#metodoPago").val();
+            var numeroTarjeta = $("#numeroTarjeta").val();
+            var fechaVencimiento = $("#fechaVencimiento").val();
+            var codigoSeguridad = $("#codigoSeguridad").val();
+            var total = parseFloat($("#total").val());
+
+            // Crear un objeto con los datos del formulario
+            var datosFormulario = {
+                IDEmpresa: idEmpresa,
+                IDTipoPaquete: idTipoPaquete,
+                Origen: origen,
+                Destino: destino,
+                TiempoEstimado: tiempoEstimado,
+                Subtotal: subtotal,
+                MetodoPago: metodoPago,
+                NumeroTarjeta: numeroTarjeta,
+                FechaVencimiento: fechaVencimiento,
+                CodigoSeguridad: codigoSeguridad,
+                Total: total
+            };
+            var urlAccion = '@Url.Action("ConfirmarServicio", "Inicio")';
+            // Enviar los datos al controlador mediante una solicitud POST
+            $.post(urlAccion, datosFormulario, function (respuesta) {
+
+            });
+        }
+
+        // Función para obtener el ID del tipo de paquete seleccionado
+        function obtenerIdTipoPaqueteSeleccionado() {
+            if ($("#tentonsCheckbox").is(":checked")) {
+                return $("#tentonsCheckbox").val();
+            } else if ($("#heavyhaulCheckbox").is(":checked")) {
+                return $("#heavyhaulCheckbox").val();
+            } else if ($("#heavytruckCheckbox").is(":checked")) {
+                return $("#heavytruckCheckbox").val();
+            } else {
+                return ""; // Puedes manejar este caso según tus necesidades
+            }
+        }
+        function mostrarPopup() {
+            var popup = document.createElement("div");
+            popup.style.width = "400px";
+            popup.style.height = "300px";
+            popup.style.border = "1px solid black";
+            popup.style.backgroundColor = "white";
+            popup.innerHTML = "<h1>¡Pago exitoso!</h1>";
+            document.body.appendChild(popup);
+
+            // Mostrar el popup
+            popup.style.display = "block";
+
+            // Ocultar el popup después de 5 segundos
+            setTimeout(function () {
+                popup.style.display = "none";
+            }, 5000);
+        }
+        // Manejar el clic en el botón de confirmar
+        $("#botonConfirmar").click(function (event) {
+        
+            
+            mostrarPopup(); // Prevenir el comportamiento predeterminado del botón
+            enviarFormulario(); // Llamar a la función para enviar el formulario
+        });
+    </script>
+</body>
