@@ -36,7 +36,7 @@ namespace ULACWeb.Controllers
 
             return View();
         }
-        public ActionResult Seguimiento(List<SeguimientoModel> seguimientos)
+        public ActionResult SeguimientoList(List<SeguimientoModel> seguimientos)
         {
             return View(seguimientos);
         }
