@@ -15,7 +15,7 @@ namespace ULACWeb.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ConfirmarServicio(int IDEmpresa, string Origen, string Destino, string TiempoEstimado, decimal Subtotal, string MetodoPago, string NumeroTarjeta, string FechaVencimiento, string CodigoSeguridad, decimal Total, int IDTipoPaquete)
+        public ActionResult ConfirmarServicio(int IDEmpresa, string Origen, string Destino, string TiempoEstimado, string Industria, decimal Subtotal, string MetodoPago, string NumeroTarjeta, string FechaVencimiento, string CodigoSeguridad, decimal Total, int IDTipoPaquete)
         {
             // Crear un objeto de contrato con los datos recibidos del formulario
             InicioModel.Contrato contrato = new InicioModel.Contrato
@@ -25,6 +25,7 @@ namespace ULACWeb.Controllers
                 Origen = Origen,
                 Destino = Destino,
                 TiempoEstimado = TiempoEstimado,
+                Industria = Industria,
                 Subtotal = Subtotal,
                 MetodoPago = MetodoPago,
                 NumeroTarjeta = NumeroTarjeta,

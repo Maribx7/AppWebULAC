@@ -200,6 +200,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DetallesOperacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleOperacionModel.cs" />
     <Compile Include="Models\InicioModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegistroModel.cs" />
@@ -380,6 +382,8 @@
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\mixins.less" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\dataTables.js" />
+    <Content Include="Scripts\dataTables.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -410,11 +414,14 @@
     <Content Include="Views\Home\Seguimiento.cshtml" />
     <Content Include="Views\Home\Pago.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
+    <Content Include="Views\Home\DetallesOperacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DetallesOperacion\" />
     <Folder Include="Views\Inicio\" />
     <Folder Include="Views\Login\" />
+    <Folder Include="Views\Operacion\" />
     <Folder Include="Views\Registro\" />
     <Folder Include="Views\Seguimiento\" />
     <Folder Include="Views\Servicios\" />

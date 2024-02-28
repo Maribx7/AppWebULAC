@@ -60,7 +60,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="inicio.html" class="nav-item nav-link active">Inicio</a>
-                <a href="~/Home/SeguimientoNormal" class="nav-item nav-link">Seguimiento de Envíos</a>
+                <a href="~/Home/Seguimiento" class="nav-item nav-link">Seguimiento de Envíos</a>
                 <a href="Operaciones.html" class="nav-item nav-link">Detalles de Operación</a>
                 <a href="perfil.html" class="nav-item nav-link">Perfil</a>
                 <a href="index.html" class="nav-item nav-link">Cerrar Sesión</a>
@@ -200,16 +200,32 @@
                     <input type="text" class="form-control" id="tiempoEstimado" readonly>
                 </div>
 
+                <!-- Tipo de industria -->
+                <div class="mb-3">
+                    <label for="tipo_industria" class="form-label">Tipo de Industria:</label>
+                    <select class="form-select" id="tipo_industria">
+                        <option value="Automotriz">Automotriz</option>
+                        <option value="Tecnología">Tecnología</option>
+                        <option value="Alimentaria">Alimentaria</option>
+                        <option value="Textil">Textil</option>
+                        <option value="Farmacéutica">Farmacéutica</option>
+                        <option value="Construcción">Construcción</option>
+                    </select>
+                </div>
+
                 <!-- Subtotal del servicio -->
                 <div class="mb-3">
                     <label for="subtotal" class="form-label">Subtotal:</label>
                     <input type="text" class="form-control" id="subtotal" value="" readonly>
                 </div>
+
                 <!-- Total del servicio -->
                 <div class="mb-3">
                     <label for="total" class="form-label">total:</label>
                     <input type="text" class="form-control" id="total" value="" readonly>
                 </div>
+
+
 
                 <!-- Método de pago -->
                 <div class="mb-3">
@@ -236,7 +252,7 @@
                             <label for="codigoSeguridad">Código de Seguridad:</label>
                             <input type="text" class="form-control" name="CodigoSeguridad" id="codigoSeguridad" placeholder="Ingrese el código de seguridad">
                         </div>
-                        <input type="hidden" name="idEmpresa" value="@Session["IDEmpresa"]"/>
+                        <input type="hidden" name="idEmpresa" value="@Session["IDEmpresa"]" />
                     </div>
                 </div>
 
@@ -632,6 +648,7 @@
             var origen = $("#origenInput").val();
             var destino = $("#destinoInput").val();
             var tiempoEstimado = $("#tiempoEstimado").val();
+            var industria = $("#tipo_industria").val();
             var subtotal = parseFloat($("#subtotal").val());
             var metodoPago = $("#metodoPago").val();
             var numeroTarjeta = $("#numeroTarjeta").val();
@@ -646,6 +663,7 @@
                 Origen: origen,
                 Destino: destino,
                 TiempoEstimado: tiempoEstimado,
+                industria,
                 Subtotal: subtotal,
                 MetodoPago: metodoPago,
                 NumeroTarjeta: numeroTarjeta,

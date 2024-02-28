@@ -474,3 +474,18 @@
 .footer .copyright a {
     color: var(--light);
 }
+table.dataTable {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+}
+
+    table.dataTable thead th {
+        background-color: #337ab7;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    table.dataTable tbody td {
+        text-align: center;
+    }

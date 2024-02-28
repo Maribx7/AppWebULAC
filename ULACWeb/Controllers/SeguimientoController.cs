@@ -30,7 +30,7 @@ namespace ULACWeb.Controllers
             List<SeguimientoModel> seguimientos = model.ObtenerSeguimientoEnvios(IDEmpresa);
 
 
-            return RedirectToAction("Seguimiento", "Home", new { seguimientos = model });
+            return View("~/Views/Home/Seguimiento.cshtml", seguimientos);
         }
     }
 }

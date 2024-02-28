@@ -17,6 +17,7 @@ namespace ULACWeb.Models
             public int IDTipoPaquete { get; set; }
             public string Origen { get; set; }
             public string Destino { get; set; }
+            public string Industria { get; set; }
             public string TiempoEstimado { get; set; }
             public decimal Subtotal { get; set; }
             public string MetodoPago { get; set; }
@@ -46,6 +47,7 @@ namespace ULACWeb.Models
                         command.Parameters.AddWithValue("@Origen", Origen);
                         command.Parameters.AddWithValue("@Destino", Destino);
                         command.Parameters.AddWithValue("@TiempoEstimado", TiempoEstimado);
+                        command.Parameters.AddWithValue("@Industria", Industria);
                         command.Parameters.AddWithValue("@Subtotal", Subtotal);
                         command.Parameters.AddWithValue("@MetodoPago", MetodoPago);
                         command.Parameters.AddWithValue("@NumeroTarjeta", NumeroTarjeta);

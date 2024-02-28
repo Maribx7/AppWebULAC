@@ -12,7 +12,6 @@ namespace ULACWeb.Models
         public int IDEmpresa { get; set; }
         public string Chofer { get; set; }
         public string Estado { get; set; }
-        public string CodigoEntrega { get; set; }
         public string CompaniaContratante { get; set; }
         public string Destino { get; set; }
         public string Origen { get; set; }
@@ -39,7 +38,7 @@ namespace ULACWeb.Models
                         seguimiento.IDEmpresa = Convert.ToInt32(reader["IDEmpresa"]);
                         seguimiento.Chofer = reader["Chofer"].ToString();
                         seguimiento.Estado = reader["Estado"].ToString();
-                        seguimiento.CodigoEntrega = reader["CodigoEntrega"].ToString();
+                     
                         seguimiento.CompaniaContratante = reader["CompaniaContratante"].ToString();
                         seguimiento.Destino = reader["Destino"].ToString();
                         seguimiento.Origen = reader["Origen"].ToString();
