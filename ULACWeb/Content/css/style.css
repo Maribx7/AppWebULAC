@@ -489,21 +489,30 @@ table.dataTable {
     table.dataTable tbody td {
         text-align: center;
     }
-/* Estilos para la página Perfil */
 
-.container {
-    max-width: 960px;
-    margin: 0 auto;
-}
 
-.card {
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    text-align: center;
-}
+    .card {
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        text-align: center;
+    }
 
-.card-title {
-    padding: 1rem;
-    font-weight: bold;
-}
+    .card-title {
+        padding: 1rem;
+        font-weight: bold;
+    }
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+        }
+
+        .card {
+            width: 100%;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+        }
+    }
+

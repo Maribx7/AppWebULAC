@@ -51,5 +51,15 @@ namespace ULACWeb.Controllers
             return View();
         }
 
+        public ActionResult About()
+        {
+
+            return View();
+        }
+        public ActionResult Servicio()
+        {
+
+            return View();
+        }
     }
 }

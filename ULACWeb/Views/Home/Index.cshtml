@@ -10,7 +10,7 @@
 
     <!-- Favicon -->
     <link href="~/Content/img/logo.ico" rel="icon">
-
+    
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,12 +57,11 @@
                     <div class="dropdown-menu fade-up m-0">
                         <a href="~/Home/Index" class="dropdown-item">Inicio</a>
                         <a href="~/Home/About" class="dropdown-item">¿Quienes Somos?</a>
-                        <a href="~/Home/service" class="dropdown-item">Nuestras Unidades</a>
-
-
+                        <a href="~/Home/Service" class="dropdown-item">Nuestras Unidades</a>
+                        <a href="~/Home/AcercaDe" class="dropdown-item">Acerca del Desarrollador</a>
                     </div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contacto</a>
+                <a href="~/Home/contact" class="nav-item nav-link">Contacto</a>
             </div>
             <h3 class="m-0 pe-lg-5 d-none d-lg-block"><i class="fa fa-headphones text-primary me-3"></i>+506 89884512</h3>
         </div>
@@ -80,8 +79,8 @@
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown">Transportes por carretera nacional e internacional</h5>
                                 <h1 class="display-3 text-white animated slideInDown mb-4">ULAC #1 EN <span class="text-primary">TRANSPORTE</span> POR CARRETERA</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Vinculando sueños, entregando confianza. </p>
-                                <a href="Registro.cshtml" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Registrarme</a>
-                                <a href="Login.cshtml" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Iniciar Sesion</a>
+                                <a href="~/Home/Registro" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Registrarme</a>
+                                <a href="~/Home/Login" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Iniciar Sesion</a>
                             </div>
                         </div>
                     </div>
@@ -96,8 +95,8 @@
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown">Transportes por carretera nacional e internacional</h5>
                                 <h1 class="display-3 text-white animated slideInDown mb-4">SOMOS LOS #1 EN SERVICIOS DE <span class="text-primary">CONFIANZA</span></h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Vinculando sueños, entregando confianza.</p>
-                                <a href="registro.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Registrarme</a>
-                                <a href="login.html" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Iniciar Sesion</a>
+                                <a href="~/Home/Registro" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Registrarme</a>
+                                <a href="~/Home/Login" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Iniciar Sesion</a>
                             </div>
                         </div>
                     </div>
@@ -106,6 +105,7 @@
         </div>
     </div>
     <!-- Carousel End -->
+
     <!-- About Start -->
     <div class="container-fluid overflow-hidden py-5 px-lg-0">
         <div class="container about py-5 px-lg-0">
@@ -131,7 +131,7 @@
                             <p class="m-0">En Transportes ULAC, cada entrega es una promesa cumplida. Nuestra dedicación se traduce en "Entregas de Confianza", asegurando la seguridad y puntualidad que nuestros clientes merecen.</p>
                         </div>
                     </div>
-                    <a href="about.html" class="btn btn-primary py-3 px-5">Ver más</a>
+                    <a href="~/Home/about" class="btn btn-primary py-3 px-5">Ver más</a>
                 </div>
             </div>
         </div>
@@ -237,7 +237,7 @@
             <div class="row g-5 mx-lg-0">
                 <div class="col-lg-6 ps-lg-0 wow fadeInLeft" data-wow-delay="0.1s" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute img-fluid w-100 h-100" src="img/Puerto-Caldera.12.gif" style="object-fit: cover;" alt="Mapa de la ubicación">
+                        <img class="position-absolute img-fluid w-100 h-100" src="~/Content/img/Puerto-Caldera.12.gif" style="object-fit: cover;" alt="Mapa de la ubicación">
                     </div>
                 </div>
                 <div class="col-lg-6 ubicacion-text wow fadeInUp" data-wow-delay="0.3s">
@@ -256,7 +256,7 @@
                             <p class="m-0">Teléfono: +506 89884512</p>
                         </div>
                     </div>
-                    <a href="contact.html" class="btn btn-primary py-3 px-5">Contactar</a>
+                    <a href="~/Home/contact.html" class="btn btn-primary py-3 px-5">Contactar</a>
                 </div>
             </div>
         </div>
@@ -343,10 +343,10 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Links Rápidos</h4>
-                    <a class="btn btn-link" href="~/Views/Home/about.html">Sobre Nosotros</a>
-                    <a class="btn btn-link" href="~/Views/Home/contact.html">Contáctenos</a>
-                    <a class="btn btn-link" href="~/Views/Home/registro.html">Registro</a>
-                    <a class="btn btn-link" href="~/Views/Home/login.html">Login</a>
+                    <a class="btn btn-link" href="~/Home/About">Sobre Nosotros</a>
+                    <a class="btn btn-link" href="~/Home/Contact">Contáctenos</a>
+                    <a class="btn btn-link" href="~/Home/Registro">Registro</a>
+                    <a class="btn btn-link" href="~/Home/Login">Login</a>
                 </div>
             </div>
         </div>
