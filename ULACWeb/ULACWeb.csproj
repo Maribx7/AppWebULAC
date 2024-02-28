@@ -408,16 +408,15 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Registro.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Inicio.cshtml" />
     <Content Include="Views\Home\Seguimiento.cshtml" />
-    <Content Include="Views\Home\Pago.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
     <Content Include="Views\Home\DetallesOperacion.cshtml" />
     <Content Include="Views\Home\Perfil.cshtml" />
     <Content Include="Views\Home\Servicio.cshtml" />
     <Content Include="Views\Home\AcercaDe.cshtml" />
+    <Content Include="Views\Home\Registro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

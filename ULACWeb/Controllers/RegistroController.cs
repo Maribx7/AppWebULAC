@@ -9,6 +9,7 @@ namespace ULACWeb.Controllers
     public class RegistroController : Controller
     {
         // Acción para mostrar el formulario de registro
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
@@ -16,13 +17,10 @@ namespace ULACWeb.Controllers
 
         // Acción para procesar el formulario de registro
         [HttpPost]
-        public ActionResult Index(RegistroModel model)
+        public ActionResult Registrar(RegistroModel model)
         {
             // Aquí puedes realizar la lógica para guardar en la base de datos
-            if (model.GuardarEnBaseDeDatos())
-            {
-                return PartialView("_PopupRegistroExitoso");
-            }
+            model.GuardarEnBaseDeDatos();
 
             // Siempre regresa a la vista del formulario, independientemente del resultado del guardado en la base de datos
             return View("~/Views/Home/Registro.cshtml");

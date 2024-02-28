@@ -3,6 +3,7 @@
     ViewBag.Title = "Registro";
 }
 
+
 <head>
     <meta charset="utf-8">
     <title>ULAC S.A. - Registro</title>
@@ -16,7 +17,7 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -25,11 +26,16 @@
     <!-- Libraries Stylesheet -->
     <link href="~/Content/lib/animate/animate.min.css" rel="stylesheet">
     <link href="~/Content/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+
+    <!-- Librerias de JqueryMobile -->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <!-- Bootstrap JS (with Popper.js) -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+    <!-- Bootstrap  -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <!-- Customized Bootstrap Stylesheet -->
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
 
@@ -47,7 +53,7 @@
     <!-- Spinner End -->
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0">
-        <a href="~/Home/Index" class="navbar-brand bg-primary d-flex align-items-center px-4 px-lg-5">
+        <a href="~/Home/Registro" class="navbar-brand bg-primary d-flex align-items-center px-4 px-lg-5">
             <h2 class="mb-2 text-white">Transportes ULAC </h2>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -64,12 +70,12 @@
                         <a href="~/Home/Index" class="dropdown-item">Inicio</a>
                         <a href="~/Home/About" class="dropdown-item">¿Quienes Somos?</a>
                         <a href="~/Home/Service" class="dropdown-item">Nuestras Unidades</a>
-                        <a href="~/Home/Resenas" class="dropdown-item">Reseñas</a>
+                        <a href="~/Home/AcercaDe" class="dropdown-item">Acerca del Desarrollador</a>
                     </div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contacto</a>
+                <a href="~/Home/Contact.html" class="nav-item nav-link">Contacto</a>
             </div>
-            <h4 class="m-0 pe-lg-5 d-none d-lg-block"><i class="fa fa-headphones text-primary me-3"></i>+506 89884512 /+506 87765412 </h4>
+            <h4 class="m-0 pe-lg-5 d-none d-lg-block"><i class="fa fa-headphones text-primary me-3"></i>+506 89884512 </h4>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -88,45 +94,43 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="bg-light text-center p-5 wow fadeIn" data-wow-delay="0.5s">
-                        <form action="@Url.Action("Index", "Registro")" method="post">
-                            <div class="row g-3">
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" name="IDEmpresa" class="form-control border-0" placeholder="ID Empresa" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" name="NombreContactoPrincipal" class="form-control border-0" placeholder="Nombre Completo" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="email" name="CorreoContactoPrincipal" class="form-control border-0" placeholder="Correo Electronico" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" name="NumeroContactoPrincipal" class="form-control border-0" placeholder="Número de telefono" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <select class="form-select border-0" style="height: 55px;" name="PaisResidencia">
-                                        <option selected>Pais de residencia</option>
-                                        <option value="Costa Rica">Costa Rica</option>
-                                        <option value="Salvador">Salvador</option>
-                                        <option value="Nicaragua">Nicaragua</option>
-                                        <option value="Honduras">Honduras</option>
-                                        <option value="Panama">Panama</option>
-                                        <option value="Honduras">Honduras</option>
-                                        <!-- Add more countries as needed -->
-                                    </select>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" name="Usuario" class="form-control border-0" placeholder="Usuario" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="password" name="Contraseñas" class="form-control border-0" placeholder="Contraseña" style="height: 55px;">
-                                </div>
-
-                                <div class="col-12">
-                                    <button href="popupRegistroExitoso" class="ui-btn ui-btn-a ui-btn-icon-left" type="submit">Registrarme</button>
-                                </div>
-                                <div id="popupContainer"></div>
-
+                        <form action="@Url.Action("Registrar", "Registro")" method="post" data-ajax="false">
+                            <div class="ui-field-contain">
+                                <label for="IDEmpresa">ID Empresa:</label>
+                                <input type="text" name="IDEmpresa" id="IDEmpresa" placeholder="ID Empresa">
                             </div>
+                            <div class="ui-field-contain">
+                                <label for="NombreContactoPrincipal">Nombre Completo:</label>
+                                <input type="text" name="NombreContactoPrincipal" id="NombreContactoPrincipal" placeholder="Nombre Completo">
+                            </div>
+                            <div class="ui-field-contain">
+                                <label for="CorreoContactoPrincipal">Correo Electrónico:</label>
+                                <input type="email" name="CorreoContactoPrincipal" id="CorreoContactoPrincipal" placeholder="Correo Electrónico">
+                            </div>
+                            <div class="ui-field-contain">
+                                <label for="NumeroContactoPrincipal">Número de Teléfono:</label>
+                                <input type="tel" name="NumeroContactoPrincipal" id="NumeroContactoPrincipal" placeholder="Número de Teléfono">
+                            </div>
+                            <div class="ui-field-contain">
+                                <label for="PaisResidencia">País de Residencia:</label>
+                                <select name="PaisResidencia" id="PaisResidencia">
+                                    <option value="">País de Residencia</option>
+                                    <option value="Costa Rica">Costa Rica</option>
+                                    <option value="Salvador">Salvador</option>
+                                    <option value="Nicaragua">Nicaragua</option>
+                                    <option value="Honduras">Honduras</option>
+                                    <option value="Panamá">Panamá</option>
+                                </select>
+                            </div>
+                            <div class="ui-field-contain">
+                                <label for="Usuario">Usuario:</label>
+                                <input type="text" name="Usuario" id="Usuario" placeholder="Usuario">
+                            </div>
+                            <div class="ui-field-contain">
+                                <label for="Contraseñas">Contraseña:</label>
+                                <input type="password" name="Contraseñas" id="Contraseñas" placeholder="Contraseña">
+                            </div>
+                            <input type="submit" value="Registrarse">
                         </form>
                     </div>
                 </div>
@@ -163,6 +167,7 @@
                     <a class="btn btn-link" href="~/Home/Contact">Contáctenos</a>
                     <a class="btn btn-link" href="~/Home/Registro">Registro</a>
                     <a class="btn btn-link" href="~/Home/Login">Login</a>
+                    <a class="btn btn-link" href="~/Home/AcercaDe">Acerca del desarrollador</a>
                 </div>
             </div>
         </div>
@@ -192,29 +197,5 @@
     <!-- Template Javascript -->
     <script src="~/Content/js/main.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            // Enviar el formulario por AJAX
-            $("form").submit(function (event) {
-                // Evitar que el formulario se envíe de forma predeterminada
-                event.preventDefault();
-
-                // Realizar la petición AJAX
-                $.ajax({
-                    type: "POST",
-                    url: $(this).attr("action"),
-                    data: $(this).serialize(),
-                    success: function (response) {
-                        // Cargar el contenido del popup en el contenedor
-                        $("#popupContainer").html(response);
-                    },
-                    error: function () {
-                        // Manejar errores de la petición AJAX
-                        console.log("Error al enviar el formulario.");
-                    }
-                });
-            });
-        });
-    </script>
 
 </body>
