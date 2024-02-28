@@ -204,6 +204,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
     <Compile Include="Controllers\SeguimientoController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Models\DetalleOperacionModel.cs" />
     <Compile Include="Models\InicioModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\PerfilModel.cs" />
     <Compile Include="Models\RegistroModel.cs" />
     <Compile Include="Models\SeguimientoModel.cs" />
     <Compile Include="Models\ServiciosModel.cs" />
@@ -415,6 +417,7 @@
     <Content Include="Views\Home\Pago.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
     <Content Include="Views\Home\DetallesOperacion.cshtml" />
+    <Content Include="Views\Home\Perfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -422,6 +425,7 @@
     <Folder Include="Views\Inicio\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Views\Operacion\" />
+    <Folder Include="Views\Perfil\" />
     <Folder Include="Views\Registro\" />
     <Folder Include="Views\Seguimiento\" />
     <Folder Include="Views\Servicios\" />
