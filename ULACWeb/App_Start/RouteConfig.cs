@@ -24,6 +24,11 @@ namespace ULACWeb
                 url: "Registro",
                 defaults: new { controller = "Registro", action = "Index" }
             );
+            routes.MapRoute(
+                name: "DetalleOperacion",
+                url: "DetalleOperacion",
+                defaults: new { controller = "DetalleOperacion", action = "Index" }
+            );
 
         }
     }

@@ -40,5 +40,10 @@ namespace ULACWeb.Controllers
         {
             return View(seguimientos);
         }
+        public ActionResult DetallesOperacion()
+        {
+
+            return View();
+        }
     }
 }

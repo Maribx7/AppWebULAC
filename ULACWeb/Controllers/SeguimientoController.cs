@@ -32,5 +32,6 @@ namespace ULACWeb.Controllers
 
             return View("~/Views/Home/Seguimiento.cshtml", seguimientos);
         }
+
     }
 }

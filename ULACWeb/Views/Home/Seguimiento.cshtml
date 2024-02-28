@@ -145,7 +145,7 @@
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="inicio.html" class="nav-item nav-link active">Inicio</a>
                 <a href="Seguimiento.html" class="nav-item nav-link">Seguimiento de Envíos</a>
-                <a href="~/Views/Home/DetallesOperacion.cshtml" class="nav-item nav-link">Detalles de Operación</a>
+                <a href="~/Home/DetallesOperacion" class="nav-item nav-link">Detalles de Operación</a>
                 <a href="perfil.html" class="nav-item nav-link">Perfil</a>
                 <a href="index.html" class="nav-item nav-link">Cerrar Sesión</a>
                 <!-- Mostrar IDEmpresa en la barra de navegación -->
@@ -202,47 +202,54 @@
         </div>
         <form action="@Url.Action("ObtenerDatosSeguimiento", "Seguimiento")" method="post">
 
-            <button type="submit">Cargar datos</button>
-
-            <table data-role="table" id="table-seguimiento" data-mode="reflow" class="ui-responsive table-stroke">
-                <thead>
-                    <tr>
-                        <th>ID viaje</th>
-                        <th>ID Empresa</th>
-                        <th>Chofer</th>
-                        <th>Estado</th>
-                     
-                        <th>Compañía Contratante</th>
-                        <th>Destino</th>
-                        <th>Origen</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model != null && Model.Count > 0)
-                    {
-                        foreach (var seguimiento in Model)
-                        {
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">Cargar Datos</button>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <table data-role="table" id="table-seguimiento" data-mode="reflow" class="ui-responsive table-stroke">
+                        <thead>
                             <tr>
-                                <td>@seguimiento.IDViaje</td>
-                                <td>@seguimiento.IDEmpresa</td>
-                                <td>@seguimiento.Chofer</td>
-                                <td>@seguimiento.Estado</td>
-                                <td>@seguimiento.CompaniaContratante</td>
-                                <td>@seguimiento.Destino</td>
-                                <td>@seguimiento.Origen</td>
+                                <th>ID viaje</th>
+                                <th>ID Empresa</th>
+                                <th>Chofer</th>
+                                <th>Estado</th>
+                                <th>Compañía Contratante</th>
+                                <th>Destino</th>
+                                <th>Origen</th>
                             </tr>
-                        }
-                    }
-                    else
-                    {
-                        // Mostrar un mensaje de error o una vista vacía
-                        <p>No hay datos de seguimiento disponibles.</p>
-                    }
-                </tbody>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                foreach (var seguimiento in Model)
+                                {
+                                    <tr>
+                                        <td>@seguimiento.IDViaje</td>
+                                        <td>@seguimiento.IDEmpresa</td>
+                                        <td>@seguimiento.Chofer</td>
+                                        <td>@seguimiento.Estado</td>
+                                        <td>@seguimiento.CompaniaContratante</td>
+                                        <td>@seguimiento.Destino</td>
+                                        <td>@seguimiento.Origen</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                // Mostrar un mensaje de error o una vista vacía
+                                <p>No hay datos de seguimiento disponibles.</p>
+                            }
+                        </tbody>
 
-            </table>
-            <input type="hidden" name="IDEmpresa" value="@Session["IDEmpresa"]" />
-
+                    </table>
+                    <input type="hidden" name="IDEmpresa" value="@Session["IDEmpresa"]" />
+                   
+                </div>
+            </div>
         </form>
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
