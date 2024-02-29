@@ -66,102 +66,150 @@
                 </div>
                 <a href="~/Home/Contact" class="nav-item nav-link">Contacto</a>
             </div>
-            <h4 class="m-0 pe-lg-5 d-none d-lg-block"><i class="fa fa-headphones text-primary me-3"></i>+506 89884512 /+506 87765412 </h4>
+            <h4 class="m-0 pe-lg-5 d-none d-lg-block"><i class="fa fa-headphones text-primary me-3"></i>+506 89884512 </h4>
         </div>
     </nav>
     <!-- Navbar End -->
     <!-- Sign-in Start -->
+    <form id="loginForm" method="post">
+        <div class="container-xxl py-5">
+            <div class="container py-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
+                        <h6 class="text-secondary text-uppercase mb-3">INICIO DE SESIÓN</h6>
+                        <h1 class="mb-5">¡Bienvenido de nuevo!</h1>
+                        <p class="mb-5">Ingrese sus credenciales para iniciar sesión en su cuenta.</p>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-box-arrow-in-right fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="bg-light text-center p-5 wow fadeIn" data-wow-delay="0.5s">
+                            <form action="@Url.Action("Index", "Login")" id="" method="post">
+                                <div class="form-group mb-4">
+                                    <input name="Usuario" type="text" class="form-control border-0" placeholder="Nombre de Usuario" style="height: 55px; margin-bottom: 15px;">
+                                </div>
 
-    <div class="container-xxl py-5">
-        <div class="container py-5">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <h6 class="text-secondary text-uppercase mb-3">INICIO DE SESIÓN</h6>
-                    <h1 class="mb-5">¡Bienvenido de nuevo!</h1>
-                    <p class="mb-5">Ingrese sus credenciales para iniciar sesión en su cuenta.</p>
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-box-arrow-in-right fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
+                                <div class="form-group mb-4">
+                                    <input name="Contraseñas" id="password" type="password" class="form-control border-0" placeholder="Contraseña" style="height: 55px;">
+                                </div>
+
+                                <div class="form-group form-check mb-4">
+                                    <input type="checkbox" class="form-check-input" id="showPassword">
+                                    <label class="form-check-label" for="showPassword">Mostrar contraseña</label>
+                                </div>
+
+                                <button class="btn btn-primary w-100 py-3" type="submit">Iniciar Sesión</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Sign-in End -->
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container py-5">
+                <div class="row g-5 justify-content-center">
+                    <!-- Modificación: Agregar la clase justify-content-center -->
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-light mb-4">Dirección</h4>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Caldera, Costa Rica</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+506 89884512</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>gerenciatransulac@transulac.cr</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href="https://twitter.com/?lang=es"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/?locale=es_LA"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-light mb-4">Servicio de transporte por carretera</h4>
+                        <a class="btn btn-link" href="">Kenworth</a>
+                        <a class="btn btn-link" href="">Freightliner</a>
+                        <a class="btn btn-link" href="">MACK</a>
+                        <a class="btn btn-link" href="">International</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="text-light mb-4">Links Rápidos</h4>
+                        <a class="btn btn-link" href="">Sobre Nosotros</a>
+                        <a class="btn btn-link" href="">Contáctenos</a>
+                        <a class="btn btn-link" href="">Registro</a>
+                        <a class="btn btn-link" href="">Login</a>
                     </div>
                 </div>
-                <div class="col-lg-7">
-                    <div class="bg-light text-center p-5 wow fadeIn" data-wow-delay="0.5s">
-                        <form action="@Url.Action("Index", "Login")" method="post">
-                            <div class="form-group">
-                                <input name="Usuario" type="text" class="form-control border-0" placeholder="Nombre de Usuario" style="height: 55px; margin-bottom: 15px;">
-                            </div>
-
-                            <div class="form-group">
-                                <input name="Contraseñas" type="password" class="form-control border-0" placeholder="Contraseña" style="height: 55px;">
-                            </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="remember">
-                                <label class="form-check-label" for="remember">Recordar contraseña</label>
-                            </div>
-                            <button class="btn btn-primary w-100 py-3" type="submit">Iniciar Sesión</button>
-                        </form>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">Transportes ULAC</a>, Todos los derechos reservados.
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Sign-in End -->
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
-        <div class="container py-5">
-            <div class="row g-5 justify-content-center">
-                <!-- Modificación: Agregar la clase justify-content-center -->
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Dirección</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Caldera, Costa Rica</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+506 89884512</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>gerenciatransulac@transulac.cr</p>
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href="https://twitter.com/?lang=es"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/?locale=es_LA"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Servicio de transporte por carretera</h4>
-                    <a class="btn btn-link" href="">Kenworth</a>
-                    <a class="btn btn-link" href="">Freightliner</a>
-                    <a class="btn btn-link" href="">MACK</a>
-                    <a class="btn btn-link" href="">International</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Links Rápidos</h4>
-                    <a class="btn btn-link" href="">Sobre Nosotros</a>
-                    <a class="btn btn-link" href="">Contáctenos</a>
-                    <a class="btn btn-link" href="">Registro</a>
-                    <a class="btn btn-link" href="">Login</a>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Transportes ULAC</a>, Todos los derechos reservados.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-0 back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-0 back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/Content/lib/wow/wow.min.js"></script>
-    <script src="~/Content/lib/easing/easing.min.js"></script>
-    <script src="~/Content/lib/waypoints/waypoints.min.js"></script>
-    <script src="~/Content/lib/counterup/counterup.min.js"></script>
-    <script src="~/Content/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/Content/lib/wow/wow.min.js"></script>
+        <script src="~/Content/lib/easing/easing.min.js"></script>
+        <script src="~/Content/lib/waypoints/waypoints.min.js"></script>
+        <script src="~/Content/lib/counterup/counterup.min.js"></script>
+        <script src="~/Content/lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="~/Content/js/main.js"></script>
+        <!-- Template Javascript -->
+        <script src="~/Content/js/main.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#showPassword').change(function () {
+                    var isChecked = $(this).prop('checked');
+                    if (isChecked) {
+                        $('#password').attr('type', 'text');
+                    } else {
+                        $('#password').attr('type', 'password');
+                    }
+                });
+            });
+        </script>
+        <script>
+      $(document).ready(function () {
+          $('#loginForm').submit(function (e) {
+              e.preventDefault(); // Evitar el envío del formulario normalmente
+
+              // Realizar la solicitud POST al controlador
+              $.ajax({
+                  url: '@Url.Action("Index", "Login")',
+                  type: 'POST',
+                  data: $(this).serialize(),
+                  success: function (response) {
+                      if (response.hasOwnProperty('success')) {
+                          if (response.success === true) {
+                            // Si las credenciales son válidas, redirigir al usuario a la página de inicio
+                            window.location.href = '@Url.Action("Inicio", "Home")';
+                          } else if (response.success === false) {
+                            // Si las credenciales son inválidas, mostrar un mensaje de error
+                            alert(response.message);
+                          }
+                        } else {
+                          // La respuesta del servidor no tiene la propiedad 'success'
+                          alert('Error al procesar la respuesta del servidor.');
+                        }
+                      },
+                  error: function () {
+                      alert('Error al intentar iniciar sesión. Por favor, inténtelo de nuevo más tarde.');
+                  }
+              });
+          });
+      });
+        </script>
 </body>
 
 

@@ -1,10 +1,10 @@
-﻿using Microsoft.Ajax.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ULACWeb.Models;
+using Newtonsoft.Json;
 
 namespace ULACWeb.Controllers
 {
@@ -26,21 +26,33 @@ namespace ULACWeb.Controllers
                 {
                     // Almacenar el IDEmpresa en la sesión
                     Session["IDEmpresa"] = idEmpresa;
-                    
 
-                    return RedirectToAction("Inicio", "Home");
+                    // Crear la respuesta JSON
+                    var response = new
+                    {
+                        success = true,
+                        message = "Inicio de sesión exitoso"
+                    };
+
+                   
+
+                    // Convertir la respuesta a JSON
+                    var json = JsonConvert.SerializeObject(response);
+
+                    // Devolver la respuesta JSON
+                    return Content(json, "application/json");
                 }
                 else
                 {
                     // Las credenciales son inválidas, agregar un mensaje de error y volver a mostrar el formulario de inicio de sesión
-                    ModelState.AddModelError("", "El nombre de usuario o la contraseña son incorrectos.");
-                    return View(model);
+                    return Json(new { success = false, message = "El nombre de usuario o la contraseña son incorrectos." });
+
                 }
             }
             else
             {
                 // El modelo no es válido, volver a mostrar el formulario de inicio de sesión con los mensajes de validación
-                return View(model);
+                return Json(new { success = false, message = "Por favor, complete todos los campos." });
             }
         }
     }

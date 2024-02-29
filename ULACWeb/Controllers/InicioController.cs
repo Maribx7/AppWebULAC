@@ -14,6 +14,7 @@ namespace ULACWeb.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult ConfirmarServicio(int IDEmpresa, string Origen, string Destino, string TiempoEstimado, string Industria, decimal Subtotal, string MetodoPago, string NumeroTarjeta, string FechaVencimiento, string CodigoSeguridad, decimal Total, int IDTipoPaquete)
         {

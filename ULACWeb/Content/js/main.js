@@ -109,6 +109,10 @@
             }
         }
     });
+    $(window).on('scroll', function (event) {
+        event.preventDefault(); 
+        
+    });
     
 })(jQuery);
 

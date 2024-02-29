@@ -57,5 +57,15 @@ namespace ULACWeb.Controllers
 
             return View();
         }
+        public ActionResult AcercaDe()
+        {
+
+            return View();
+        }
+        public ActionResult Contact()
+        {
+
+            return View();
+        }
     }
 }

@@ -8,8 +8,7 @@ namespace ULACWeb.Controllers
 {
     public class RegistroController : Controller
     {
-        // Acción para mostrar el formulario de registro
-        [HttpGet]
+        
         public ActionResult Index()
         {
             return View();

@@ -2,6 +2,7 @@
 @{
 
     ViewBag.Title = "Perfil";
+    int IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
 }
 
 <head>
@@ -52,11 +53,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="inicio.html" class="nav-item nav-link active">Inicio</a>
-                <a href="Seguimiento.html" class="nav-item nav-link">Seguimiento de Envíos</a>
-                <a href="Operaciones.html" class="nav-item nav-link">Detalles de Operación</a>
-                <a href="perfil.html" class="nav-item nav-link">Perfil</a>
+                <a href="~/Home/Inicio" class="nav-item nav-link active">Inicio</a>
+                <a href="~/Home/Seguimiento" class="nav-item nav-link">Seguimiento de Envíos</a>
+                <a href="~/Home/DetallesOperacion" class="nav-item nav-link">Detalles de Operación</a>
+                <a href="~/Home/Perfil" class="nav-item nav-link">Perfil</a>
                 <a href="~/Home/Index" class="nav-item nav-link">Cerrar Sesión</a>
+                
+
             </div>
         </div>
     </nav>
