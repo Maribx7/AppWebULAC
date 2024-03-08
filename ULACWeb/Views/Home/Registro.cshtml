@@ -4,81 +4,12 @@
 }
 
 
-<head>
-    <meta charset="utf-8">
-    <title>ULAC S.A. - Registro</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Favicon -->
-    <link href="~/Content/img/logo.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="~/Content/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="~/Content/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-
-    <!-- Librerias de JqueryMobile -->
-   
-    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-
-    <!-- Bootstrap  -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="~/Content/css/style.css" rel="stylesheet">
-</head>
 
 <body>
-    <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Cargando...</span>
-        </div>
-    </div>
-    <!-- Spinner End -->
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0">
-        <a href="~/Home/Registro" class="navbar-brand bg-primary d-flex align-items-center px-4 px-lg-5">
-            <h2 class="mb-2 text-white">Transportes ULAC </h2>
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-3 p-lg-0">
-                <a href="~/Home/Index" class="nav-item nav-link">Inicio</a>
-                <a href="~/Home/Registro" class="nav-item nav-link active">Registrarme</a>
-                <a href="~/Home/Login" class="nav-item nav-link">Iniciar Sesion</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Más</a>
-                    <div class="dropdown-menu fade-up m-0">
-                        <a href="~/Home/Index" class="dropdown-item">Inicio</a>
-                        <a href="~/Home/About" class="dropdown-item">¿Quienes Somos?</a>
-                        <a href="~/Home/Service" class="dropdown-item">Nuestras Unidades</a>
-                        <a href="~/Home/AcercaDe" class="dropdown-item">Acerca del Desarrollador</a>
-                    </div>
-                </div>
-                <a href="~/Home/Contact" class="nav-item nav-link">Contacto</a>
-            </div>
-            <h4 class="m-0 pe-lg-5 d-none d-lg-block"><i class="fa fa-headphones text-primary me-3"></i>+506 89884512 </h4>
-        </div>
-    </nav>
-    <!-- Navbar End -->
+
+  @section navbar{
+      }
+
     <!-- Sign-up Start -->
     <div class="container-xxl py-5">
         <div class="container py-5">
@@ -127,7 +58,51 @@
                             </div>
                             <div class="ui-field-contain">
                                 <label for="Contraseñas">Contraseña:</label>
-                                <input type="password" name="Contraseñas" id="Contraseñas" placeholder="Contraseña" data-mini="true">
+                                <input type="password" name="Contraseña" id="Contraseña" placeholder="Contraseña" data-mini="true">
+                            </div>
+
+                            <div class="ui-field-contain">
+                                <label for="Pregunta1">Pregunta 1:</label>
+                                <select name="Pregunta1" id="Pregunta1" data-native-menu="false" data-mini="true" style="width: 100%;">
+                                    <option value="">Selecciona una pregunta</option>
+                                    <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                                </select>
+                            </div>
+                            <div class="ui-field-contain">
+                                <input type="text" name="Respuesta1" id="Respuesta1" placeholder="Ingrese su respuesta" data-mini="true">
+                            </div>
+                            <div class="ui-field-contain">
+                                <label for="Pregunta2">Pregunta 2:</label>
+                                <select name="Pregunta2" id="Pregunta2" data-native-menu="false" data-mini="true" style="width: 100%;">
+                                    <option value="¿Cuál es el nombre de tu primera mascota?">¿Cuál es el nombre de tu primera mascota?</option>
+                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                                </select>
+                            </div>
+                            <div class="ui-field-contain">
+      
+                                <input type="text" name="Respuesta2" id="Respuesta2" placeholder="Ingrese su respuesta" data-mini="true"  >
+                            </div>
+                            <div class="ui-field-contain">
+                                <label for="Pregunta3">Pregunta 3:</label>
+                                <select name="Pregunta3" id="Pregunta3" data-native-menu="false" data-mini="true" style="width: 100%;">
+
+                                    <option value="¿Cuál es el nombre de tu primera mascota?">¿Cuál es el nombre de tu primera mascota?</option>
+                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                                </select>
+                            </div>
+                            <div class="ui-field-contain">
+                                <label for="Respuesta3">Respuesta 3:</label>
+                                <input type="text" name="Respuesta3" id="Respuesta3" placeholder="Ingrese su respuesta" data-mini="true">
                             </div>
                             <input type="submit" value="Registrarse" class="ui-btn ui-corner-all ui-shadow ui-btn-b">
                         </form>
@@ -137,64 +112,7 @@
         </div>
     </div>
     <!-- Sign-up End -->
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
-        <div class="container py-5">
-            <div class="row g-5 justify-content-center">
-                <!-- Modificación: Agregar la clase justify-content-center -->
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Dirección</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Caldera, Costa Rica</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+506 89884512</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>gerenciatransulac@transulac.cr</p>
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href="https://twitter.com/?lang=es"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/?locale=es_LA"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Servicio de transporte por carretera</h4>
-                    <a class="btn btn-link" href="">Kenworth</a>
-                    <a class="btn btn-link" href="">Freightliner</a>
-                    <a class="btn btn-link" href="">MACK</a>
-                    <a class="btn btn-link" href="">International</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Links Rápidos</h4>
-                    <a class="btn btn-link" href="~/Home/About">Sobre Nosotros</a>
-                    <a class="btn btn-link" href="~/Home/Contact">Contáctenos</a>
-                    <a class="btn btn-link" href="~/Home/Registro">Registro</a>
-                    <a class="btn btn-link" href="~/Home/Login">Login</a>
-                    <a class="btn btn-link" href="~/Home/AcercaDe">Acerca del desarrollador</a>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Transportes ULAC</a>, Todos los derechos reservados.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-0 back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/Content/lib/wow/wow.min.js"></script>
-    <script src="~/Content/lib/easing/easing.min.js"></script>
-    <script src="~/Content/lib/waypoints/waypoints.min.js"></script>
-    <script src="~/Content/lib/counterup/counterup.min.js"></script>
-    <script src="~/Content/lib/owlcarousel/owl.carousel.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="~/Content/js/main.js"></script>
-
+@section footer{
+}
 
 </body>
