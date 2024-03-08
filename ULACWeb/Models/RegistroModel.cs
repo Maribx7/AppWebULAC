@@ -7,6 +7,9 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using static ULACWeb.Models.RegistroModel;
+using System.Security.Cryptography;
+using System.Text;
+using System.Net.Mail;
 
 namespace ULACWeb.Models
 {
@@ -28,6 +31,7 @@ namespace ULACWeb.Models
         [Required(ErrorMessage = "El Correo Electrónico es obligatorio")]
         [EmailAddress(ErrorMessage = "El Correo Electrónico no es válido")]
         public string CorreoContactoPrincipal { get; set; }
+        public bool IsVerified { get; set; }
         [Required(ErrorMessage = "La selección de la pregunta es obligatoria")]
         public string Pregunta1 { get; set; }
         [Required(ErrorMessage = "La selección de la pregunta es obligatoria")]
@@ -41,10 +45,37 @@ namespace ULACWeb.Models
         [Required(ErrorMessage = "La respuesta de la pregunta es obligatoria")]
         public string Respuesta3 { get; set; }
 
+        public string VerificationToken { get; set; }
+
+
+        //DATOS PARA EL MAIL
+        public string Destinatario { get; set; }
+        public string Asunto { get; set; }
+        public string Mensaje { get; set; }
+
         public bool GuardarEnBaseDeDatos()
         {
             try
             {
+                // Generate a unique verification token
+                VerificationToken = Guid.NewGuid().ToString();
+                var protectedToken = Convert.ToBase64String(
+                  ProtectedData.Protect(
+                    Encoding.UTF8.GetBytes(VerificationToken),
+                    null,
+                    DataProtectionScope.LocalMachine
+                  )
+                );
+
+                string enlaceVerificacion = GenerarEnlaceVerificacion("https://www.susitioweb.com");
+
+                
+                Destinatario = CorreoContactoPrincipal;
+                Asunto = "Verificación de correo electrónico para ULAC";
+                Mensaje = $"Hola {NombreContactoPrincipal},<br>Para completar tu registro en ULAC, haz clic en el siguiente enlace para verificar tu correo electrónico: <br>{enlaceVerificacion}";
+
+                EnviarCorreoElectronico();
+
                 string connectionString = ConfigurationManager.ConnectionStrings["SqlConexion"].ConnectionString;
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -65,6 +96,9 @@ namespace ULACWeb.Models
                     command.Parameters.AddWithValue("@RespuestaSeguridad1", Respuesta1);
                     command.Parameters.AddWithValue("@RespuestaSeguridad2", Respuesta2);
                     command.Parameters.AddWithValue("@RespuestaSeguridad3", Respuesta3);
+
+                    command.Parameters.AddWithValue("@IsVerified", false);
+                    command.Parameters.AddWithValue("@VerificationToken", protectedToken);
                     command.ExecuteNonQuery();
                 }
                 return true;
@@ -75,6 +109,28 @@ namespace ULACWeb.Models
                 Console.WriteLine("Error al guardar en la base de datos: " + ex.Message);
                 return false;
             }
+        }
+        public void EnviarCorreoElectronico()
+        {
+            using (SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587))
+            {
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new System.Net.NetworkCredential("marilyn030599@gmail.com", "birn wtdq abim ouit");
+                smtpClient.EnableSsl = true;
+
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("marilyn030599@gmail.com");
+                mailMessage.To.Add(Destinatario);
+                mailMessage.Subject = Asunto;
+                mailMessage.Body = Mensaje;
+
+                smtpClient.Send(mailMessage);
+            }
+        }
+
+        public string GenerarEnlaceVerificacion(string urlBase)
+        {
+            return $"{urlBase}/VerificarCorreo?token={VerificationToken}";
         }
     }
 
