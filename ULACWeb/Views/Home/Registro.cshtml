@@ -1,118 +1,263 @@
 ﻿
 @{
     ViewBag.Title = "Registro";
+    var verificacionExitosa = HttpContext.Current.Request.QueryString["verificacionExitosa"] == "True";
 }
 
 
 
 <body>
+    @if (verificacionExitosa)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                // Define el contenido del modal para mostrar el mensaje de verificación exitosa
+                $('.modal-body').text('Tu cuenta ha sido verificada con éxito.');
+                // Muestra el modal
+                $('#messageModal').modal('show');
+            });
+        </script>
+    }
 
-  @section navbar{
-      }
+    @section navbar{
+    }
 
     <!-- Sign-up Start -->
-    <div class="container-xxl py-5">
-        <div class="container py-5">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <h6 class="text-secondary text-uppercase mb-3">REGISTRO</h6>
-                    <h1 class="mb-5">Regístrate ahora!</h1>
-                    <p class="mb-5">Regístrate ahora y obtén más información sobre nuestros servicios!</p>
-                    <div class="d-flex align-items-center">
-                        <i class="fa fa-user-plus fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
+    <form id="registrationForm" action="@Url.Action("Registrar", "Registro")" method="post">
+
+        <div class="container-xxl py-5">
+            <div class="container py-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
+                        <h6 class="text-secondary text-uppercase mb-3">REGISTRO</h6>
+                        <h1 class="mb-5">Regístrate ahora!</h1>
+                        <p class="mb-5">Regístrate ahora y obtén más información sobre nuestros servicios!</p>
+                        <div class="d-flex align-items-center">
+                            <i class="fa fa-user-plus fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-7">
-                    <div class="bg-light text-center p-5 wow fadeIn" data-wow-delay="0.5s">
-                        <form action="@Url.Action("Registrar", "Registro")" method="post" data-ajax="false">
-                            <div class="ui-field-contain">
-                                <label for="IDEmpresa">ID Empresa:</label>
-                                <input type="text" name="IDEmpresa" id="IDEmpresa" placeholder="ID Empresa" data-mini="true">
-                            </div>
-                            <div class="ui-field-contain">
-                                <label for="NombreContactoPrincipal">Nombre Completo:</label>
-                                <input type="text" name="NombreContactoPrincipal" id="NombreContactoPrincipal" placeholder="Nombre Completo" data-mini="true">
-                            </div>
-                            <div class="ui-field-contain">
-                                <label for="CorreoContactoPrincipal">Correo Electrónico:</label>
-                                <input type="email" name="CorreoContactoPrincipal" id="CorreoContactoPrincipal" placeholder="Correo Electrónico" data-mini="true">
-                            </div>
-                            <div class="ui-field-contain">
-                                <label for="NumeroContactoPrincipal">Número de Teléfono:</label>
-                                <input type="tel" name="NumeroContactoPrincipal" id="NumeroContactoPrincipal" placeholder="Número de Teléfono" data-mini="true">
-                            </div>
-                            <div class="ui-field-contain">
-                                <label for="PaisResidencia">País de Residencia:</label>
-                                <select name="PaisResidencia" id="PaisResidencia" data-native-menu="false" data-mini="true">
-                                    <option value="">País de Residencia</option>
-                                    <option value="Costa Rica">Costa Rica</option>
-                                    <option value="Salvador">Salvador</option>
-                                    <option value="Nicaragua">Nicaragua</option>
-                                    <option value="Honduras">Honduras</option>
-                                    <option value="Panamá">Panamá</option>
-                                </select>
-                            </div>
-                            <div class="ui-field-contain">
-                                <label for="Usuario">Usuario:</label>
-                                <input type="text" name="Usuario" id="Usuario" placeholder="Usuario" data-mini="true">
-                            </div>
-                            <div class="ui-field-contain">
-                                <label for="Contraseñas">Contraseña:</label>
-                                <input type="password" name="Contraseña" id="Contraseña" placeholder="Contraseña" data-mini="true">
-                            </div>
+                    <div class="col-lg-7">
+                        <div class="bg-light text-center p-5 wow fadeIn" data-wow-delay="0.5s">
+                            @if (TempData["MensajeExito"] != null)
+                            {
+                                <div class="alert alert-success">
+                                    @TempData["MensajeExito"]
+                                </div>
+                            }
 
-                            <div class="ui-field-contain">
-                                <label for="Pregunta1">Pregunta 1:</label>
-                                <select name="Pregunta1" id="Pregunta1" data-native-menu="false" data-mini="true" style="width: 100%;">
-                                    <option value="">Selecciona una pregunta</option>
-                                    <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
-                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
-                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
-                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
-                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
-                                </select>
-                            </div>
-                            <div class="ui-field-contain">
-                                <input type="text" name="Respuesta1" id="Respuesta1" placeholder="Ingrese su respuesta" data-mini="true">
-                            </div>
-                            <div class="ui-field-contain">
-                                <label for="Pregunta2">Pregunta 2:</label>
-                                <select name="Pregunta2" id="Pregunta2" data-native-menu="false" data-mini="true" style="width: 100%;">
-                                    <option value="¿Cuál es el nombre de tu primera mascota?">¿Cuál es el nombre de tu primera mascota?</option>
-                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
-                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
-                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
-                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
-                                </select>
-                            </div>
-                            <div class="ui-field-contain">
-      
-                                <input type="text" name="Respuesta2" id="Respuesta2" placeholder="Ingrese su respuesta" data-mini="true"  >
-                            </div>
-                            <div class="ui-field-contain">
-                                <label for="Pregunta3">Pregunta 3:</label>
-                                <select name="Pregunta3" id="Pregunta3" data-native-menu="false" data-mini="true" style="width: 100%;">
+                            @if (TempData["MensajeError"] != null)
+                            {
+                                <div class="alert alert-danger">
+                                    @TempData["MensajeError"]
+                                </div>
+                            }
 
-                                    <option value="¿Cuál es el nombre de tu primera mascota?">¿Cuál es el nombre de tu primera mascota?</option>
-                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
-                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
-                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
-                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
-                                </select>
-                            </div>
-                            <div class="ui-field-contain">
-                                <label for="Respuesta3">Respuesta 3:</label>
-                                <input type="text" name="Respuesta3" id="Respuesta3" placeholder="Ingrese su respuesta" data-mini="true">
-                            </div>
-                            <input type="submit" value="Registrarse" class="ui-btn ui-corner-all ui-shadow ui-btn-b">
-                        </form>
+                            <form action="@Url.Action("Registrar", "Registro")" method="post">
+                                <div class="form-group">
+                                    <label for="IDEmpresa">ID Empresa:</label>
+                                    <input type="text" class="form-control" name="IDEmpresa" id="IDEmpresa" placeholder="ID Empresa" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="NombreContactoPrincipal">Nombre Completo:</label>
+                                    <input type="text" class="form-control" name="NombreContactoPrincipal" id="NombreContactoPrincipal" placeholder="Nombre Completo" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CorreoContactoPrincipal">Correo Electrónico:</label>
+                                    <input type="email" class="form-control" name="CorreoContactoPrincipal" id="CorreoContactoPrincipal" placeholder="Correo Electrónico" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="NumeroContactoPrincipal">Número de Teléfono:</label>
+                                    <input type="tel" class="form-control" name="NumeroContactoPrincipal" id="NumeroContactoPrincipal" placeholder="Número de Teléfono" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="PaisResidencia">País de Residencia:</label>
+                                    <select class="form-control" name="PaisResidencia" id="PaisResidencia" required>
+                                        <option value="">Seleccione un país</option>
+                                        <option value="Costa Rica">Costa Rica</option>
+                                        <option value="Salvador">El Salvador</option>
+                                        <option value="Nicaragua">Nicaragua</option>
+                                        <option value="Honduras">Honduras</option>
+                                        <option value="Panamá">Panamá</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Usuario">Usuario:</label>
+                                    <input type="text" class="form-control" name="Usuario" id="Usuario" placeholder="Usuario" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Contraseña">Contraseña:</label>
+                                    <div class="position-relative">
+                                        <input type="password" class="form-control" name="Contraseña" id="Contraseña" placeholder="Contraseña" required>
+                                        <div id="password-requirements" class="password-requirements d-none">
+                                            <ul>
+                                                <li id="length-requirement" class="text-danger"></li>
+                                                <li id="letter-requirement" class="text-danger"></li>
+                                                <li id="capital-requirement" class="text-danger"></li>
+                                                <li id="number-requirement" class="text-danger"></li>
+                                                <li id="special-requirement" class="text-danger"></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pregunta de seguridad y respuesta 1 -->
+                                <div class="form-group">
+                                    <label for="Pregunta1">Pregunta de Seguridad 1:</label>
+                                    <select class="form-control" name="Pregunta1" id="Pregunta1" required>
+                                        <option value="">Selecciona una pregunta</option>
+                                        <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                        <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                        <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                        <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                        <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="Respuesta1" id="Respuesta1" placeholder="Respuesta 1" required>
+                                </div>
+
+                                <!-- Pregunta de seguridad y respuesta 2 -->
+                                <div class="form-group">
+                                    <label for="Pregunta2">Pregunta de Seguridad 2:</label>
+                                    <select class="form-control" name="Pregunta2" id="Pregunta2" required>
+                                        <option value="">Selecciona una pregunta</option>
+                                        <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                        <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                        <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                        <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                        <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="Respuesta2" id="Respuesta2" placeholder="Respuesta 2" required>
+                                </div>
+
+                                <!-- Pregunta de seguridad y respuesta 3 -->
+                                <div class="form-group">
+                                    <label for="Pregunta3">Pregunta de Seguridad 3:</label>
+                                    <select class="form-control" name="Pregunta3" id="Pregunta3" required>
+                                        <option value="">Selecciona una pregunta</option>
+                                        <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                        <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                        <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                        <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                        <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="Respuesta3" id="Respuesta3" placeholder="Respuesta 3" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Registrarse</button>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <!-- Sign-up End -->
-@section footer{
-}
+    <!-- Modal de Bootstrap para confirmación -->
+
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Mensaje del Sistema</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section footer{
+    }
+
+
+    @section Scripts {
+
+        <!-- Incluyendo jQuery y Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+               // Verificación de contraseña segura
+    $('#Contraseña').on('input', function () {
+        verificarContraseñaSegura($(this).val());
+    });
+    function verificarContraseñaSegura(password) {
+        const lengthRequirement = /.{8,}/;
+        const letterRequirement = /[a-z]/;
+        const capitalRequirement = /[A-Z]/;
+        const numberRequirement = /\d/;
+        const specialRequirement = /[!-#$_&*,.]/;
+
+        $('#length-requirement').text(lengthRequirement.test(password) ? 'Longitud correcta' : 'Mínimo 8 caracteres').toggleClass('text-danger', !lengthRequirement.test(password)).toggleClass('text-success', lengthRequirement.test(password));
+        $('#letter-requirement').text(letterRequirement.test(password) ? 'Letra minúscula incluida' : 'Incluye al menos una letra minúscula').toggleClass('text-danger', !letterRequirement.test(password)).toggleClass('text-success', letterRequirement.test(password));
+        $('#capital-requirement').text(capitalRequirement.test(password) ? 'Letra mayúscula incluida' : 'Incluye al menos una letra mayúscula').toggleClass('text-danger', !capitalRequirement.test(password)).toggleClass('text-success', capitalRequirement.test(password));
+        $('#number-requirement').text(numberRequirement.test(password) ? 'Número incluido' : 'Incluye al menos un número').toggleClass('text-danger', !numberRequirement.test(password)).toggleClass('text-success', numberRequirement.test(password));
+        $('#special-requirement').text(specialRequirement.test(password) ? 'Símbolo especial incluido' : 'Incluye al menos un símbolo especial').toggleClass('text-danger', !specialRequirement.test(password)).toggleClass('text-success', specialRequirement.test(password));
+
+        // Muestra o esconde el contenedor de requisitos según si algún requisito no se cumple
+        if (lengthRequirement.test(password) && letterRequirement.test(password) && capitalRequirement.test(password) && numberRequirement.test(password) && specialRequirement.test(password)) {
+            $('#password-requirements').addClass('d-none');
+        } else {
+            $('#password-requirements').removeClass('d-none');
+        }
+    }
+
+    // Inicializa la verificación de contraseña segura
+    verificarContraseñaSegura($('#Contraseña').val());
+
+                $('#registrationForm').submit(function (event) {
+                    event.preventDefault(); // Previene el envío normal del formulario
+                    var formData = $(this).serialize(); // Serializa los datos del formulario
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Registro/Registrar", // Cambia esto por la ruta adecuada si es necesario
+                        data: formData,
+                        success: function (response) {
+                            if (response.success) {
+                                // Si es exitoso, muestra el modal con el mensaje de éxito
+                                $('.modal-body').text(response.message);
+                                $('#messageModal').modal('show'); // Corrige el ID aquí
+                            } else {
+                                // Maneja el caso de error
+                                $('.modal-body').text(response.message);
+                                $('#messageModal').modal('show'); // Corrige el ID aquí
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            $('.modal-body').text('Hubo un error al procesar la solicitud.');
+                            $('#messageModal').modal('show'); // Corrige el ID aquí
+                        }
+                    });
+                });
+            });
+            $(document).on('click', '.btn-secondary', function () {
+                $('#messageModal').modal('hide');
+            });
+        </script>
+
+
+             
+        </script>
+    }
+
+
+
+
 
 </body>
