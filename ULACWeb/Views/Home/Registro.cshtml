@@ -23,140 +23,151 @@
     }
 
     <!-- Sign-up Start -->
-    <form id="registrationForm" action="@Url.Action("Registrar", "Registro")" method="post">
 
-        <div class="container-xxl py-5">
-            <div class="container py-5">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
-                        <h6 class="text-secondary text-uppercase mb-3">REGISTRO</h6>
-                        <h1 class="mb-5">Regístrate ahora!</h1>
-                        <p class="mb-5">Regístrate ahora y obtén más información sobre nuestros servicios!</p>
-                        <div class="d-flex align-items-center">
-                            <i class="fa fa-user-plus fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
-                        </div>
+
+    <div class="container-xxl py-5">
+        <div class="container py-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="text-secondary text-uppercase mb-3">REGISTRO</h6>
+                    <h1 class="mb-5">Regístrate ahora!</h1>
+                    <p class="mb-5">Regístrate ahora y obtén más información sobre nuestros servicios!</p>
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-user-plus fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="bg-light text-center p-5 wow fadeIn" data-wow-delay="0.5s">
-                            @if (TempData["MensajeExito"] != null)
-                            {
-                                <div class="alert alert-success">
-                                    @TempData["MensajeExito"]
-                                </div>
-                            }
+                </div>
+                <div class="col-lg-7">
+                    <div class="bg-light text-center p-5 wow fadeIn" data-wow-delay="0.5s">
+                        @if (TempData["MensajeExito"] != null)
+                        {
+                            <div class="alert alert-success">
+                                @TempData["MensajeExito"]
+                            </div>
+                        }
 
-                            @if (TempData["MensajeError"] != null)
-                            {
-                                <div class="alert alert-danger">
-                                    @TempData["MensajeError"]
-                                </div>
-                            }
+                        @if (TempData["MensajeError"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                @TempData["MensajeError"]
+                            </div>
+                        }
 
-                            <form action="@Url.Action("Registrar", "Registro")" method="post">
-                                <div class="form-group">
-                                    <label for="IDEmpresa">ID Empresa:</label>
-                                    <input type="text" class="form-control" name="IDEmpresa" id="IDEmpresa" placeholder="ID Empresa" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="NombreContactoPrincipal">Nombre Completo:</label>
-                                    <input type="text" class="form-control" name="NombreContactoPrincipal" id="NombreContactoPrincipal" placeholder="Nombre Completo" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="CorreoContactoPrincipal">Correo Electrónico:</label>
-                                    <input type="email" class="form-control" name="CorreoContactoPrincipal" id="CorreoContactoPrincipal" placeholder="Correo Electrónico" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="NumeroContactoPrincipal">Número de Teléfono:</label>
-                                    <input type="tel" class="form-control" name="NumeroContactoPrincipal" id="NumeroContactoPrincipal" placeholder="Número de Teléfono" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="PaisResidencia">País de Residencia:</label>
-                                    <select class="form-control" name="PaisResidencia" id="PaisResidencia" required>
-                                        <option value="">Seleccione un país</option>
-                                        <option value="Costa Rica">Costa Rica</option>
-                                        <option value="Salvador">El Salvador</option>
-                                        <option value="Nicaragua">Nicaragua</option>
-                                        <option value="Honduras">Honduras</option>
-                                        <option value="Panamá">Panamá</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="Usuario">Usuario:</label>
-                                    <input type="text" class="form-control" name="Usuario" id="Usuario" placeholder="Usuario" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="Contraseña">Contraseña:</label>
-                                    <div class="position-relative">
+                        <form action="@Url.Action("Registrar", "Registro")" method="post">
+                            <div class="form-group">
+                                <label for="IDEmpresa">ID Empresa:<span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" name="IDEmpresa" id="IDEmpresa" placeholder="ID Empresa" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="NombreContactoPrincipal">Nombre Completo:<span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" name="NombreContactoPrincipal" id="NombreContactoPrincipal" placeholder="Nombre Completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="CorreoContactoPrincipal">Correo Electrónico:<span style="color: red;">*</span></label>
+                                <input type="email" class="form-control" name="CorreoContactoPrincipal" id="CorreoContactoPrincipal" placeholder="Correo Electrónico" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="NumeroContactoPrincipal">Número de Teléfono:<span style="color: red;">*</span></label>
+                                <input type="tel" class="form-control" name="NumeroContactoPrincipal" id="NumeroContactoPrincipal" placeholder="Número de Teléfono" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="PaisResidencia">País de Residencia:<span style="color: red;">*</span></label>
+                                <select class="form-control" name="PaisResidencia" id="PaisResidencia" required>
+                                    <option value="">Seleccione un país</option>
+                                    <option value="Costa Rica">Costa Rica</option>
+                                    <option value="Salvador">El Salvador</option>
+                                    <option value="Nicaragua">Nicaragua</option>
+                                    <option value="Honduras">Honduras</option>
+                                    <option value="Panamá">Panamá</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Usuario">Usuario:<span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" name="Usuario" id="Usuario" placeholder="Usuario" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Contraseña">Contraseña:<span style="color: red;">*</span></label>
+                                <div class="position-relative">
+                                    <div class="input-group">
                                         <input type="password" class="form-control" name="Contraseña" id="Contraseña" placeholder="Contraseña" required>
-                                        <div id="password-requirements" class="password-requirements d-none">
-                                            <ul>
-                                                <li id="length-requirement" class="text-danger"></li>
-                                                <li id="letter-requirement" class="text-danger"></li>
-                                                <li id="capital-requirement" class="text-danger"></li>
-                                                <li id="number-requirement" class="text-danger"></li>
-                                                <li id="special-requirement" class="text-danger"></li>
-                                            </ul>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"><i class="fa fa-eye"></i></button>
                                         </div>
                                     </div>
+                                   
+                                    <div id="password-requirements" class="password-requirements d-none">
+                                        <ul>
+                                            <li id="length-requirement" class="text-danger"></li>
+                                            <li id="letter-requirement" class="text-danger"></li>
+                                            <li id="capital-requirement" class="text-danger"></li>
+                                            <li id="number-requirement" class="text-danger"></li>
+                                            <li id="special-requirement" class="text-danger"></li>
+                                        </ul>
+                                    </div>
+                                    
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ConfirmacionContraseña">Confirmar Contraseña:<span style="color: red;">*</span></label>
+                                <input type="password" class="form-control" id="ConfirmacionContraseña" placeholder="Confirmar Contraseña" required>
+                                <span class="error-contraseña" style="color:red; display:none;"></span>
+                            </div>
+                            <!-- Pregunta de seguridad y respuesta 1 -->
+                            <div class="form-group">
+                                <label for="Pregunta1">Pregunta de Seguridad 1:<span style="color: red;">*</span></label>
+                                <select class="form-control" name="Pregunta1" id="Pregunta1" required>
+                                    <option value="">Selecciona una pregunta</option>
+                                    <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Respuesta1" id="Respuesta1" placeholder="Respuesta 1" required>
+                            </div>
 
-                                <!-- Pregunta de seguridad y respuesta 1 -->
-                                <div class="form-group">
-                                    <label for="Pregunta1">Pregunta de Seguridad 1:</label>
-                                    <select class="form-control" name="Pregunta1" id="Pregunta1" required>
-                                        <option value="">Selecciona una pregunta</option>
-                                        <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
-                                        <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
-                                        <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
-                                        <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
-                                        <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="Respuesta1" id="Respuesta1" placeholder="Respuesta 1" required>
-                                </div>
+                            <!-- Pregunta de seguridad y respuesta 2 -->
+                            <div class="form-group">
+                                <label for="Pregunta2">Pregunta de Seguridad 2:<span style="color: red;">*</span></label>
+                                <select class="form-control" name="Pregunta2" id="Pregunta2" required>
+                                    <option value="">Selecciona una pregunta</option>
+                                    <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Respuesta2" id="Respuesta2" placeholder="Respuesta 2" required>
+                            </div>
 
-                                <!-- Pregunta de seguridad y respuesta 2 -->
-                                <div class="form-group">
-                                    <label for="Pregunta2">Pregunta de Seguridad 2:</label>
-                                    <select class="form-control" name="Pregunta2" id="Pregunta2" required>
-                                        <option value="">Selecciona una pregunta</option>
-                                        <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
-                                        <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
-                                        <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
-                                        <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
-                                        <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="Respuesta2" id="Respuesta2" placeholder="Respuesta 2" required>
-                                </div>
+                            <!-- Pregunta de seguridad y respuesta 3 -->
+                            <div class="form-group">
+                                <label for="Pregunta3">Pregunta de Seguridad 3:<span style="color: red;">*</span></label>
+                                <select class="form-control" name="Pregunta3" id="Pregunta3" required>
+                                    <option value="">Selecciona una pregunta</option>
+                                    <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Respuesta3" id="Respuesta3" placeholder="Respuesta 3" required>
+                            </div>
 
-                                <!-- Pregunta de seguridad y respuesta 3 -->
-                                <div class="form-group">
-                                    <label for="Pregunta3">Pregunta de Seguridad 3:</label>
-                                    <select class="form-control" name="Pregunta3" id="Pregunta3" required>
-                                        <option value="">Selecciona una pregunta</option>
-                                        <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
-                                        <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
-                                        <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
-                                        <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
-                                        <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="Respuesta3" id="Respuesta3" placeholder="Respuesta 3" required>
-                                </div>
+                            <button type="submit" class="btn btn-primary">Registrarse</button>
+                        </form>
 
-                                <button type="submit" class="btn btn-primary">Registrarse</button>
-                            </form>
-
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+
     <!-- Sign-up End -->
     <!-- Modal de Bootstrap para confirmación -->
 
@@ -178,6 +189,24 @@
             </div>
         </div>
     </div>
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Campos Obligatorios</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Todos los campos son obligatorios.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     @section footer{
     }
@@ -189,37 +218,100 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
         <script>
             $(document).ready(function () {
-               // Verificación de contraseña segura
-    $('#Contraseña').on('input', function () {
-        verificarContraseñaSegura($(this).val());
-    });
-    function verificarContraseñaSegura(password) {
-        const lengthRequirement = /.{8,}/;
-        const letterRequirement = /[a-z]/;
-        const capitalRequirement = /[A-Z]/;
-        const numberRequirement = /\d/;
-        const specialRequirement = /[!-#$_&*,.]/;
+                $('form').submit(function (event) {
+                    var isFormValid = true;
 
-        $('#length-requirement').text(lengthRequirement.test(password) ? 'Longitud correcta' : 'Mínimo 8 caracteres').toggleClass('text-danger', !lengthRequirement.test(password)).toggleClass('text-success', lengthRequirement.test(password));
-        $('#letter-requirement').text(letterRequirement.test(password) ? 'Letra minúscula incluida' : 'Incluye al menos una letra minúscula').toggleClass('text-danger', !letterRequirement.test(password)).toggleClass('text-success', letterRequirement.test(password));
-        $('#capital-requirement').text(capitalRequirement.test(password) ? 'Letra mayúscula incluida' : 'Incluye al menos una letra mayúscula').toggleClass('text-danger', !capitalRequirement.test(password)).toggleClass('text-success', capitalRequirement.test(password));
-        $('#number-requirement').text(numberRequirement.test(password) ? 'Número incluido' : 'Incluye al menos un número').toggleClass('text-danger', !numberRequirement.test(password)).toggleClass('text-success', numberRequirement.test(password));
-        $('#special-requirement').text(specialRequirement.test(password) ? 'Símbolo especial incluido' : 'Incluye al menos un símbolo especial').toggleClass('text-danger', !specialRequirement.test(password)).toggleClass('text-success', specialRequirement.test(password));
+                    $(this).find(':input[required]').each(function () {
+                        if (!$(this).val()) {
+                            isFormValid = false;
+                            return false;
+                        }
+                    });
 
-        // Muestra o esconde el contenedor de requisitos según si algún requisito no se cumple
-        if (lengthRequirement.test(password) && letterRequirement.test(password) && capitalRequirement.test(password) && numberRequirement.test(password) && specialRequirement.test(password)) {
-            $('#password-requirements').addClass('d-none');
-        } else {
-            $('#password-requirements').removeClass('d-none');
-        }
-    }
+                    if (!isFormValid) {
+                        $('#myModal').modal('show');
+                        event.preventDefault();
+                    }
+                });
+            });
+        </script>
 
-    // Inicializa la verificación de contraseña segura
-    verificarContraseñaSegura($('#Contraseña').val());
+        <script>
+            document.getElementById('togglePassword').addEventListener('click', function (e) {
+                const passwordInput = document.getElementById('Contraseña');
+                const passwordIcon = this.querySelector('i');
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    passwordIcon.classList.remove('fa-eye');
+                    passwordIcon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = "password";
+                    passwordIcon.classList.remove('fa-eye-slash');
+                    passwordIcon.classList.add('fa-eye');
+                }
+            });
+        </script>
 
+        <script>
+            $(document).ready(function () {
+                // Verificación de contraseña segura
+                $('#Contraseña').on('input', function () {
+                    verificarContraseñaSegura($(this).val());
+                });
+
+                function verificarContraseñaSegura(password) {
+                    const lengthRequirement = /.{8,}/;
+                    const letterRequirement = /[a-z]/;
+                    const capitalRequirement = /[A-Z]/;
+                    const numberRequirement = /\d/;
+                    const specialRequirement = /[!-#$_&*,.]/;
+
+                    $('#length-requirement').text(lengthRequirement.test(password) ? 'Longitud correcta' : 'Mínimo 8 caracteres').toggleClass('text-danger', !lengthRequirement.test(password)).toggleClass('text-success', lengthRequirement.test(password));
+                    $('#letter-requirement').text(letterRequirement.test(password) ? 'Letra minúscula incluida' : 'Incluye al menos una letra minúscula').toggleClass('text-danger', !letterRequirement.test(password)).toggleClass('text-success', letterRequirement.test(password));
+                    $('#capital-requirement').text(capitalRequirement.test(password) ? 'Letra mayúscula incluida' : 'Incluye al menos una letra mayúscula').toggleClass('text-danger', !capitalRequirement.test(password)).toggleClass('text-success', capitalRequirement.test(password));
+                    $('#number-requirement').text(numberRequirement.test(password) ? 'Número incluido' : 'Incluye al menos un número').toggleClass('text-danger', !numberRequirement.test(password)).toggleClass('text-success', numberRequirement.test(password));
+                    $('#special-requirement').text(specialRequirement.test(password) ? 'Símbolo especial incluido' : 'Incluye al menos un símbolo especial').toggleClass('text-danger', !specialRequirement.test(password)).toggleClass('text-success', specialRequirement.test(password));
+
+                    // Muestra o esconde el contenedor de requisitos según si algún requisito no se cumple
+                    if (lengthRequirement.test(password) && letterRequirement.test(password) && capitalRequirement.test(password) && numberRequirement.test(password) && specialRequirement.test(password)) {
+                        $('#password-requirements').addClass('d-none');
+                    } else {
+                        $('#password-requirements').removeClass('d-none');
+                    }
+                }
+
+                // Verificación para la confirmación de la contraseña
+                function verificarConfirmacionContraseña() {
+                    var contraseña = $('#Contraseña').val();
+                    var confirmacionContraseña = $('#ConfirmacionContraseña').val();
+
+                    // Verifica si las contraseñas coinciden
+                    if (contraseña !== confirmacionContraseña) {
+                        // Muestra un mensaje de error o maneja la discrepancia
+                        $('.error-contraseña').text('Las contraseñas no coinciden').show();
+                        return false; // Las contraseñas no coinciden
+                    } else {
+                        // Oculta el mensaje de error si las contraseñas ahora coinciden
+                        $('.error-contraseña').hide();
+                        return true; // Las contraseñas coinciden
+                    }
+                }
+
+                // Evento para verificar la coincidencia cada vez que el usuario escribe en alguno de los campos de contraseña
+                $('#Contraseña, #ConfirmacionContraseña').on('input', function () {
+                    verificarConfirmacionContraseña();
+                });
+
+                // Inicializa la verificación de contraseña segura
+                verificarContraseñaSegura($('#Contraseña').val());
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
                 $('#registrationForm').submit(function (event) {
                     event.preventDefault(); // Previene el envío normal del formulario
                     var formData = $(this).serialize(); // Serializa los datos del formulario
@@ -232,32 +324,25 @@
                             if (response.success) {
                                 // Si es exitoso, muestra el modal con el mensaje de éxito
                                 $('.modal-body').text(response.message);
-                                $('#messageModal').modal('show'); // Corrige el ID aquí
+                                $('#messageModal').modal('show'); // Asegúrate de corregir el ID aquí si es diferente
                             } else {
                                 // Maneja el caso de error
                                 $('.modal-body').text(response.message);
-                                $('#messageModal').modal('show'); // Corrige el ID aquí
+                                $('#messageModal').modal('show'); // Asegúrate de corregir el ID aquí si es diferente
                             }
                         },
                         error: function (xhr, status, error) {
                             $('.modal-body').text('Hubo un error al procesar la solicitud.');
-                            $('#messageModal').modal('show'); // Corrige el ID aquí
+                            $('#messageModal').modal('show'); // Asegúrate de corregir el ID aquí si es diferente
                         }
                     });
                 });
-            });
-            $(document).on('click', '.btn-secondary', function () {
-                $('#messageModal').modal('hide');
-            });
-        </script>
 
-
-             
+                $(document).on('click', '.btn-secondary', function () {
+                    $('#messageModal').modal('hide');
+                });
+            });
         </script>
     }
-
-
-
-
 
 </body>

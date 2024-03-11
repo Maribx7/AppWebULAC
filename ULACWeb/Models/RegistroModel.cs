@@ -80,11 +80,79 @@ namespace ULACWeb.Models
                 );
 
                 string enlaceVerificacion = GenerarEnlaceVerificacion("http://localhost:52512/Registro/", VerificationUID);
+                string mensajeHtml = $@"
+                                        <html>
+                                        <head>
+                                            <style>
+                                                .email-container {{
+                                                    max-width: 600px;
+                                                    margin: auto;
+                                                    background-color: #fff;
+                                                    padding: 20px;
+                                                    border-radius: 8px;
+                                                    border: 1px solid #ccc;
+                                                    font-family: 'Arial', sans-serif;
+                                                }}
+                                                .header {{
+                                                    background-color: #d32f2f;
+                                                    color: #fff;
+                                                    padding: 10px;
+                                                    text-align: center;
+                                                }}
+                                                .footer {{
+                                                   
+                                                    background-color: #d32f2f;
+                                                    color: #fff;
+                                                    padding: 20px 10px;
+                                                    text-align: center;
+                                                    background-image: url('https://get.wallhere.com/photo/1920x1080-px-American-Truck-Simulator-ATS-Kenworth-Peterbilt-trucks-1346089.jpg');
+                                                    background-size: cover;
+                                                    background-position: center; 
+                                                    min-height: 150px;
+
+                                                }}
+                                                .content {{
+                                                    margin: 20px 0;
+                                                    color: #000;
+                                                }}
+                                                .btn-verify {{
+                                                    background-color: #d32f2f;
+                                                    color: #fff !important;
+                                                    padding: 10px 20px;
+                                                    text-decoration: none;
+                                                    border-radius: 5px;
+                                                    display: block;
+                                                    width: fit-content;
+                                                    margin: 20px auto;
+                                                }}
+                                                .disclaimer {{
+                                                    font-size: 0.8em;
+                                                    color: #666;
+                                                    text-align: center;
+                                                }}
+                                            </style>
+                                        </head>
+                                        <body>
+                                            <div class='email-container'>
+                                                <div class='header'>ULAC - Verificación de Correo</div>
+                                                <div class='content'>
+                                                    <p>Hola {NombreContactoPrincipal},</p>
+                                                    <p>Gracias por registrarte en Transportes ULAC. Estamos emocionados que seas parte de nuestros asociados. Para completar tu proceso de registro y verificar tu correo electrónico, haz clic en el botón a continuación:</p>
+                                                    <a href='{enlaceVerificacion}' class='btn-verify'>Verificar Cuenta</a>
+                                                    <p>Si no has solicitado un registro en ULAC, puedes ignorar este correo.</p>
+                                                </div>
+                                                <div class='footer'>
+                                                    <p>Gracias por usar ULAC</p>
+                                                </div>
+                                                <p class='disclaimer'>Este es un correo automático, por favor no responder.</p>
+                                            </div>
+                                        </body>
+                                        </html>";
 
 
                 Destinatario = CorreoContactoPrincipal;
                 Asunto = "Verificación de correo electrónico para ULAC";
-                Mensaje = $"Hola {NombreContactoPrincipal},<br>Para completar tu registro en ULAC, haz clic en el siguiente enlace para verificar tu correo electrónico: <br>{enlaceVerificacion}";
+                Mensaje = mensajeHtml;
 
                 EnviarCorreoElectronico();
                 IsVerified = false;
@@ -138,7 +206,7 @@ namespace ULACWeb.Models
                 mailMessage.To.Add(Destinatario);
                 mailMessage.Subject = Asunto;
                 mailMessage.Body = Mensaje;
-
+                mailMessage.IsBodyHtml = true; 
                 smtpClient.Send(mailMessage);
             }
         }
