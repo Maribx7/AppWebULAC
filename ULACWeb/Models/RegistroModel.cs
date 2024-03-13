@@ -53,7 +53,8 @@ namespace ULACWeb.Models
         public string Asunto { get; set; }
         public string Mensaje { get; set; }
 
-
+        public string AsuntoToken { get; set; }
+        public string MensajeToken { get; set; }
         public bool GuardarEnBaseDeDatos()
         {
             try
@@ -68,9 +69,9 @@ namespace ULACWeb.Models
                 // Genera un token de verificación único y un UID
                 VerificationToken = Guid.NewGuid().ToString();
                 VerificationUID = Guid.NewGuid(); // Genera el UID
-
+                string formattedVerificationUID = VerificationUID.ToString().Trim(new char[] { '{', '}' });
                 // Genera un token de verificación único
-                
+
                 var protectedToken = Convert.ToBase64String(
                   ProtectedData.Protect(
                     Encoding.UTF8.GetBytes(VerificationToken),
@@ -153,10 +154,11 @@ namespace ULACWeb.Models
                 Destinatario = CorreoContactoPrincipal;
                 Asunto = "Verificación de correo electrónico para ULAC";
                 Mensaje = mensajeHtml;
-
+               
                 EnviarCorreoElectronico();
                 IsVerified = false;
                 MensajeGeneral = "Se ha enviado un correo electrónico de verificación a su dirección. Haga clic en el enlace para completar el registro."; ;
+                
 
                 string connectionString = ConfigurationManager.ConnectionStrings["SqlConexion"].ConnectionString;
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -180,9 +182,12 @@ namespace ULACWeb.Models
                     command.Parameters.AddWithValue("@RespuestaSeguridad3", Respuesta3);
                     command.Parameters.AddWithValue("@IsVerified", false);
                     command.Parameters.AddWithValue("@VerificationToken", protectedToken);
-                    command.Parameters.AddWithValue("@VerificationUID", VerificationUID);
+                    command.Parameters.AddWithValue("@VerificationUID", formattedVerificationUID);
                     command.ExecuteNonQuery();
                 }
+
+                
+
                 return true;
             }
             catch (Exception ex)
@@ -202,12 +207,106 @@ namespace ULACWeb.Models
                 smtpClient.EnableSsl = true;
 
                 MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress("marilyn030599@gmail.com");
+                mailMessage.From = new MailAddress("transportesulac@gmail.com");
                 mailMessage.To.Add(Destinatario);
                 mailMessage.Subject = Asunto;
                 mailMessage.Body = Mensaje;
                 mailMessage.IsBodyHtml = true; 
                 smtpClient.Send(mailMessage);
+            }
+        }
+
+        public void EnviarToken(string Destinatario, string Token)
+        {
+            AsuntoToken = "Registro ULAC - TOKEN";
+        
+            using (SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587))
+            {
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new System.Net.NetworkCredential("transportesulac@gmail.com", "znak dpdt xmvl phkt");
+                smtpClient.EnableSsl = true;
+
+                string mensajeHtmlToken = $@"
+                                    <html>
+                                    <head>
+                                        <style>
+                                            .email-container {{
+                                                max-width: 600px;
+                                                margin: auto;
+                                                background-color: #fff;
+                                                padding: 20px;
+                                                border-radius: 8px;
+                                                border: 1px solid #ccc;
+                                                font-family: 'Arial', sans-serif;
+                                            }}
+                                            .header {{
+                                                background-color: #d32f2f;
+                                                color: #fff;
+                                                padding: 10px;
+                                                text-align: center;
+                                            }}
+                                            .footer {{
+                                                background-color: #d32f2f;
+                                                color: #fff;
+                                                padding: 20px 10px;
+                                                text-align: center;
+                                                background-image: url('https://get.wallhere.com/photo/1920x1080-px-American-Truck-Simulator-ATS-Kenworth-Peterbilt-trucks-1346089.jpg');
+                                                background-size: cover;
+                                                background-position: center; 
+                                                min-height: 150px;
+                                            }}
+                                            .content {{
+                                                margin: 20px 0;
+                                                color: #000;
+                                            }}
+                                            .btn-verify {{
+                                                background-color: #d32f2f;
+                                                color: #fff !important;
+                                                padding: 10px 20px;
+                                                text-decoration: none;
+                                                border-radius: 5px;
+                                                display: block;
+                                                width: fit-content;
+                                                margin: 20px auto;
+                                            }}
+                                            .disclaimer {{
+                                                font-size: 0.8em;
+                                                color: #666;
+                                                text-align: center;
+                                            }}
+                                        </style>
+                                    </head>
+                                    <body>
+                                        <div class='email-container'>
+                                            <div class='header'>ULAC - Token de Inicio de Sesión</div>
+                                            <div class='content'>
+                                                <p>Hola,</p>
+                                                <p>Gracias por verificar tu correo electrónico. A continuación, encontrarás tu token personal para iniciar sesión en Transportes ULAC. Es importante que mantengas este token seguro y no lo compartas con nadie.</p>
+                                                <p>Tu token es: <strong>{Token}</strong></p>
+                                                <p>Para iniciar sesión, puedes utilizar el siguiente enlace y proporcionar tu token cuando se te solicite.</p>
+                                                <a href='http://localhost:52512/' class='btn-verify'>Iniciar Sesión</a>
+                                                <p>Si no has solicitado este token, por favor ignora este mensaje o ponte en contacto con nuestro equipo de soporte.</p>
+                                            </div>
+                                            <div class='footer'>
+                                                <p>Gracias por usar ULAC</p>
+                                            </div>
+                                            <p class='disclaimer'>Este es un correo automático, por favor no responder.</p>
+                                        </div>
+                                    </body>
+                                    </html>";
+
+                 
+                 
+
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("transportesulac@gmail.com");
+                mailMessage.To.Add(Destinatario);
+                mailMessage.Subject = AsuntoToken;
+                mailMessage.Body = mensajeHtmlToken; 
+                mailMessage.IsBodyHtml = true;
+
+                smtpClient.Send(mailMessage);
+                MensajeGeneral = "Se ha enviado un correo electrónico de verificación a su dirección. Haga clic en el enlace para completar el registro."; ;
             }
         }
 

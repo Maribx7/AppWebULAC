@@ -21,9 +21,18 @@
 
     @section navbar{
     }
+<style>
+    .form-group1 .form-control {
+        width: 100%; /* Asegura que el select use todo el ancho disponible */
+        max-width: 100%; /* Evita que se extienda más allá de su contenedor */
+        box-sizing: border-box; /* El ancho incluye el padding y el border */
+    }
+</style>
 
     <!-- Sign-up Start -->
-
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
     <div class="container-xxl py-5">
         <div class="container py-5">
@@ -52,115 +61,121 @@
                             </div>
                         }
 
-                        <form action="@Url.Action("Registrar", "Registro")" method="post">
-                            <div class="form-group">
-                                <label for="IDEmpresa">ID Empresa:<span style="color: red;">*</span></label>
-                                <input type="text" class="form-control" name="IDEmpresa" id="IDEmpresa" placeholder="ID Empresa" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="NombreContactoPrincipal">Nombre Completo:<span style="color: red;">*</span></label>
-                                <input type="text" class="form-control" name="NombreContactoPrincipal" id="NombreContactoPrincipal" placeholder="Nombre Completo" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="CorreoContactoPrincipal">Correo Electrónico:<span style="color: red;">*</span></label>
-                                <input type="email" class="form-control" name="CorreoContactoPrincipal" id="CorreoContactoPrincipal" placeholder="Correo Electrónico" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="NumeroContactoPrincipal">Número de Teléfono:<span style="color: red;">*</span></label>
-                                <input type="tel" class="form-control" name="NumeroContactoPrincipal" id="NumeroContactoPrincipal" placeholder="Número de Teléfono" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="PaisResidencia">País de Residencia:<span style="color: red;">*</span></label>
-                                <select class="form-control" name="PaisResidencia" id="PaisResidencia" required>
-                                    <option value="">Seleccione un país</option>
-                                    <option value="Costa Rica">Costa Rica</option>
-                                    <option value="Salvador">El Salvador</option>
-                                    <option value="Nicaragua">Nicaragua</option>
-                                    <option value="Honduras">Honduras</option>
-                                    <option value="Panamá">Panamá</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="Usuario">Usuario:<span style="color: red;">*</span></label>
-                                <input type="text" class="form-control" name="Usuario" id="Usuario" placeholder="Usuario" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="Contraseña">Contraseña:<span style="color: red;">*</span></label>
-                                <div class="position-relative">
-                                    <div class="input-group">
-                                        <input type="password" class="form-control" name="Contraseña" id="Contraseña" placeholder="Contraseña" required>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"><i class="fa fa-eye"></i></button>
-                                        </div>
+                    <form action="@Url.Action("Registrar", "Registro")" method="post">
+                        <div class="form-group">
+                            <label for="IDEmpresa">ID Empresa:<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" name="IDEmpresa" id="IDEmpresa" placeholder="ID Empresa" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="NombreContactoPrincipal">Nombre Completo:<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" name="NombreContactoPrincipal" id="NombreContactoPrincipal" placeholder="Nombre Completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="CorreoContactoPrincipal">Correo Electrónico:<span style="color: red;">*</span></label>
+                            <input type="email" class="form-control" name="CorreoContactoPrincipal" id="CorreoContactoPrincipal" placeholder="Correo Electrónico" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="NumeroContactoPrincipal">Número de Teléfono:<span style="color: red;">*</span></label>
+                            <input type="tel" class="form-control" name="NumeroContactoPrincipal" id="NumeroContactoPrincipal" placeholder="Número de Teléfono" required>
+                        </div>
+                        <div class="form-group1">
+                            <label for="PaisResidencia">País de Residencia:<span style="color: red;">*</span></label>
+                            <select class="form-control" name="PaisResidencia" id="PaisResidencia" required>
+                                <option value="">Seleccione un país</option>
+                                <option value="Costa Rica">Costa Rica</option>
+                                <option value="Salvador">El Salvador</option>
+                                <option value="Nicaragua">Nicaragua</option>
+                                <option value="Honduras">Honduras</option>
+                                <option value="Panamá">Panamá</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="Usuario">Usuario:<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" name="Usuario" id="Usuario" placeholder="Usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Contraseña">Contraseña:<span style="color: red;">*</span></label>
+                            <div class="position-relative">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="Contraseña" id="Contraseña" placeholder="Contraseña" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"><i class="fa fa-eye"></i></button>
                                     </div>
-                                   
-                                    <div id="password-requirements" class="password-requirements d-none">
-                                        <ul>
-                                            <li id="length-requirement" class="text-danger"></li>
-                                            <li id="letter-requirement" class="text-danger"></li>
-                                            <li id="capital-requirement" class="text-danger"></li>
-                                            <li id="number-requirement" class="text-danger"></li>
-                                            <li id="special-requirement" class="text-danger"></li>
-                                        </ul>
-                                    </div>
-                                    
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="ConfirmacionContraseña">Confirmar Contraseña:<span style="color: red;">*</span></label>
-                                <input type="password" class="form-control" id="ConfirmacionContraseña" placeholder="Confirmar Contraseña" required>
-                                <span class="error-contraseña" style="color:red; display:none;"></span>
-                            </div>
-                            <!-- Pregunta de seguridad y respuesta 1 -->
-                            <div class="form-group">
-                                <label for="Pregunta1">Pregunta de Seguridad 1:<span style="color: red;">*</span></label>
-                                <select class="form-control" name="Pregunta1" id="Pregunta1" required>
-                                    <option value="">Selecciona una pregunta</option>
-                                    <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
-                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
-                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
-                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
-                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="Respuesta1" id="Respuesta1" placeholder="Respuesta 1" required>
-                            </div>
 
-                            <!-- Pregunta de seguridad y respuesta 2 -->
-                            <div class="form-group">
-                                <label for="Pregunta2">Pregunta de Seguridad 2:<span style="color: red;">*</span></label>
-                                <select class="form-control" name="Pregunta2" id="Pregunta2" required>
-                                    <option value="">Selecciona una pregunta</option>
-                                    <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
-                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
-                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
-                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
-                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="Respuesta2" id="Respuesta2" placeholder="Respuesta 2" required>
-                            </div>
+                                <div id="password-requirements" class="password-requirements d-none">
+                                    <ul>
+                                        <li id="length-requirement" class="text-danger"></li>
+                                        <li id="letter-requirement" class="text-danger"></li>
+                                        <li id="capital-requirement" class="text-danger"></li>
+                                        <li id="number-requirement" class="text-danger"></li>
+                                        <li id="special-requirement" class="text-danger"></li>
+                                    </ul>
+                                </div>
 
-                            <!-- Pregunta de seguridad y respuesta 3 -->
-                            <div class="form-group">
-                                <label for="Pregunta3">Pregunta de Seguridad 3:<span style="color: red;">*</span></label>
-                                <select class="form-control" name="Pregunta3" id="Pregunta3" required>
-                                    <option value="">Selecciona una pregunta</option>
-                                    <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
-                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
-                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
-                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
-                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
-                                </select>
                             </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="Respuesta3" id="Respuesta3" placeholder="Respuesta 3" required>
-                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ConfirmacionContraseña">Confirmar Contraseña:<span style="color: red;">*</span></label>
+                            <input type="password" class="form-control" id="ConfirmacionContraseña" placeholder="Confirmar Contraseña" required>
+                            <span class="error-contraseña" style="color:red; display:none;"></span>
+                        </div>
 
-                            <button type="submit" class="btn btn-primary">Registrarse</button>
-                        </form>
+
+                        <!-- Pregunta de seguridad y respuesta 1 -->
+                        <div class="form-group1">
+                            <label for="Pregunta1">Pregunta de Seguridad 1:<span style="color: red;">*</span></label>
+                            <select class="form-control" name="Pregunta1" id="Pregunta1" required>
+                                <option value="">Selecciona una pregunta</option>
+                                <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Respuesta1" id="Respuesta1" placeholder="Respuesta 1" required>
+                        </div>
+
+                        <!-- Pregunta de seguridad y respuesta 2 -->
+                        <div class="form-group1">
+                            <label for="Pregunta2">Pregunta de Seguridad 2:<span style="color: red;">*</span></label>
+                            <select class="form-control" name="Pregunta2" id="Pregunta2" required>
+                                <option value="">Selecciona una pregunta</option>
+                                <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Respuesta2" id="Respuesta2" placeholder="Respuesta 2" required>
+                        </div>
+
+                        <!-- Pregunta de seguridad y respuesta 3 -->
+                        <div class="form-group1">
+                            <label for="Pregunta3">Pregunta de Seguridad 3:<span style="color: red;">*</span></label>
+                            <select class="form-control" name="Pregunta3" id="Pregunta3" required>
+                                <option value="">Selecciona una pregunta</option>
+                                <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Respuesta3" id="Respuesta3" placeholder="Respuesta 3" required>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary">Registrarse</button>
+                    </form>
 
                     </div>
                 </div>

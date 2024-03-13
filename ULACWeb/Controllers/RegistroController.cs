@@ -12,7 +12,7 @@ namespace ULACWeb.Controllers
 {
     public class RegistroController : Controller
     {
-        
+
         public ActionResult Index()
         {
             return View();
@@ -41,7 +41,7 @@ namespace ULACWeb.Controllers
             }
 
         }
-        public ActionResult VerificarCorreo(string uid)
+        public ActionResult VerificarCorreo(string uid, RegistroModel model)
         {
             if (uid != null && !string.IsNullOrEmpty(uid))
             {
@@ -51,9 +51,9 @@ namespace ULACWeb.Controllers
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         connection.Open();
-                        SqlCommand command = new SqlCommand("VerificarCorreo", connection);
+                        SqlCommand command = new SqlCommand("VerificarCorreo", connection); // Asume que este SP también devuelve información del usuario
                         command.CommandType = CommandType.StoredProcedure;
-                        // Pasamos el UID en lugar del Token directamente.
+
                         command.Parameters.AddWithValue("@UID", uid);
 
                         var reader = command.ExecuteReader();
@@ -61,9 +61,15 @@ namespace ULACWeb.Controllers
                         {
                             if (reader.GetInt32(0) == 1) // Asegúrate de que el SP devuelve 1 para éxito
                             {
+
+                                var Destinatario = reader.GetString(reader.GetOrdinal("CorreoContactoPrincipal"));
+                                var Token = reader.GetString(reader.GetOrdinal("Token"));
+                                // Aquí puedes enviar otro correo o realizar la acción deseada ahora que tienes el correo del usuario
+                                model.EnviarToken(Destinatario, Token); // Ajusta esto según tu necesidad
+
                                 TempData["MensajeExito"] = "Su correo ha sido verificado con éxito. Puede realizar el inicio de sesión.";
                                 TempData.Keep("MensajeExito");
-                                return RedirectToAction("Login", "Home"); 
+                                return RedirectToAction("Login", "Home");
                             }
                             else
                             {
@@ -71,7 +77,6 @@ namespace ULACWeb.Controllers
                             }
                         }
                     }
-                 
                 }
                 catch (Exception ex)
                 {
@@ -79,9 +84,8 @@ namespace ULACWeb.Controllers
                     return Content(ViewBag.MensajeError);
                 }
             }
-
             ViewBag.MensajeError = "El token de verificación no es válido.";
             return Content(ViewBag.MensajeError);
         }
     }
-}
+    }
