@@ -1,0 +1,171 @@
+﻿
+@{
+    ViewBag.Title = "CambioContraseña";
+}
+@section navbarRC{}
+
+
+<style>
+    .centered-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh; /* Ajusta esto según sea necesario */
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: 500px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: white;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+</style>
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+<div class="centered-form">
+    <div class="form-container">
+        <h2>Restablecer Contraseña</h2>
+        <form action="@Url.Action("CambioContraseña", "CambioContraseña")" method="post">
+            <div class="form-group">
+                <label for="Contraseña">Contraseña:<span style="color: red;">*</span></label>
+                <div class="position-relative">
+                    <div class="input-group">
+                        <input type="password" class="form-control" name="NuevaContraseña" id="NuevaContraseña" placeholder="Contraseña" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword"><i class="fa fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div id="password-requirements" class="password-requirements d-none">
+                        <ul>
+                            <li id="length-requirement" class="text-danger"></li>
+                            <li id="letter-requirement" class="text-danger"></li>
+                            <li id="capital-requirement" class="text-danger"></li>
+                            <li id="number-requirement" class="text-danger"></li>
+                            <li id="special-requirement" class="text-danger"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ConfirmacionContraseña">Confirmar Contraseña:<span style="color: red;">*</span></label>
+                <input type="password" class="form-control" id="ConfirmacionContraseña" placeholder="Confirmar Contraseña" required>
+                <span class="error-contraseña" style="color:red; display:none;"></span>
+            </div>
+            <br />
+
+            <input type="hidden" name="IDUsuario" value="@TempData["IDUsuario"]" />
+            <input type="hidden" name="correo" value="@TempData["Correo"]" />
+            <button type="submit" class="btn btn-primary">Restablecer Contraseña</button>
+        </form>
+    </div>
+</div>
+
+
+@section footer{}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+<script>
+    $(document).ready(function () {
+        $('form').submit(function (event) {
+            var isFormValid = true;
+
+            $(this).find(':input[required]').each(function () {
+                if (!$(this).val()) {
+                    isFormValid = false;
+                    return false;
+                }
+            });
+
+            if (!isFormValid) {
+                $('#myModal').modal('show');
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function (e) {
+        const passwordInput = document.getElementById('NuevaContraseña');
+        const passwordIcon = this.querySelector('i');
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordIcon.classList.remove('fa-eye');
+            passwordIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = "password";
+            passwordIcon.classList.remove('fa-eye-slash');
+            passwordIcon.classList.add('fa-eye');
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        verificarContraseñaSegura($('#NuevaContraseña').val());
+
+
+        $('#NuevaContraseña').on('input', function () {
+            verificarContraseñaSegura($(this).val());
+        });
+
+        function verificarContraseñaSegura(password) {
+            const lengthRequirement = /.{8,}/;
+            const letterRequirement = /[a-z]/;
+            const capitalRequirement = /[A-Z]/;
+            const numberRequirement = /\d/;
+            const specialRequirement = /[!-#$_&*,.]/;
+
+            $('#length-requirement').text(lengthRequirement.test(password) ? 'Longitud correcta' : 'Mínimo 8 caracteres').toggleClass('text-danger', !lengthRequirement.test(password)).toggleClass('text-success', lengthRequirement.test(password));
+            $('#letter-requirement').text(letterRequirement.test(password) ? 'Letra minúscula incluida' : 'Incluye al menos una letra minúscula').toggleClass('text-danger', !letterRequirement.test(password)).toggleClass('text-success', letterRequirement.test(password));
+            $('#capital-requirement').text(capitalRequirement.test(password) ? 'Letra mayúscula incluida' : 'Incluye al menos una letra mayúscula').toggleClass('text-danger', !capitalRequirement.test(password)).toggleClass('text-success', capitalRequirement.test(password));
+            $('#number-requirement').text(numberRequirement.test(password) ? 'Número incluido' : 'Incluye al menos un número').toggleClass('text-danger', !numberRequirement.test(password)).toggleClass('text-success', numberRequirement.test(password));
+            $('#special-requirement').text(specialRequirement.test(password) ? 'Símbolo especial incluido' : 'Incluye al menos un símbolo especial').toggleClass('text-danger', !specialRequirement.test(password)).toggleClass('text-success', specialRequirement.test(password));
+
+            // Muestra o esconde el contenedor de requisitos según si algún requisito no se cumple
+            if (lengthRequirement.test(password) && letterRequirement.test(password) && capitalRequirement.test(password) && numberRequirement.test(password) && specialRequirement.test(password)) {
+                $('#password-requirements').addClass('d-none');
+            } else {
+                $('#password-requirements').removeClass('d-none');
+            }
+        }
+
+        // Verificación para la confirmación de la contraseña
+        function verificarConfirmacionContraseña() {
+            var contraseña = $('#NuevaContraseña').val();
+            var confirmacionContraseña = $('#ConfirmacionContraseña').val();
+
+            // Verifica si las contraseñas coinciden
+            if (contraseña !== confirmacionContraseña) {
+                // Muestra un mensaje de error o maneja la discrepancia
+                $('.error-contraseña').text('Las contraseñas no coinciden').show();
+                return false; // Las contraseñas no coinciden
+            } else {
+                // Oculta el mensaje de error si las contraseñas ahora coinciden
+                $('.error-contraseña').hide();
+                return true; // Las contraseñas coinciden
+            }
+        }
+
+        // Evento para verificar la coincidencia cada vez que el usuario escribe en alguno de los campos de contraseña
+        $('#NuevaContraseña, #ConfirmacionContraseña').on('input', function () {
+            verificarConfirmacionContraseña();
+        });
+
+        // Inicializa la verificación de contraseña segura
+        verificarContraseñaSegura($('#NuevaContraseña').val());
+    });
+</script>

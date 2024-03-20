@@ -67,5 +67,41 @@ namespace ULACWeb.Controllers
 
             return View();
         }
+        public ActionResult RestablecerContraseña()
+        {
+
+            return View();
+        }
+
+        public ActionResult Restablecer()
+        {
+
+            return View();
+        }
+
+        public ActionResult EnvioCorreo()
+        {
+
+            return View();
+        }
+
+        public ActionResult ErrorBloqueado()
+        {
+            return View();
+        }
+        public ActionResult ReactivarCuenta()
+        {
+            return View();
+        }
+        public ActionResult PreguntasSeguridad()
+        {
+            return View();
+        }
+
+        public ActionResult CambioContraseña()
+        {
+            return View();
+        }
+
     }
 }

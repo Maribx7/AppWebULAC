@@ -79,6 +79,41 @@
     }
     <!-- Navbar End -->
 
+
+    @if (IsSectionDefined("navbarRC"))
+    {
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0">
+
+            <a href="~/Home/Index" class="navbar-brand bg-primary d-flex align-items-center px-4 px-lg-5">
+                <h2 class="mb-2 text-white">Transportes ULAC </h2>
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-3 p-lg-0">
+                    <a href="~/Home/Index" class="nav-item nav-link active">Inicio</a>
+                    <a href="~/Home/Registro" class="nav-item nav-link">Registrarme</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Más</a>
+                        <div class="dropdown-menu fade-up m-0">
+                            <a href="~/Home/About" class="dropdown-item">¿Quienes Somos?</a>
+                            <a href="~/Home/Servicio" class="dropdown-item">Nuestras Unidades</a>
+                            <a href="~/Home/AcercaDe" class="dropdown-item">Acerca del Desarrollador</a>
+                        </div>
+                    </div>
+                    <a href="~/Home/Contact" class="nav-item nav-link">Contacto</a>
+                </div>
+                <h3 class="m-0 pe-lg-5 d-none d-lg-block"><i class="fa fa-headphones text-primary me-3"></i>+506 89884512</h3>
+            </div>
+            @RenderSection("navbarRC")
+        </nav>
+    }
+
+
+
+
     @if (IsSectionDefined("navbarUsuario"))
     {
         <nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0">
@@ -108,7 +143,7 @@
                     </span>
                 </div>
             </div>
-            
+
             @RenderSection("navbarUsuario")
         </nav>
     }

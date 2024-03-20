@@ -1,0 +1,73 @@
+﻿
+@model ULACWeb.Models.PreguntasSeguridadModel
+@{
+    ViewBag.Title = "PreguntasSeguridad";
+}
+
+@section navbar{}
+<style>
+    <style >
+    html, body {
+        height: 150%;
+        margin: 0%;
+    }
+
+    .center-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50%;
+        top: 30%;
+        margin: 5%;
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: 500px;
+        padding: 50px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        background: white;
+    }
+
+    .btn-seguridad {
+        background-color: #D32F2F; /* Rojo */
+        color: white; /* Texto blanco */
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        display: inline-block;
+        margin: 10px 0;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 5px; /* Bordes redondeados */
+    }
+
+        .btn-seguridad:hover {
+            background-color: #B71C1C; /* Rojo oscuro */
+        }
+</style>
+<link rel="stylesheet" href="~/Content/css/Camion.css">
+<h1>Preguntas de seguridad </h1>
+<form action="@Url.Action("ValidarRespuestas", "PreguntasSeguridad")" method="post">
+    <div class="center-form">
+        <div class="pregunta-seguridad">
+
+            <label>Identificacion:</label>
+            <input type="text" class="form-control" name="IDUsuario" placeholder="Ingrese su identificacion" required>
+            <label>@Model.Pregunta.Pregunta</label>
+
+            <input type="text" class="form-control" name="respuesta" placeholder="Ingrese su respuesta" required>
+            <input type="hidden" name="IDPregunta" value="@Model.Pregunta.IDPregunta" />
+            <input type="hidden" name="correo" value="@Model.Correo" />
+        </div>
+        <button type="submit" class="btn-seguridad">Validar Respuesta</button>
+    </div>
+</form>
+
+
+
+<div class="contenedor">
+    <img src="~/Content/img/truck_icon_148218.png" alt="Camión" class="camion">
+</div>
+@section footer{}
+

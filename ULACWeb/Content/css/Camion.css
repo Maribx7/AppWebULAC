@@ -1,0 +1,41 @@
+﻿.contenedor {
+    width: 80vw;
+    min-height: 55px;
+    margin: 20px auto; /* Añadir un poco de margen superior para separarlo del botón */
+    max-width: 500px;
+    text-align: center; /* Esto centra el contenido del contenedor */
+}
+
+.camion {
+    width: 100px;
+    height: 55px;
+    display: inline-block; 
+    margin: 0 auto; /* Centrar el camión si se necesita, aunque text-align ya debería hacerlo */
+    animation: moverCamion 5s infinite linear;
+}
+
+p {
+    text-align:center;
+}
+@keyframes moverCamion {
+    0% {
+        transform: translateX(-100%); /* Inicia completamente fuera del lado izquierdo */
+    }
+
+    100% {
+        transform: translateX(100%); /* Termina completamente fuera del lado derecho */
+    }
+}
+
+
+@media (max-width: 400px) {
+    .contenedor {
+        width: 90vw; 
+    }
+
+    .camion {
+        
+        width: 80px;
+        height: 44px;
+    }
+}

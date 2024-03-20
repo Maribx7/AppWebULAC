@@ -7,85 +7,82 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using ULACWeb.Models;
 using System.Security.Cryptography;
+using System.Data.Entity;
+using System.Collections.Generic;
+using static ULACWeb.Models.RegistroModel;
 
 namespace ULACWeb.Controllers
 {
     public class RegistroController : Controller
     {
 
+        private RegistroModel model = new RegistroModel();
+
         public ActionResult Index()
         {
+
+            
             return View();
         }
 
         // Acción para procesar el formulario de registro
         [HttpPost]
-        public JsonResult Registrar(RegistroModel model)
+        public ActionResult Registrar(RegistroModel model)
         {
-            if (ModelState.IsValid)
             {
-                var resultado = model.GuardarEnBaseDeDatos();
+               
+
+                var resultado = model.EnviodeCorreoVerificacion();
                 if (resultado)
                 {
-                    return Json(new { success = true, message = "Se ha enviado un correo electrónico de verificación a su dirección. Haga clic en el enlace para completar el registro." });
+                    return RedirectToAction("EnvioCorreo", "Home");
                 }
                 else
                 {
-                    // Si hubo un error al guardar en la base de datos o el correo ya estaba registrado
-                    return Json(new { success = false, message = "Algunos campos del formulario no son válidos. Por favor, revise e intente nuevamente." });
+                    return RedirectToAction("Login", "Home");
                 }
             }
-            else
-            {
-                return Json(new { success = false, message = "Algunos campos del formulario no son válidos. Por favor, revise e intente nuevamente." });
-            }
+             
 
         }
-        public ActionResult VerificarCorreo(string uid, RegistroModel model)
+        public ActionResult Verificar(string uid, RegistroModel model)
         {
-            if (uid != null && !string.IsNullOrEmpty(uid))
+
+            if (model != null)
             {
-                try
+                if (model.GuardarDatosVerificados(uid))
                 {
-                    string connectionString = ConfigurationManager.ConnectionStrings["SqlConexion"].ConnectionString;
-                    using (SqlConnection connection = new SqlConnection(connectionString))
-                    {
-                        connection.Open();
-                        SqlCommand command = new SqlCommand("VerificarCorreo", connection); // Asume que este SP también devuelve información del usuario
-                        command.CommandType = CommandType.StoredProcedure;
+                    ViewBag.MensajeExito = "Verificación completada con éxito. Ahora puede iniciar sesión.";
+                    return RedirectToAction("Login", "Home");
 
-                        command.Parameters.AddWithValue("@UID", uid);
-
-                        var reader = command.ExecuteReader();
-                        if (reader.Read())
-                        {
-                            if (reader.GetInt32(0) == 1) // Asegúrate de que el SP devuelve 1 para éxito
-                            {
-
-                                var Destinatario = reader.GetString(reader.GetOrdinal("CorreoContactoPrincipal"));
-                                var Token = reader.GetString(reader.GetOrdinal("Token"));
-                                // Aquí puedes enviar otro correo o realizar la acción deseada ahora que tienes el correo del usuario
-                                model.EnviarToken(Destinatario, Token); // Ajusta esto según tu necesidad
-
-                                TempData["MensajeExito"] = "Su correo ha sido verificado con éxito. Puede realizar el inicio de sesión.";
-                                TempData.Keep("MensajeExito");
-                                return RedirectToAction("Login", "Home");
-                            }
-                            else
-                            {
-                                ViewBag.MensajeError = reader.GetString(1); // Mensaje de error del SP
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.MensajeError = "Error al verificar el correo electrónico: " + ex.Message;
-                    return Content(ViewBag.MensajeError);
                 }
             }
-            ViewBag.MensajeError = "El token de verificación no es válido.";
-            return Content(ViewBag.MensajeError);
+
+            ViewBag.MensajeError = "Error durante la verificación. Por favor, intente de nuevo.";
+            return View(); // Asegúrate de manejar correctamente esta situación, posiblemente mostrando un mensaje de error.
         }
+
+        public ActionResult GetPaises()
+        {
+            var paises = model.GetPaises(); 
+            return Json(new SelectList(paises, "IDPais", "NombrePais"), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetProvinciasByPaisId(int paisId)
+        {
+            var provincias = model.GetProvincias(paisId); 
+            return Json(new SelectList(provincias, "IDProvincia", "NombreProvincia"), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetCantonesByProvinciaId(int provinciaId)
+        {
+            var cantones = model.GetCanton(provinciaId); 
+            return Json(new SelectList(cantones, "IDCanton", "NombreCanton"), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetDistritosByCantonId(int cantonId)
+        {
+            var distritos = model.GetDistrito(cantonId); 
+            return Json(new SelectList(distritos, "IDDistrito", "NombreDistrito"), JsonRequestBehavior.AllowGet);
+        }
+
     }
     }

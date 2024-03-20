@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "ReactivarCuenta";
+}
+
+<@section navbar{
+}
+<style>
+    /* Estilos para centrar el formulario en la página */
+    .center-screen {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 50vh;
+        flex-direction: column;
+    }
+</style>
+
+<link rel="stylesheet" href="~/Content/css/Camion.css">
+<form class="center-screen" action="@Url.Action("Index", "ReactivarCuenta")"  method="post">
+    <h2>Reactivar Cuenta</h2>
+    <p> Para recibir las instrucciones de reactivacion de cuenta coloque su correo electronico </p>
+    <div>
+        <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su correo electrónico" required>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Enviar solicitud</button>
+
+    </div>
+</form>
+<div class="contenedor">
+    <img src="~/Content/img/truck_icon_148218.png" alt="Camión" class="camion">
+</div>
+<script src="script.js"></script>
+
+@section footer{
+}

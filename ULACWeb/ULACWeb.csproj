@@ -93,6 +93,18 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.3.1.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=7.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.7.4.1\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=7.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.7.4.1\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=7.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.7.4.1\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=7.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.7.4.1\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.JSInterop, Version=3.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.JSInterop.3.1.0\lib\netstandard2.0\Microsoft.JSInterop.dll</HintPath>
     </Reference>
@@ -120,6 +132,9 @@
     <Reference Include="System.Formats.Asn1, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Formats.Asn1.8.0.0\lib\net462\System.Formats.Asn1.dll</HintPath>
     </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=7.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.7.4.1\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -138,11 +153,11 @@
     <Reference Include="System.Security.Cryptography.ProtectedData, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.ProtectedData.8.0.0\lib\net462\System.Security.Cryptography.ProtectedData.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.4.7.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.2\lib\net461\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.4.7.0\lib\net461\System.Text.Json.dll</HintPath>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -219,10 +234,13 @@
     <Compile Include="Controllers\AcercaDeController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DetallesOperacionController.cs" />
+    <Compile Include="Controllers\EnvioCorreoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\PreguntasSeguridadController.cs" />
+    <Compile Include="Controllers\ReactivarCuentaController.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
     <Compile Include="Controllers\SeguimientoController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
@@ -230,17 +248,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActividadModel.cs" />
+    <Compile Include="Controllers\CambioContraseñaController.cs" />
+    <Compile Include="Models\CambioContraseñaModel.cs" />
     <Compile Include="Models\DetalleOperacionModel.cs" />
     <Compile Include="Models\InicioModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PerfilModel.cs" />
+    <Compile Include="Controllers\RestablecerContraseñaController.cs" />
+    <Compile Include="Models\PreguntasSeguridadModel.cs" />
+    <Compile Include="Models\ReactivarCuentaModel.cs" />
     <Compile Include="Models\RegistroModel.cs" />
+    <Compile Include="Models\RestablecerContraseñaModel.cs" />
     <Compile Include="Models\SeguimientoModel.cs" />
     <Compile Include="Models\ServiciosModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\Camion.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\img\14562331996405.jpg" />
     <Content Include="Content\img\1hd.jpg" />
@@ -278,6 +304,7 @@
     <Content Include="Content\img\testimonial-3.jpg" />
     <Content Include="Content\img\testimonial-4.jpg" />
     <Content Include="Content\img\trucks-kenworth-wallpaper-preview.jpg" />
+    <Content Include="Content\img\truck_icon_148218.png" />
     <Content Include="Content\img\WhatsApp Image 2024-02-04 at 10.25.02 PM.jpeg" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\lib\animate\animate.css" />
@@ -437,12 +464,16 @@
     <Content Include="Views\Home\Servicio.cshtml" />
     <Content Include="Views\Home\AcercaDe.cshtml" />
     <Content Include="Views\Home\Registro.cshtml" />
+    <Content Include="Views\Home\RestablecerContraseña.cshtml" />
+    <Content Include="Views\Home\EnvioCorreo.cshtml" />
+    <Content Include="Views\Home\ErrorBloqueado.cshtml" />
+    <Content Include="Views\Home\ReactivarCuenta.cshtml" />
+    <Content Include="Views\Home\PreguntasSeguridad.cshtml" />
+    <Content Include="Views\Home\CambioContraseña.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AcercaDe\" />
-    <Folder Include="Views\Contact\" />
-    <Folder Include="Views\DetallesOperacion\" />
+    <Folder Include="Views\CambioContraseña\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

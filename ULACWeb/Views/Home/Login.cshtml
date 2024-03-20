@@ -26,21 +26,32 @@
                     <div class="bg-light text-center p-5 wow fadeIn" data-wow-delay="0.5s">
                         <form action="@Url.Action("Index", "Login")" id="" method="post">
                             <div class="form-group mb-4">
-                                <input name="Usuario" type="text" class="form-control border-0" placeholder="Nombre de Usuario" margin-bottom: 15px;">
+                                <input name="Usuario" id="Usuario" type="text" class="form-control border-0" placeholder="Nombre de Usuario" margin-bottom: 15px;">
                             </div>
 
-                            
+
                             <div class="position-relative">
                                 <div class="input-group">
-                                    <input type="password" class="form-control" name="Contraseña" id="Contraseña" placeholder="Contraseña" required>
+                                    <input type="password" class="form-control" name="Contraseñas" id="Contraseñas" placeholder="Contraseña" required>
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" type="button" id="togglePassword" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"><i class="fa fa-eye"></i></button>
                                     </div>
                                 </div>
-                                </div>
+                            </div>
 
                             <br />
-                                <button class="btn btn-primary w-100 py-3" type="submit">Iniciar Sesión</button>
+
+                            <div class="form-group mb-4">
+                                <input name="Token" id="Token" type="text" class="form-control border-0" placeholder="TOKEN">
+                            </div>
+
+                            <div class="mt-3">
+                                <a href="@Url.Action("RestablecerContraseña", "Home")" class="text-primary">Recuperar Cuenta</a>
+                            </div>
+                            <br />
+                  
+                            <br />
+                            <button class="btn btn-primary w-100 py-3" type="submit">Iniciar Sesión</button>
                         </form>
                     </div>
                 </div>
@@ -103,7 +114,7 @@
 
     <script>
         document.getElementById('togglePassword').addEventListener('click', function (e) {
-            const passwordInput = document.getElementById('Contraseña');
+            const passwordInput = document.getElementById('Contraseñas');
             const passwordIcon = this.querySelector('i');
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
@@ -120,9 +131,8 @@
     <script>
             jQuery(document).ready(function () {
                 jQuery('#loginForm').submit(function (e) {
-              e.preventDefault(); // Evitar el envío del formulario normalmente
-
-              // Realizar la solicitud POST al controlador
+              e.preventDefault();
+              
                     jQuery.ajax({
                   url: '@Url.Action("Index", "Login")',
                   type: 'POST',

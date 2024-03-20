@@ -10,27 +10,37 @@ using static ULACWeb.Models.RegistroModel;
 using System.Security.Cryptography;
 using System.Text;
 using System.Net.Mail;
+using System.Data.Entity;
+using Microsoft.IdentityModel.Tokens;
+using Org.BouncyCastle.Utilities.Encoders;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace ULACWeb.Models
 {
     public class RegistroModel
     {
+
+
+
         [Required(ErrorMessage = "El ID de su empresa es obligatorio")]
         public int IDEmpresa { get; set; }
+
+        [Required(ErrorMessage = "La Identificación es obligatorio")]
+        public string Identificacion { get; set; }
+
         [Required(ErrorMessage = "El nombre completo es obligatorio")]
-        public string NombreContactoPrincipal { get; set; }
+        public string Nombre { get; set; }
 
         [Required(ErrorMessage = "El Número de Teléfono es obligatorio")]
-        public string NumeroContactoPrincipal { get; set; }
+        public string Telefono { get; set; }
+        [Required(ErrorMessage = "El  Correo es obligatorio")]
+        public string Correo { get; set; }
 
-        [Required(ErrorMessage = "El País de Residencia es obligatorio")]
-        public string PaisResidencia { get; set; }
         [Required(ErrorMessage = "El Contraseña es obligatorio")]
         public string Contraseña { get; set; }
-        [Required(ErrorMessage = "La Usuario es obligatorio")]
-        public string Usuario { get; set; }
-        public string CorreoContactoPrincipal { get; set; }
-        public bool IsVerified { get; set; }
+
         [Required(ErrorMessage = "La selección de la pregunta es obligatoria")]
         public string Pregunta1 { get; set; }
         [Required(ErrorMessage = "La selección de la pregunta es obligatoria")]
@@ -55,32 +65,101 @@ namespace ULACWeb.Models
 
         public string AsuntoToken { get; set; }
         public string MensajeToken { get; set; }
-        public bool GuardarEnBaseDeDatos()
+
+        [Required(ErrorMessage = "Elegir el pais es obligatoria")]
+        public string NombrePais { get; set; }
+        [Required(ErrorMessage = "Elegir la provincia es obligatoria")]
+        public string NombreProvincia { get; set; }
+        [Required(ErrorMessage = "Elegir el canton es obligatoria")]
+        public string NombreCanton { get; set; }
+        [Required(ErrorMessage = "Elegir el distrito es obligatoria")]
+        public string NombreDistrito { get; set; }
+
+        public class Pais
+        {
+            public int IDPais { get; set; }
+            public string NombrePais { get; set; } 
+            public virtual ICollection<Provincia> Provincias { get; set; }
+        }
+
+        public class Provincia
+        {
+            public int IDProvincia { get; set; }
+            public int IDPais { get; set; }
+            public string NombreProvincia { get; set; }
+            public virtual Pais Pais { get; set; }
+            public virtual ICollection<Canton> Cantones { get; set; }
+        }
+
+        public class Canton
+        {
+            public int IDCanton { get; set; }
+            public string NombreCanton { get; set; }
+            public int IDProvincia { get; set; }
+            public virtual Provincia Provincia { get; set; }
+            public virtual ICollection<Distrito> Distritos { get; set; }
+        }
+
+        public class Distrito
+        {
+            public int IDDistrito { get; set; }
+            public string NombreDistrito { get; set; }
+            public int IDCanton { get; set; }
+            public virtual Canton Canton { get; set; }
+        }
+
+        public static string GenerarClaveSecreta()
+        {
+            var randomBytes = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomBytes);
+            }
+            return Convert.ToBase64String(randomBytes);
+        }
+
+
+
+        public bool EnviodeCorreoVerificacion()
         {
             try
             {
-                if (UsuarioYaRegistrado(CorreoContactoPrincipal))
-                {
-                    MensajeGeneral = "El correo electrónico ya está registrado.";
-                    return false;
-                    
-                }
+                var secretKeyString = ConfigurationManager.AppSettings["JWTSecret"];
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKeyString));
+                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
-                // Genera un token de verificación único y un UID
-                VerificationToken = Guid.NewGuid().ToString();
-                VerificationUID = Guid.NewGuid(); // Genera el UID
-                string formattedVerificationUID = VerificationUID.ToString().Trim(new char[] { '{', '}' });
-                // Genera un token de verificación único
 
-                var protectedToken = Convert.ToBase64String(
-                  ProtectedData.Protect(
-                    Encoding.UTF8.GetBytes(VerificationToken),
-                    null,
-                    DataProtectionScope.LocalMachine
-                  )
-                );
+                var tokenOptions = new JwtSecurityToken(
+                    issuer: "http://localhost:52512",
+                    audience: "http://localhost:52512",
+                    claims: new List<Claim>()
+                    {
+                        
+                        new Claim(ClaimTypes.Email, Correo),
+                        new Claim(ClaimTypes.Name, Nombre),
+                        new Claim("IDEmpresa" ,IDEmpresa.ToString()),
+                        new Claim("Identificacion",Identificacion),
+                        new Claim("Telefono", Telefono),
+                        new Claim("PaisResidencia", NombrePais),
+                        new Claim("Provincia", NombreProvincia),
+                        new Claim("Canton", NombreCanton),
+                        new Claim("Distrito", NombreDistrito),
+                        new Claim("Contraseña", Contraseña), 
+                        new Claim("Pregunta1", Pregunta1),
+                        new Claim("Pregunta2", Pregunta2),
+                        new Claim("Pregunta3", Pregunta3),
+                        new Claim("Respuesta1", Respuesta1),
+                        new Claim("Respuesta2", Respuesta2),
+                        new Claim("Respuesta3", Respuesta3)
 
-                string enlaceVerificacion = GenerarEnlaceVerificacion("http://localhost:52512/Registro/", VerificationUID);
+                    },
+                    expires: DateTime.Now.AddMinutes(30),
+                    signingCredentials: signinCredentials
+                        );
+
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+                string enlaceVerificacion = GenerarEnlaceVerificacion("http://localhost:52512/Registro/", tokenString);
+
                 string mensajeHtml = $@"
                                         <html>
                                         <head>
@@ -137,7 +216,7 @@ namespace ULACWeb.Models
                                             <div class='email-container'>
                                                 <div class='header'>ULAC - Verificación de Correo</div>
                                                 <div class='content'>
-                                                    <p>Hola {NombreContactoPrincipal},</p>
+                                                    <p>Hola {Nombre},</p>
                                                     <p>Gracias por registrarte en Transportes ULAC. Estamos emocionados que seas parte de nuestros asociados. Para completar tu proceso de registro y verificar tu correo electrónico, haz clic en el botón a continuación:</p>
                                                     <a href='{enlaceVerificacion}' class='btn-verify'>Verificar Cuenta</a>
                                                     <p>Si no has solicitado un registro en ULAC, puedes ignorar este correo.</p>
@@ -151,54 +230,102 @@ namespace ULACWeb.Models
                                         </html>";
 
 
-                Destinatario = CorreoContactoPrincipal;
+                Destinatario = Correo;
                 Asunto = "Verificación de correo electrónico para ULAC";
                 Mensaje = mensajeHtml;
-               
+
                 EnviarCorreoElectronico();
-                IsVerified = false;
                 MensajeGeneral = "Se ha enviado un correo electrónico de verificación a su dirección. Haga clic en el enlace para completar el registro."; ;
-                
-
-                string connectionString = ConfigurationManager.ConnectionStrings["SqlConexion"].ConnectionString;
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("InsertarUsuario", connection);
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    command.Parameters.AddWithValue("@IDEmpresa", IDEmpresa);
-                    command.Parameters.AddWithValue("@NombreContactoPrincipal", NombreContactoPrincipal);
-                    command.Parameters.AddWithValue("@NumeroContactoPrincipal", NumeroContactoPrincipal);
-                    command.Parameters.AddWithValue("@PaisResidencia", PaisResidencia);
-                    command.Parameters.AddWithValue("@Contraseña", Contraseña);
-                    command.Parameters.AddWithValue("@Usuario", Usuario);
-                    command.Parameters.AddWithValue("@CorreoContactoPrincipal", CorreoContactoPrincipal);
-                    command.Parameters.AddWithValue("@PreguntaSeguridad1", Pregunta1);
-                    command.Parameters.AddWithValue("@PreguntaSeguridad2", Pregunta2);
-                    command.Parameters.AddWithValue("@PreguntaSeguridad3", Pregunta3);
-                    command.Parameters.AddWithValue("@RespuestaSeguridad1", Respuesta1);
-                    command.Parameters.AddWithValue("@RespuestaSeguridad2", Respuesta2);
-                    command.Parameters.AddWithValue("@RespuestaSeguridad3", Respuesta3);
-                    command.Parameters.AddWithValue("@IsVerified", false);
-                    command.Parameters.AddWithValue("@VerificationToken", protectedToken);
-                    command.Parameters.AddWithValue("@VerificationUID", formattedVerificationUID);
-                    command.ExecuteNonQuery();
-                }
-
-                
 
                 return true;
             }
             catch (Exception ex)
             {
-                // Manejar cualquier excepción que ocurra al intentar guardar en la base de datos
-                MensajeGeneral = "Error al guardar en la base de datos: " + ex.Message;
+                MensajeGeneral = "Error al enviar el correo de verificación: " + ex.Message;
                 return false;
             }
         }
 
-        public void EnviarCorreoElectronico()
+        public bool GuardarDatosVerificados(string token)
+        {
+            try
+            {
+                Random random = new Random();
+                int tokenpersonal = random.Next(10000000, 100000000);
+                string tokensesion = tokenpersonal.ToString();
+                var handler = new JwtSecurityTokenHandler();
+                var tokenS = handler.ReadToken(token) as JwtSecurityToken;
+
+                if (tokenS != null)
+                {
+                    var IDEmpresa = tokenS.Claims.First(claim => claim.Type == "IDEmpresa").Value;
+                    var correo = tokenS.Claims.First(claim => claim.Type == ClaimTypes.Email).Value;
+                    var nombre = tokenS.Claims.First(claim => claim.Type == ClaimTypes.Name).Value;
+                    var identificacion = tokenS.Claims.First(claim => claim.Type == "Identificacion").Value;
+                    var telefono = tokenS.Claims.First(claim => claim.Type == "Telefono").Value;
+                    var paisResidencia = tokenS.Claims.First(claim => claim.Type == "PaisResidencia").Value;
+                    var provincia = tokenS.Claims.First(claim => claim.Type == "Provincia").Value;
+                    var canton = tokenS.Claims.First(claim => claim.Type == "Canton").Value;
+                    var distrito = tokenS.Claims.First(claim => claim.Type == "Distrito").Value;
+                    var contraseña = tokenS.Claims.First(claim => claim.Type == "Contraseña").Value;
+                    var pregunta1 = tokenS.Claims.First(claim => claim.Type == "Pregunta1").Value;
+                    var pregunta2 = tokenS.Claims.First(claim => claim.Type == "Pregunta2").Value;
+                    var pregunta3 = tokenS.Claims.First(claim => claim.Type == "Pregunta3").Value;
+                    var respuesta1 = tokenS.Claims.First(claim => claim.Type == "Respuesta1").Value;
+                    var respuesta2 = tokenS.Claims.First(claim => claim.Type == "Respuesta2").Value;
+                    var respuesta3 = tokenS.Claims.First(claim => claim.Type == "Respuesta3").Value;
+                    int.TryParse(paisResidencia, out int IDPaisResidencia);
+                    int.TryParse(provincia, out int IDProvincia);
+                    int.TryParse(canton, out int IDcanton);
+                    int.TryParse(distrito, out int IDdistrito);
+
+                    string connectionString = ConfigurationManager.ConnectionStrings["SqlConexion"].ConnectionString;
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("InsertarUsuario", connection);
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IDEmpresa", IDEmpresa);
+                        command.Parameters.AddWithValue("@Correo", correo);
+                        command.Parameters.AddWithValue("@Nombre", nombre);
+                        command.Parameters.AddWithValue("@Identificacion", identificacion);
+                        command.Parameters.AddWithValue("@Telefono", telefono);
+                        command.Parameters.AddWithValue("@IDPaisResidencia", IDPaisResidencia);
+                        command.Parameters.AddWithValue("@IDProvincia", IDProvincia);
+                        command.Parameters.AddWithValue("@IDCanton", IDcanton);
+                        command.Parameters.AddWithValue("@IDDistrito", IDdistrito);
+                        
+                        command.Parameters.AddWithValue("@Contraseña", contraseña);
+                        command.Parameters.AddWithValue("@Pregunta1", pregunta1);
+                        command.Parameters.AddWithValue("@Pregunta2", pregunta2);
+                        command.Parameters.AddWithValue("@Pregunta3", pregunta3);
+                        command.Parameters.AddWithValue("@Respuesta1", respuesta1);
+                        command.Parameters.AddWithValue("@Respuesta2", respuesta2);
+                        command.Parameters.AddWithValue("@Respuesta3", respuesta3);
+                        command.Parameters.AddWithValue("@Token", tokensesion);
+                        
+
+
+                        command.ExecuteNonQuery();
+                    }
+                    EnviarToken(correo, tokensesion);
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Token inválido.");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier excepción que ocurra al guardar los datos verificados en la base de datos
+                Console.WriteLine($"Error al guardar los datos verificados en la base de datos: {ex.Message}");
+                return false;
+            }
+        }
+    
+    public void EnviarCorreoElectronico()
         {
             using (SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587))
             {
@@ -311,30 +438,144 @@ namespace ULACWeb.Models
         }
 
 
-        private bool UsuarioYaRegistrado(string CorreoContactoPrincipal)
+
+
+       
+
+
+        public string GenerarEnlaceVerificacion(string urlBase, string token)
         {
+           
+            return $"{urlBase}Verificar?uid={token}";
+        }
+
+        public List<Pais> GetPaises()
+        {
+            List<Pais> paises = new List<Pais>();
             string connectionString = ConfigurationManager.ConnectionStrings["SqlConexion"].ConnectionString;
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                SqlCommand cmd = new SqlCommand("SELECT IDPais, NombrePais FROM Pais", connection);
                 connection.Open();
-                SqlCommand command = new SqlCommand("UsuarioYaRegistrado", connection);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@CorreoContactoPrincipal", CorreoContactoPrincipal);
 
-                var reader = command.ExecuteReader();
-                if (reader.Read())
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    return reader.GetInt32(0) == 1;
+                    Pais pais = new Pais()
+                    {
+                        IDPais = (int)reader["IDPais"],
+                        NombrePais = reader["NombrePais"].ToString()
+                    };
+                    paises.Add(pais);
                 }
-                return false;
             }
 
+            return paises;
         }
-        public string GenerarEnlaceVerificacion(string urlBase, Guid uid)
+
+        public List<Provincia> GetProvincias(int idPais)
         {
-            // Usa el UID en lugar del token para el enlace de verificación
-            return $"{urlBase}VerificarCorreo?uid={uid}";
+            List<Provincia> provincias = new List<Provincia>();
+            string connectionString = ConfigurationManager.ConnectionStrings["SqlConexion"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("ExtraerProvincia", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idPais", idPais); 
+
+                connection.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Provincia provincia = new Provincia()
+                    {
+                        IDProvincia = (int)reader["IDProvincia"],
+                        NombreProvincia = reader["NombreProvincia"].ToString(),
+                        IDPais = idPais 
+                    };
+                    provincias.Add(provincia);
+                }
+            }
+
+            return provincias;
         }
+        public List<Canton> GetCanton(int IDProvincia)
+        {
+            List<Canton> cantones = new List<Canton>();
+            string connectionString = ConfigurationManager.ConnectionStrings["SqlConexion"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("ExtraerCanton", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IDProvincia", IDProvincia); // Asegúrate que el parámetro se llame así en tu SP
+
+                connection.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Canton canton = new Canton()
+                    {
+                        IDCanton = (int)reader["IDCanton"],
+                        NombreCanton = reader["NombreCanton"].ToString(),
+                        IDProvincia = IDProvincia // Asumiendo que quieras mantener esta información aquí
+                    };
+                    cantones.Add(canton); // Añade 'canton', no 'cantones'
+                }
+            }
+
+            return cantones;
+        }
+        public List<Distrito> GetDistrito(int IDCanton)
+        {
+            List<Distrito> distritos = new List<Distrito>();
+            string connectionString = ConfigurationManager.ConnectionStrings["SqlConexion"].ConnectionString;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("ExtraerDistrito", connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IDCanton", IDCanton); // Asegúrate que el parámetro se llame así en tu SP
+
+                    connection.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Distrito distrito = new Distrito()
+                            {
+                                IDDistrito = (int)reader["IDDistrito"],
+                                NombreDistrito = reader["NombreDistrito"].ToString(),
+                                IDCanton = IDCanton // Asumiendo que quieras mantener esta información aquí
+                            };
+                            distritos.Add(distrito);
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                // Manejo específico de excepciones de SQL
+                Console.WriteLine($"Error SQL: {sqlEx.Message}");
+                // Considera registrar este error en un archivo de logs o manejarlo según las necesidades de tu aplicación.
+            }
+            catch (Exception ex)
+            {
+                // Manejo de otras excepciones
+                Console.WriteLine($"Error: {ex.Message}");
+                // Considera registrar este error en un archivo de logs o manejarlo según las necesidades de tu aplicación.
+            }
+
+            return distritos;
+        }
+
 
     }
 }

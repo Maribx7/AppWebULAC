@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ULACWeb.Models;
 using Newtonsoft.Json;
+using static ULACWeb.Models.ActividadModel;
 
 namespace ULACWeb.Controllers
 {
@@ -19,41 +20,69 @@ namespace ULACWeb.Controllers
         [HttpPost]
         public ActionResult Index(LoginModel model)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                int idEmpresa;
-                if (model.VerificarCredenciales(out idEmpresa))
+                if (ModelState.IsValid)
                 {
-                    // Almacenar el IDEmpresa en la sesión
-                    Session["IDEmpresa"] = idEmpresa;
+                    int idEmpresa = 0;
 
-                    // Crear la respuesta JSON
-                    var response = new
+                    if (model.VerificarCredenciales(out idEmpresa))
                     {
-                        success = true,
-                        message = "Inicio de sesión exitoso"
-                    };
 
-                   
+                        // Almacenar el IDEmpresa en la sesión
+                        Session["IDEmpresa"] = idEmpresa;
+                        Actividad actividadLogin = new Actividad
+                        {
+                            IDEmpresa = idEmpresa, // Necesitarás implementar este método
+                           
+                            TipoActividad = "Inicio de sesión",
+                            Detalles = "Inicio de sesión exitoso",
+                            IP = Request.UserHostAddress 
+                        };
+                        var IDEmpresa = idEmpresa.ToString();
+                        RegistroActividadesHelper.RegistrarActividad(actividadLogin);
+                        RegistroActividadesHelper.RegistrarUltimoIngreso(IDEmpresa, DateTime.Now);
+                        return RedirectToAction("Inicio", "Home");
+                    }
+                    else
+                    {
+                        model.VerificarNOCredenciales(out idEmpresa);
+                        Actividad actividadLogin = new Actividad
+                        {
+                            IDEmpresa = idEmpresa, // Necesitarás implementar este método
 
-                    // Convertir la respuesta a JSON
-                    var json = JsonConvert.SerializeObject(response);
+                            TipoActividad = "Inicio de sesión fallido",
+                            Detalles = "Inicio de sesión fallido. El nombre de usuario o la contraseña son incorrectos.",
+                            IP = Request.UserHostAddress
+                        };
 
-                    // Devolver la respuesta JSON
-                    return Content(json, "application/json");
+                        var IDEmpresa = idEmpresa.ToString();
+                        RegistroActividadesHelper.actividadLoginFallido(IDEmpresa);
+                        RegistroActividadesHelper.RegistrarActividad(actividadLogin);
+                        if (RegistroActividadesHelper.EstaUsuarioBloqueado(idEmpresa))
+                        {
+                            return RedirectToAction("ErrorBloqueado", "Home");
+                        }
+                        return Json(new { success = false, message = "El nombre de usuario o la contraseña son incorrectos." });
+
+                    }
                 }
                 else
                 {
-                    // Las credenciales son inválidas, agregar un mensaje de error y volver a mostrar el formulario de inicio de sesión
-                    return Json(new { success = false, message = "El nombre de usuario o la contraseña son incorrectos." });
-
+                    
+                    return Json(new { success = false, message = "Por favor, complete todos los campos." });
                 }
             }
-            else
+            catch (Exception ex)
             {
-                // El modelo no es válido, volver a mostrar el formulario de inicio de sesión con los mensajes de validación
-                return Json(new { success = false, message = "Por favor, complete todos los campos." });
+              
+                return Json(new { success = false, message = "Ocurrió un error inesperado. Por favor, intente de nuevo más tarde." });
             }
         }
+
+
     }
+
+
 }
