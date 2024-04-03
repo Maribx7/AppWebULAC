@@ -7,13 +7,16 @@
 
 
 <body>
-@section navbarUsuario{
-}
-@section carousel{
-}
+    @section navbarUsuario{
+
+
+    }
+    @section carousel{
+    }
 
     <!-- Contrato de Servicios -->
     <form id="formularioConfirmarServicio">
+
         <div class="container py-5">
             <h2 class="text-center mb-4">Selecciona tu servicio de transporte</h2>
             <div class="row justify-content-center">
@@ -83,14 +86,14 @@
                 <!-- Campos de origen y destino -->
 
                 <div class="search-form">
-                    <form id="search-form">
-                        <div class="mb-3">
-                            <label for="origenInput" class="form-label">Origen:</label>
-                            <select class="form-select" id="origenInput" required>
-                                <option value="">Selecciona el Origen</option>
-                            </select>
-                        </div>
-                    </form>
+
+                    <div class="mb-3">
+                        <label for="origenInput" class="form-label">Origen:</label>
+                        <select class="form-select" id="origenInput" required>
+                            <option value="">Selecciona el Origen</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <div class="mb-3">
@@ -107,22 +110,6 @@
                     <input type="text" class="form-control" id="tiempoEstimado" readonly>
                 </div>
 
-                <div class="search-form">
-                    <form id="search-form">
-                        <div class="mb-3">
-                            <label for="tipo_industria" class="form-label">Tipo de Industria:</label>
-                            <select class="form-select" id="tipo_industria" data-native-menu="false">
-                                <option value="">Seleccione el tipo de industria</option>
-                                <option value="Automotriz">Automotriz</option>
-                                <option value="Tecnología">Tecnología</option>
-                                <option value="Alimentaria">Alimentaria</option>
-                                <option value="Textil">Textil</option>
-                                <option value="Farmacéutica">Farmacéutica</option>
-                                <option value="Construcción">Construcción</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
                 <!-- Subtotal del servicio -->
                 <div class="mb-3">
                     <label for="subtotal" class="form-label">Subtotal:</label>
@@ -142,8 +129,8 @@
                     <label for="metodoPago" class="form-label">Método de Pago:</label>
                     <select class="form-select" id="metodoPago" required>
                         <option value="">Seleccione un método de pago</option>
-                        <option value="pagoCompleto">Pago Completo</option>
-                        <option value="pagoFraccionado">Pago Fraccionado</option>
+                        <option value="TarjetaCredito">Pago con tarjeta credito</option>
+                        <option value="Transferencia">Pago por transferencia</option>
                     </select>
                 </div>
 
@@ -151,39 +138,56 @@
                 <div id="detallesTarjeta" style="display: none;" margin-bottom: 1rem;>
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="numeroTarjeta">Número de tarjeta:</label>
-                            <input type="text" class="form-control" name="NumeroTarjeta" id="numeroTarjeta" placeholder="Ingrese el número de tarjeta">
+                            <label for="Identificacion">Identificacion:</label>
+                            <input type="text" class="form-control" name="Identificacion" id="Identificacion" placeholder="x-xxxx-xxxx">
                         </div>
-                        <div class="col-md-3">
-                            <label for="fechaVencimiento">Fecha de Vencimiento:</label>
-                            <input type="text" class="form-control" name="FechaVencimiento" id="fechaVencimiento" placeholder="MM/AA">
+                    <div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="numeroTarjeta">Número de tarjeta:</label>
+                                <input type="text" class="form-control" name="NumeroTarjeta" id="numeroTarjeta" placeholder="Ingrese el número de tarjeta">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="fechaVencimiento">Fecha de Vencimiento:</label>
+                                <input type="text" class="form-control" name="FechaVencimiento" id="fechaVencimiento" placeholder="AAAA-MM-DD">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="codigoSeguridad">Código de Seguridad:</label>
+                                <input type="text" class="form-control" name="CodigoSeguridad" id="codigoSeguridad" placeholder="Ingrese el código de seguridad">
+                            </div>
+                            <input type="hidden" name="idEmpresa" value="@Session["IDEmpresa"]" />
                         </div>
-                        <div class="col-md-3">
-                            <label for="codigoSeguridad">Código de Seguridad:</label>
-                            <input type="text" class="form-control" name="CodigoSeguridad" id="codigoSeguridad" placeholder="Ingrese el código de seguridad">
+                    </div>
+                <!-- Detalles de Transferencia -->
+                    <div id="detallesTransferencia" style="display: none;">
+                        <div class="mb-3">
+                            <label for="Identificacion">Identificacion/Cédula:<span style="color: red;">*Este será su usuario*</span></label>
+                            <input type="text" class="form-control" name="Identificacion" id="Identificacion" placeholder="x-xxxx-xxxx">
+                        </div>
+                        <div class="mb-3">
+                            <label for="numeroCuenta">Número de cuenta:</label>
+                            <input type="text" class="form-control" id="numeroCuenta" placeholder="Ingrese el número de cuenta bancaria">
                         </div>
                         <input type="hidden" name="idEmpresa" value="@Session["IDEmpresa"]" />
                     </div>
-                </div>
-
             </div>
             <!-- Botón de confirmar servicio -->
             <button type="submit" class="btn btn-primary" id="botonConfirmar">Confirmar Servicio</button>
         </div>
-      </form>
-    
-@section about{
-}
-@section fact{
-}
-@section service{
-}
-@section ubicacion{
-}
-@section testimonial{
-}   
-@section footer{
-}
+    </form>
+
+    @section about{
+    }
+    @section fact{
+    }
+    @section service{
+    }
+    @section ubicacion{
+    }
+    @section testimonial{
+    }
+    @section footer{
+    }
 
 
     <!-- JavaScript Libraries -->
@@ -192,6 +196,28 @@
 
 
     <!-- APIS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: '@Url.Action("ObtenerTipoCambio", "Inicio")',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if(data.success) {
+                        $("#tipoCambio").text("Tipo de cambio: ₡" + data.tipoCambio);
+                    } else {
+                        $("#tipoCambio").text("No se pudo obtener el tipo de cambio.");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $("#tipoCambio").text("No se pudo obtener el tipo de cambio.");
+                }
+            });
+        });
+    </script>
+
+
     <script>
         $(document).ready(function () {
             var username = "marilyn"; // Reemplaza con tu nombre de usuario de Geonames
@@ -275,96 +301,85 @@
             cargarCiudades($('#origenInput, #destinoInput'));
         });
     </script>
+
+
     <script>
         // Función para mostrar u ocultar los detalles de la tarjeta de crédito según el método de pago seleccionado
         document.getElementById('metodoPago').addEventListener('change', function () {
             var detallesTarjeta = document.getElementById('detallesTarjeta');
-            if (this.value === 'pagoFraccionado' || this.value === 'pagoCompleto') {
+            var detallesTransferencia = document.getElementById('detallesTransferencia');
+
+            // Ocultar ambos inicialmente
+            detallesTarjeta.style.display = 'none';
+            detallesTransferencia.style.display = 'none';
+
+            // Mostrar detalles según la selección
+            if (this.value === 'TarjetaCredito') {
                 detallesTarjeta.style.display = 'block';
-            } else {
-                detallesTarjeta.style.display = 'none';
+            } else if (this.value === 'Transferencia') {
+                detallesTransferencia.style.display = 'block';
             }
-
         });
-
     </script>
 
     <script>
-        var idEmpresa = @Session["IDEmpresa"];
-        // Función para enviar el formulario
-        function enviarFormulario() {
+    var idEmpresa = @Html.Raw(Json.Encode(Session["IDEmpresa"]));
+    // Función para enviar el formulario
+    function enviarFormulario() {
+        // Obtener los valores de los campos del formulario
+        var idEmpresa = @Html.Raw(Json.Encode(Session["IDEmpresa"]));
+        var idTipoPaquete = obtenerIdTipoPaqueteSeleccionado();
+        var Identificacion = $("#Identificacion").val();
+        var origen = $("#origenInput").val();
+        var destino = $("#destinoInput").val();
+        var tiempoEstimado = $("#tiempoEstimado").val();
+        var subtotal = parseFloat($("#subtotal").val());
+        var metodoPago = $("#metodoPago").val();
+        var total = parseFloat($("#total").val());
 
-            // Obtener los valores de los campos del formulario
-            var idEmpresa = @Session["IDEmpresa"];
-            var idTipoPaquete = obtenerIdTipoPaqueteSeleccionado();
-            var origen = $("#origenInput").val();
-            var destino = $("#destinoInput").val();
-            var tiempoEstimado = $("#tiempoEstimado").val();
-            var industria = $("#tipo_industria").val();
-            var subtotal = parseFloat($("#subtotal").val());
-            var metodoPago = $("#metodoPago").val();
-            var numeroTarjeta = $("#numeroTarjeta").val();
-            var fechaVencimiento = $("#fechaVencimiento").val();
-            var codigoSeguridad = $("#codigoSeguridad").val();
-            var total = parseFloat($("#total").val());
+        // Variables para tarjeta y transferencia
+        var numeroTarjeta = '', fechaVencimiento = '', codigoSeguridad = '';
+        var nombreBanco = '', numeroCuenta = '', motivoTransferencia = '';
 
-            // Crear un objeto con los datos del formulario
-            var datosFormulario = {
-                IDEmpresa: idEmpresa,
-                IDTipoPaquete: idTipoPaquete,
-                Origen: origen,
-                Destino: destino,
-                TiempoEstimado: tiempoEstimado,
-                industria,
-                Subtotal: subtotal,
-                MetodoPago: metodoPago,
-                NumeroTarjeta: numeroTarjeta,
-                FechaVencimiento: fechaVencimiento,
-                CodigoSeguridad: codigoSeguridad,
-                Total: total
-            };
-            var urlAccion = '@Url.Action("ConfirmarServicio", "Inicio")';
-            // Enviar los datos al controlador mediante una solicitud POST
-            $.post(urlAccion, datosFormulario, function (respuesta) {
-
-            });
+        // Chequear método de pago y asignar variables correspondientes
+        if (metodoPago === 'TarjetaCredito') {
+            numeroTarjeta = $("#numeroTarjeta").val();
+            fechaVencimiento = $("#fechaVencimiento").val();
+            codigoSeguridad = $("#codigoSeguridad").val();
+        } else if (metodoPago === 'Transferencia') {
+            nombreBanco = $("#nombreBanco").val();
+            numeroCuenta = $("#numeroCuenta").val();
+            motivoTransferencia = $("#motivoTransferencia").val();
         }
 
-        // Función para obtener el ID del tipo de paquete seleccionado
-        function obtenerIdTipoPaqueteSeleccionado() {
-            if ($("#tentonsCheckbox").is(":checked")) {
-                return $("#tentonsCheckbox").val();
-            } else if ($("#heavyhaulCheckbox").is(":checked")) {
-                return $("#heavyhaulCheckbox").val();
-            } else if ($("#heavytruckCheckbox").is(":checked")) {
-                return $("#heavytruckCheckbox").val();
-            } else {
-                return ""; // Puedes manejar este caso según tus necesidades
-            }
-        }
-        function mostrarPopup() {
-            var popup = document.createElement("div");
-            popup.style.width = "400px";
-            popup.style.height = "300px";
-            popup.style.border = "1px solid black";
-            popup.style.backgroundColor = "white";
-            popup.innerHTML = "<h1>¡Pago exitoso!</h1>";
-            document.body.appendChild(popup);
+        // Crear un objeto con los datos del formulario
+        var datosFormulario = {
+            IDEmpresa: idEmpresa,
+            IDTipoPaquete: idTipoPaquete,
+            Identificacion: Identificacion,
+            Origen: origen,
+            Destino: destino,
+            TiempoEstimado: tiempoEstimado,
+         
+            Subtotal: subtotal,
+            MetodoPago: metodoPago,
+            // Datos de tarjeta
+            NumeroTarjeta: numeroTarjeta,
+            FechaVencimiento: fechaVencimiento,
+            CodigoSeguridad: codigoSeguridad,
+            // Datos de transferencia
+          
+            NumeroCuenta: numeroCuenta,
+            MotivoTransferencia: motivoTransferencia,
+            Total: total
+        };
 
-            // Mostrar el popup
-            popup.style.display = "block";
-
-            // Ocultar el popup después de 5 segundos
-            setTimeout(function () {
-                popup.style.display = "none";
-            }, 5000);
-        }
-        // Manejar el clic en el botón de confirmar
-        $("#botonConfirmar").click(function (event) {
-        
-            
-            mostrarPopup(); // Prevenir el comportamiento predeterminado del botón
-            enviarFormulario(); // Llamar a la función para enviar el formulario
+        var urlAccion = '@Url.Action("ConfirmarServicio", "Inicio")';
+       
+        $.post(urlAccion, datosFormulario, function (respuesta) {
+           
         });
+    }
     </script>
+
 </body>

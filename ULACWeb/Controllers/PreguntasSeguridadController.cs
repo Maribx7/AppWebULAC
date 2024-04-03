@@ -23,8 +23,10 @@ namespace ULACWeb.Controllers
         {
             return View();
         }
+
         public ActionResult PreguntasSeguridad(string uid)
         {
+            var wsClient = new WSPrueba1.WSSoapClient();
 
             var handler = new JwtSecurityTokenHandler();
             string correo = null;
@@ -34,17 +36,13 @@ namespace ULACWeb.Controllers
                 correo = tokenS.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email)?.Value;
             }
 
-            var pregunta = model.ObtenerPreguntaSeguridadAleatoria(uid);
+            var pregunta = wsClient.ObtenerPreguntaSeguridadAleatoria(uid);
             if (pregunta == null)
             {
                 return RedirectToAction("Login", "Home");
             }
-            var viewModel = new PreguntasSeguridadModel
-            {
-                Correo = correo,
-                Pregunta = pregunta
-            };
-            return View("~/Views/Home/PreguntasSeguridad.cshtml", viewModel);
+         
+            return View("~/Views/Home/PreguntasSeguridad.cshtml");
 
         }
 

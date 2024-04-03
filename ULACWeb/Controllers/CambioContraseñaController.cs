@@ -18,6 +18,7 @@ namespace ULACWeb.Models
         [HttpPost]
         public ActionResult CambioContraseña(string IDUsuario, string NuevaContraseña, string correo)
         {
+            var wsClient = new WSPrueba1.WSSoapClient();
             try
             {
                 if (string.IsNullOrEmpty(IDUsuario) || string.IsNullOrEmpty(NuevaContraseña) || string.IsNullOrEmpty(correo))
@@ -26,8 +27,7 @@ namespace ULACWeb.Models
                     return RedirectToAction("Index", "Home");
                 }
 
-                CambioContraseñaModel cambioModel = new CambioContraseñaModel();
-                bool resultado = cambioModel.CambioContraseña(IDUsuario, NuevaContraseña, correo);
+                bool resultado = wsClient.CambioContraseña(IDUsuario, NuevaContraseña, correo);
 
                 if (resultado)
                 {
@@ -38,13 +38,13 @@ namespace ULACWeb.Models
                     ViewBag.Error = "Ha ocurrido un error al intentar cambiar la contraseña.";
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // Log ex o manejo de excepciones según sea necesario.
+                
                 ViewBag.Error = "Ha ocurrido un error interno.";
             }
 
-            return View("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

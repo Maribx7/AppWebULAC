@@ -18,10 +18,8 @@ namespace ULACWeb.Controllers
         [HttpPost]
         public ActionResult ObtenerDatosCliente(int IDEmpresa)
         {
-            PerfilModel model = new PerfilModel();
-
-            // Llamar al método ObtenerDatosCliente para obtener los datos del cliente
-            List<PerfilModel> listaClientes = model.ObtenerDatosCliente(IDEmpresa);
+            var wsClient = new WSPrueba1.WSSoapClient();
+            List<WSPrueba1.PerfilModel> listaClientes = wsClient.ObtenerDatosCliente(IDEmpresa).ToList();
 
             // Devolver los datos del cliente a la vista correspondiente
             return View("~/Views/Home/Perfil.cshtml", listaClientes);

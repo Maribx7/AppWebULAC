@@ -29,7 +29,10 @@ namespace ULACWeb.Models
 
         public bool CambioContraseña(string IDUsuario, string NuevaContraseña, string correo)
         {
-           
+            Random random = new Random();
+            int tokenpersonal = random.Next(10000000, 100000000);
+            string tokensesion = tokenpersonal.ToString();
+            var nuevoToken = GenerarNuevoToken(correo);
             try
             {
                 using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlConexion"].ConnectionString))
@@ -37,33 +40,16 @@ namespace ULACWeb.Models
                     using (var command = new SqlCommand("CambiarContraseña", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
-                        // Asegúrate de que los nombres de los parámetros coincidan con los definidos en tu procedimiento almacenado.
+                     
                         command.Parameters.AddWithValue("@Identificacion", IDUsuario);
                         command.Parameters.AddWithValue("@NuevaContraseña", NuevaContraseña);
-
+                        command.Parameters.AddWithValue("@NuevoToken", tokensesion);
                         connection.Open();
                         command.ExecuteNonQuery();
                       
                     }
                 }
-                Random random = new Random();
-                int tokenpersonal = random.Next(10000000, 100000000);
-                string tokensesion = tokenpersonal.ToString();
-                var nuevoToken = GenerarNuevoToken(correo);
-                using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlConexion"].ConnectionString))
-                {
-                    using (var command = new SqlCommand("spActualizarTokenUsuario", connection)) // Asume que este SP actualiza el token
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@IDUsuario", IDUsuario);
-                        command.Parameters.AddWithValue("@NuevoToken", tokensesion);
 
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                    }
-                }
-
-                // Finalmente, enviamos el nuevo token por correo
                 EnviarToken(correo, tokensesion);
                 return true;
                 

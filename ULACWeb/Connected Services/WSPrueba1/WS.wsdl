@@ -1,0 +1,1088 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="EnviodeCorreoVerificacion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Correo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDEmpresa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Identificacion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Telefono" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NombrePais" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NombreProvincia" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NombreCanton" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NombreDistrito" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Contraseña" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pregunta1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pregunta2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pregunta3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Respuesta1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Respuesta2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Respuesta3" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviodeCorreoVerificacionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EnviodeCorreoVerificacionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerarEnlaceVerificacion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="urlBase" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerarEnlaceVerificacionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerarEnlaceVerificacionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarCorreoElectronico">
+        <s:complexType />
+      </s:element>
+      <s:element name="EnviarCorreoElectronicoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GuardarDatosVerificados">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GuardarDatosVerificadosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GuardarDatosVerificadosResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Destinatario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarTokenResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetPaises">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetPaisesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPaisesResult" type="tns:ArrayOfPais" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPais">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Pais" nillable="true" type="tns:Pais" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Pais">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IDPais" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombrePais" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Provincias" type="tns:ArrayOfProvincia" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfProvincia">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Provincia" nillable="true" type="tns:Provincia" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Provincia">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IDProvincia" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IDPais" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreProvincia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pais" type="tns:Pais" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cantones" type="tns:ArrayOfCanton" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCanton">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Canton" nillable="true" type="tns:Canton" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Canton">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IDCanton" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreCanton" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IDProvincia" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Provincia" type="tns:Provincia" />
+          <s:element minOccurs="0" maxOccurs="1" name="Distritos" type="tns:ArrayOfDistrito" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDistrito">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Distrito" nillable="true" type="tns:Distrito" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Distrito">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IDDistrito" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NombreDistrito" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IDCanton" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Canton" type="tns:Canton" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetProvincias">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idPais" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProvinciasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProvinciasResult" type="tns:ArrayOfProvincia" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCanton">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IDProvincia" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCantonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCantonResult" type="tns:ArrayOfCanton" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDistrito">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IDCanton" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDistritoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDistritoResult" type="tns:ArrayOfDistrito" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerificarCredenciales">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Contraseña" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerificarCredencialesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="VerificarCredencialesResult" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="idEmpresa" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerIDEmpresa">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerIDEmpresaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerIDEmpresaResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerificarNOCredenciales">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Contraseña" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerificarNOCredencialesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="VerificarNOCredencialesResult" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="idEmpresa" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrarActividad">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="actividad" type="tns:Actividad" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Actividad">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IDEmpresa" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoActividad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Detalles" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaHora" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="IP" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RegistrarActividadResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="actividadLoginFallido">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identificacion" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="intentosMaximosFallidos" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actividadLoginFallidoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RegistrarUltimoIngreso">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IDEmpresa" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ultimoIngreso" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrarUltimoIngresoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EstaUsuarioBloqueado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idEmpresa" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EstaUsuarioBloqueadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EstaUsuarioBloqueadoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CambioContraseña">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IDUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NuevaContraseña" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="correo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CambioContraseñaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CambioContraseñaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerDetalles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IDEmpresa" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerDetallesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerDetallesResult" type="tns:ArrayOfDetalleOperacionModel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDetalleOperacionModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DetalleOperacionModel" nillable="true" type="tns:DetalleOperacionModel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DetalleOperacionModel">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IDOperacion" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Industria" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ruta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contacto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TiempoEstimado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Estado" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Guardar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IDEmpresa" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="IDTipoPaquete" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Origen" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Destino" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TiempoEstimado" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Industria" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Subtotal" type="s:float" />
+            <s:element minOccurs="0" maxOccurs="1" name="MetodoPago" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumeroTarjeta" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FechaVencimiento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CodigoSeguridad" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Total" type="s:float" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GuardarResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerDatosCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IDEmpresa" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerDatosClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerDatosClienteResult" type="tns:ArrayOfPerfilModel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPerfilModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PerfilModel" nillable="true" type="tns:PerfilModel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PerfilModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="NombreContactoPrincipal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroContactoPrincipal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CorreoContactoPrincipal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contraseña" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PaisResidencia" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerPreguntaSeguridadAleatoria">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="uid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerPreguntaSeguridadAleatoriaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerPreguntaSeguridadAleatoriaResult" type="tns:PreguntaSeguridad" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PreguntaSeguridad">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IDPregunta" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pregunta" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ValidarRespuestaSeguridad">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IDUsuario" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IDPregunta" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Respuesta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarRespuestaSeguridadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidarRespuestaSeguridadResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarInstruccion">
+        <s:complexType />
+      </s:element>
+      <s:element name="EnviarInstruccionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EnviarInstruccionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EnviodeCorreoVerificacionSoapIn">
+    <wsdl:part name="parameters" element="tns:EnviodeCorreoVerificacion" />
+  </wsdl:message>
+  <wsdl:message name="EnviodeCorreoVerificacionSoapOut">
+    <wsdl:part name="parameters" element="tns:EnviodeCorreoVerificacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerarEnlaceVerificacionSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerarEnlaceVerificacion" />
+  </wsdl:message>
+  <wsdl:message name="GenerarEnlaceVerificacionSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerarEnlaceVerificacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="EnviarCorreoElectronicoSoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarCorreoElectronico" />
+  </wsdl:message>
+  <wsdl:message name="EnviarCorreoElectronicoSoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarCorreoElectronicoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GuardarDatosVerificadosSoapIn">
+    <wsdl:part name="parameters" element="tns:GuardarDatosVerificados" />
+  </wsdl:message>
+  <wsdl:message name="GuardarDatosVerificadosSoapOut">
+    <wsdl:part name="parameters" element="tns:GuardarDatosVerificadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="EnviarTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarToken" />
+  </wsdl:message>
+  <wsdl:message name="EnviarTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPaisesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPaises" />
+  </wsdl:message>
+  <wsdl:message name="GetPaisesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPaisesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProvinciasSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProvincias" />
+  </wsdl:message>
+  <wsdl:message name="GetProvinciasSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProvinciasResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCantonSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCanton" />
+  </wsdl:message>
+  <wsdl:message name="GetCantonSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCantonResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDistritoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDistrito" />
+  </wsdl:message>
+  <wsdl:message name="GetDistritoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDistritoResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerificarCredencialesSoapIn">
+    <wsdl:part name="parameters" element="tns:VerificarCredenciales" />
+  </wsdl:message>
+  <wsdl:message name="VerificarCredencialesSoapOut">
+    <wsdl:part name="parameters" element="tns:VerificarCredencialesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerIDEmpresaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerIDEmpresa" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerIDEmpresaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerIDEmpresaResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerificarNOCredencialesSoapIn">
+    <wsdl:part name="parameters" element="tns:VerificarNOCredenciales" />
+  </wsdl:message>
+  <wsdl:message name="VerificarNOCredencialesSoapOut">
+    <wsdl:part name="parameters" element="tns:VerificarNOCredencialesResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarActividadSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistrarActividad" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarActividadSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistrarActividadResponse" />
+  </wsdl:message>
+  <wsdl:message name="actividadLoginFallidoSoapIn">
+    <wsdl:part name="parameters" element="tns:actividadLoginFallido" />
+  </wsdl:message>
+  <wsdl:message name="actividadLoginFallidoSoapOut">
+    <wsdl:part name="parameters" element="tns:actividadLoginFallidoResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarUltimoIngresoSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistrarUltimoIngreso" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarUltimoIngresoSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistrarUltimoIngresoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EstaUsuarioBloqueadoSoapIn">
+    <wsdl:part name="parameters" element="tns:EstaUsuarioBloqueado" />
+  </wsdl:message>
+  <wsdl:message name="EstaUsuarioBloqueadoSoapOut">
+    <wsdl:part name="parameters" element="tns:EstaUsuarioBloqueadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="CambioContraseñaSoapIn">
+    <wsdl:part name="parameters" element="tns:CambioContraseña" />
+  </wsdl:message>
+  <wsdl:message name="CambioContraseñaSoapOut">
+    <wsdl:part name="parameters" element="tns:CambioContraseñaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerDetallesSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerDetalles" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerDetallesSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerDetallesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GuardarSoapIn">
+    <wsdl:part name="parameters" element="tns:Guardar" />
+  </wsdl:message>
+  <wsdl:message name="GuardarSoapOut">
+    <wsdl:part name="parameters" element="tns:GuardarResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerDatosClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerDatosCliente" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerDatosClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerDatosClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPreguntaSeguridadAleatoriaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerPreguntaSeguridadAleatoria" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPreguntaSeguridadAleatoriaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerPreguntaSeguridadAleatoriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidarRespuestaSeguridadSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidarRespuestaSeguridad" />
+  </wsdl:message>
+  <wsdl:message name="ValidarRespuestaSeguridadSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidarRespuestaSeguridadResponse" />
+  </wsdl:message>
+  <wsdl:message name="EnviarInstruccionSoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarInstruccion" />
+  </wsdl:message>
+  <wsdl:message name="EnviarInstruccionSoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarInstruccionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WSSoap">
+    <wsdl:operation name="EnviodeCorreoVerificacion">
+      <wsdl:input message="tns:EnviodeCorreoVerificacionSoapIn" />
+      <wsdl:output message="tns:EnviodeCorreoVerificacionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerarEnlaceVerificacion">
+      <wsdl:input message="tns:GenerarEnlaceVerificacionSoapIn" />
+      <wsdl:output message="tns:GenerarEnlaceVerificacionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarCorreoElectronico">
+      <wsdl:input message="tns:EnviarCorreoElectronicoSoapIn" />
+      <wsdl:output message="tns:EnviarCorreoElectronicoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GuardarDatosVerificados">
+      <wsdl:input message="tns:GuardarDatosVerificadosSoapIn" />
+      <wsdl:output message="tns:GuardarDatosVerificadosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarToken">
+      <wsdl:input message="tns:EnviarTokenSoapIn" />
+      <wsdl:output message="tns:EnviarTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaises">
+      <wsdl:input message="tns:GetPaisesSoapIn" />
+      <wsdl:output message="tns:GetPaisesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProvincias">
+      <wsdl:input message="tns:GetProvinciasSoapIn" />
+      <wsdl:output message="tns:GetProvinciasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCanton">
+      <wsdl:input message="tns:GetCantonSoapIn" />
+      <wsdl:output message="tns:GetCantonSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDistrito">
+      <wsdl:input message="tns:GetDistritoSoapIn" />
+      <wsdl:output message="tns:GetDistritoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerificarCredenciales">
+      <wsdl:input message="tns:VerificarCredencialesSoapIn" />
+      <wsdl:output message="tns:VerificarCredencialesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerIDEmpresa">
+      <wsdl:input message="tns:ObtenerIDEmpresaSoapIn" />
+      <wsdl:output message="tns:ObtenerIDEmpresaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerificarNOCredenciales">
+      <wsdl:input message="tns:VerificarNOCredencialesSoapIn" />
+      <wsdl:output message="tns:VerificarNOCredencialesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarActividad">
+      <wsdl:input message="tns:RegistrarActividadSoapIn" />
+      <wsdl:output message="tns:RegistrarActividadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="actividadLoginFallido">
+      <wsdl:input message="tns:actividadLoginFallidoSoapIn" />
+      <wsdl:output message="tns:actividadLoginFallidoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarUltimoIngreso">
+      <wsdl:input message="tns:RegistrarUltimoIngresoSoapIn" />
+      <wsdl:output message="tns:RegistrarUltimoIngresoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EstaUsuarioBloqueado">
+      <wsdl:input message="tns:EstaUsuarioBloqueadoSoapIn" />
+      <wsdl:output message="tns:EstaUsuarioBloqueadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CambioContraseña">
+      <wsdl:input message="tns:CambioContraseñaSoapIn" />
+      <wsdl:output message="tns:CambioContraseñaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDetalles">
+      <wsdl:input message="tns:ObtenerDetallesSoapIn" />
+      <wsdl:output message="tns:ObtenerDetallesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Guardar">
+      <wsdl:input message="tns:GuardarSoapIn" />
+      <wsdl:output message="tns:GuardarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDatosCliente">
+      <wsdl:input message="tns:ObtenerDatosClienteSoapIn" />
+      <wsdl:output message="tns:ObtenerDatosClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPreguntaSeguridadAleatoria">
+      <wsdl:input message="tns:ObtenerPreguntaSeguridadAleatoriaSoapIn" />
+      <wsdl:output message="tns:ObtenerPreguntaSeguridadAleatoriaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarRespuestaSeguridad">
+      <wsdl:input message="tns:ValidarRespuestaSeguridadSoapIn" />
+      <wsdl:output message="tns:ValidarRespuestaSeguridadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarInstruccion">
+      <wsdl:input message="tns:EnviarInstruccionSoapIn" />
+      <wsdl:output message="tns:EnviarInstruccionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSSoap" type="tns:WSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EnviodeCorreoVerificacion">
+      <soap:operation soapAction="http://tempuri.org/EnviodeCorreoVerificacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerarEnlaceVerificacion">
+      <soap:operation soapAction="http://tempuri.org/GenerarEnlaceVerificacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarCorreoElectronico">
+      <soap:operation soapAction="http://tempuri.org/EnviarCorreoElectronico" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GuardarDatosVerificados">
+      <soap:operation soapAction="http://tempuri.org/GuardarDatosVerificados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarToken">
+      <soap:operation soapAction="http://tempuri.org/EnviarToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaises">
+      <soap:operation soapAction="http://tempuri.org/GetPaises" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProvincias">
+      <soap:operation soapAction="http://tempuri.org/GetProvincias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCanton">
+      <soap:operation soapAction="http://tempuri.org/GetCanton" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDistrito">
+      <soap:operation soapAction="http://tempuri.org/GetDistrito" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerificarCredenciales">
+      <soap:operation soapAction="http://tempuri.org/VerificarCredenciales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerIDEmpresa">
+      <soap:operation soapAction="http://tempuri.org/ObtenerIDEmpresa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerificarNOCredenciales">
+      <soap:operation soapAction="http://tempuri.org/VerificarNOCredenciales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarActividad">
+      <soap:operation soapAction="http://tempuri.org/RegistrarActividad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actividadLoginFallido">
+      <soap:operation soapAction="http://tempuri.org/actividadLoginFallido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarUltimoIngreso">
+      <soap:operation soapAction="http://tempuri.org/RegistrarUltimoIngreso" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EstaUsuarioBloqueado">
+      <soap:operation soapAction="http://tempuri.org/EstaUsuarioBloqueado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CambioContraseña">
+      <soap:operation soapAction="http://tempuri.org/CambioContraseña" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDetalles">
+      <soap:operation soapAction="http://tempuri.org/ObtenerDetalles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Guardar">
+      <soap:operation soapAction="http://tempuri.org/Guardar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDatosCliente">
+      <soap:operation soapAction="http://tempuri.org/ObtenerDatosCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPreguntaSeguridadAleatoria">
+      <soap:operation soapAction="http://tempuri.org/ObtenerPreguntaSeguridadAleatoria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarRespuestaSeguridad">
+      <soap:operation soapAction="http://tempuri.org/ValidarRespuestaSeguridad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarInstruccion">
+      <soap:operation soapAction="http://tempuri.org/EnviarInstruccion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSSoap12" type="tns:WSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EnviodeCorreoVerificacion">
+      <soap12:operation soapAction="http://tempuri.org/EnviodeCorreoVerificacion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerarEnlaceVerificacion">
+      <soap12:operation soapAction="http://tempuri.org/GenerarEnlaceVerificacion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarCorreoElectronico">
+      <soap12:operation soapAction="http://tempuri.org/EnviarCorreoElectronico" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GuardarDatosVerificados">
+      <soap12:operation soapAction="http://tempuri.org/GuardarDatosVerificados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarToken">
+      <soap12:operation soapAction="http://tempuri.org/EnviarToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaises">
+      <soap12:operation soapAction="http://tempuri.org/GetPaises" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProvincias">
+      <soap12:operation soapAction="http://tempuri.org/GetProvincias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCanton">
+      <soap12:operation soapAction="http://tempuri.org/GetCanton" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDistrito">
+      <soap12:operation soapAction="http://tempuri.org/GetDistrito" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerificarCredenciales">
+      <soap12:operation soapAction="http://tempuri.org/VerificarCredenciales" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerIDEmpresa">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerIDEmpresa" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerificarNOCredenciales">
+      <soap12:operation soapAction="http://tempuri.org/VerificarNOCredenciales" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarActividad">
+      <soap12:operation soapAction="http://tempuri.org/RegistrarActividad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actividadLoginFallido">
+      <soap12:operation soapAction="http://tempuri.org/actividadLoginFallido" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarUltimoIngreso">
+      <soap12:operation soapAction="http://tempuri.org/RegistrarUltimoIngreso" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EstaUsuarioBloqueado">
+      <soap12:operation soapAction="http://tempuri.org/EstaUsuarioBloqueado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CambioContraseña">
+      <soap12:operation soapAction="http://tempuri.org/CambioContraseña" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDetalles">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerDetalles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Guardar">
+      <soap12:operation soapAction="http://tempuri.org/Guardar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDatosCliente">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerDatosCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPreguntaSeguridadAleatoria">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerPreguntaSeguridadAleatoria" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarRespuestaSeguridad">
+      <soap12:operation soapAction="http://tempuri.org/ValidarRespuestaSeguridad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarInstruccion">
+      <soap12:operation soapAction="http://tempuri.org/EnviarInstruccion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WS">
+    <wsdl:port name="WSSoap" binding="tns:WSSoap">
+      <soap:address location="http://localhost:49179/WS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSSoap12" binding="tns:WSSoap12">
+      <soap12:address location="http://localhost:49179/WS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

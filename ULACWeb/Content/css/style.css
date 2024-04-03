@@ -18,7 +18,15 @@
     z-index: 99;
 }
 
+.tipo-cambio {
+    font-size: 0.8rem; /* Ajusta el tamaño del texto */
+    color: #6c757d; /* Cambia el color para que sea menos prominente, usando un gris por ejemplo */
+    margin-right: 20px; /* Añade margen derecho si necesitas separación */
+}
 
+    .tipo-cambio #tipoCambio {
+        font-weight: bold; /* Opcional: hace que el número del tipo de cambio destaque un poco */
+    }
 /*** Spinner ***/
 #spinner {
     opacity: 0;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System;
 using ULACWeb.Models;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace ULACWeb.Controllers
 {
@@ -21,12 +22,13 @@ namespace ULACWeb.Controllers
         // Método para obtener los datos de seguimiento de forma asíncrona
         public ActionResult ObtenerDetalleOperacion(int IDEmpresa)
         {
+            var wsClient = new WSPrueba1.WSSoapClient();
             if (Session["IDEmpresa"] != null)
             {
                 IDEmpresa = Convert.ToInt32(Session["IDEmpresa"]);
             }
-            DetalleOperacionModel model = new DetalleOperacionModel();
-            List<DetalleOperacionModel> Detalles = model.ObtenerDetalles(IDEmpresa);
+            
+            List<WSPrueba1.DetalleOperacionModel> Detalles = wsClient.ObtenerDetalles(IDEmpresa).ToList();
 
 
             return View("~/Views/Home/DetallesOperacion.cshtml", Detalles);

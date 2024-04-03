@@ -18,7 +18,7 @@ namespace ULACWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(LoginModel model)
+        public ActionResult Index(string Usuario,string Contraseña, string Token)
         {
 
             try
@@ -26,13 +26,14 @@ namespace ULACWeb.Controllers
                 if (ModelState.IsValid)
                 {
                     int idEmpresa = 0;
+                    var wsClient = new WSPrueba1.WSSoapClient();
 
-                    if (model.VerificarCredenciales(out idEmpresa))
+                    if (wsClient.VerificarCredenciales(Usuario, Contraseña, Token, out idEmpresa))
                     {
 
                         // Almacenar el IDEmpresa en la sesión
                         Session["IDEmpresa"] = idEmpresa;
-                        Actividad actividadLogin = new Actividad
+                        WSPrueba1.Actividad actividadLogin = new WSPrueba1.Actividad
                         {
                             IDEmpresa = idEmpresa, // Necesitarás implementar este método
                            
@@ -41,14 +42,14 @@ namespace ULACWeb.Controllers
                             IP = Request.UserHostAddress 
                         };
                         var IDEmpresa = idEmpresa.ToString();
-                        RegistroActividadesHelper.RegistrarActividad(actividadLogin);
-                        RegistroActividadesHelper.RegistrarUltimoIngreso(IDEmpresa, DateTime.Now);
+                        wsClient.RegistrarActividad(actividadLogin);
+                        wsClient.RegistrarUltimoIngreso(IDEmpresa, DateTime.Now);
                         return RedirectToAction("Inicio", "Home");
                     }
                     else
                     {
-                        model.VerificarNOCredenciales(out idEmpresa);
-                        Actividad actividadLogin = new Actividad
+                        wsClient.VerificarNOCredenciales(Usuario, Contraseña, Token, out idEmpresa);
+                        WSPrueba1.Actividad actividadLogin = new WSPrueba1.Actividad
                         {
                             IDEmpresa = idEmpresa, // Necesitarás implementar este método
 
@@ -58,9 +59,9 @@ namespace ULACWeb.Controllers
                         };
 
                         var IDEmpresa = idEmpresa.ToString();
-                        RegistroActividadesHelper.actividadLoginFallido(IDEmpresa);
-                        RegistroActividadesHelper.RegistrarActividad(actividadLogin);
-                        if (RegistroActividadesHelper.EstaUsuarioBloqueado(idEmpresa))
+                        wsClient.actividadLoginFallido(Usuario, 4);
+                        wsClient.RegistrarActividad(actividadLogin);
+                        if (wsClient.EstaUsuarioBloqueado(idEmpresa))
                         {
                             return RedirectToAction("ErrorBloqueado", "Home");
                         }
@@ -74,7 +75,7 @@ namespace ULACWeb.Controllers
                     return Json(new { success = false, message = "Por favor, complete todos los campos." });
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
               
                 return Json(new { success = false, message = "Ocurrió un error inesperado. Por favor, intente de nuevo más tarde." });
