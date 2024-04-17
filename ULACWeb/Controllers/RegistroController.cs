@@ -23,20 +23,22 @@ namespace ULACWeb.Controllers
 
 
         private RegistroModel model = new RegistroModel();
-
-        public ActionResult Index()
-        {
-
-            
-            return View();
-        }
         public class Persona
         {
             public string Nombre { get; set; }
             public string Identificacion { get; set; }
             public string Apellidos { get; set; }
             public string Telefono { get; set; }
+            public string Pais { get; set; }
+            public string Provincia { get; set; }
+            public string Canton { get; set; }
+            public string Distrito { get; set; }
         }
+        public ActionResult Index()
+        {
+            return View();
+        }
+
 
         //Trae segun la identificacion los datos de la persona
         [HttpPost]
@@ -83,15 +85,16 @@ namespace ULACWeb.Controllers
                 if (resultado)
                 {
                     return RedirectToAction("EnvioCorreo", "Home");
+
                 }
                 else
                 {
-                    return RedirectToAction("Login", "Home");
+                    ViewBag.ErrorRegistro = "Ya existe un usuario registrado con la información proporcionada.";
+                    return View("~/Views/Home/Registro.cshtml"); ;
                 }
             }
-             
-
         }
+
         public ActionResult Verificar(string uid)
         {
             var wsClient = new WSPrueba1.WSSoapClient();

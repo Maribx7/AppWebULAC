@@ -17,58 +17,58 @@ namespace ULACWeb.Controllers
     public class PreguntasSeguridadController : Controller
     {
 
-        PreguntasSeguridadModel model = new PreguntasSeguridadModel();
+      
         // GET: PreguntasSeguridad
         public ActionResult Index()
         {
-            return View();
+            return View("~/Views/Home/PreguntasSeguridad.cshtml");
         }
 
         public ActionResult PreguntasSeguridad(string uid)
         {
             var wsClient = new WSPrueba1.WSSoapClient();
-
             var handler = new JwtSecurityTokenHandler();
-            string correo = null;
             var tokenS = handler.ReadToken(uid) as JwtSecurityToken;
             if (tokenS != null)
             {
-                correo = tokenS.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email)?.Value;
-            }
+                var correo = tokenS.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email)?.Value;
+                var pregunta = wsClient.ObtenerPreguntaSeguridadAleatoria(uid);
+                if (pregunta == null)
+                {
+                    return RedirectToAction("Login", "Home");
+                }
 
-            var pregunta = wsClient.ObtenerPreguntaSeguridadAleatoria(uid);
-            if (pregunta == null)
-            {
-                return RedirectToAction("Login", "Home");
+                ViewBag.Pregunta = pregunta;
+                ViewBag.Correo = correo;  // Asumiendo que también quieres pasar el correo a la vista
+                return View("~/Views/Home/PreguntasSeguridad.cshtml");
             }
-         
-            return View("~/Views/Home/PreguntasSeguridad.cshtml");
-
+            return RedirectToAction("Login", "Home");
         }
 
 
-        [HttpPost]
-        public ActionResult ValidarRespuestas(string IDUsuario, int IDPregunta, string respuesta, string correo)
-        {
 
-            
-            TempData["IDUsuario"] = IDUsuario;
-            TempData["Correo"] = correo;
-            bool esCorrecta = model.ValidarRespuestaSeguridad(IDUsuario, IDPregunta, respuesta);
-            
-            if (esCorrecta)
-            {
+        //[HttpPost]
+        //public ActionResult ValidarRespuestas(string IDUsuario, int IDPregunta, string respuesta, string correo)
+        //{
 
-                return RedirectToAction("CambioContraseña", "Home", new { IDUsuario = IDUsuario, Correo = correo });
 
-            }
-            else
-            {
-              
-                TempData["Error"] = "La respuesta ingresada no es correcta. Por favor, intente nuevamente.";
-                return RedirectToAction("PreguntasSeguridad", "Home");
-            }
-        }
+        //    //TempData["IDUsuario"] = IDUsuario;
+        //    //TempData["Correo"] = correo;
+        //    ////bool esCorrecta = model.ValidarRespuestaSeguridad(IDUsuario, IDPregunta, respuesta);
+
+        //    //if (esCorrecta)
+        //    //{
+
+        //    //    return RedirectToAction("CambioContraseña", "Home", new { IDUsuario = IDUsuario, Correo = correo });
+
+        //    //}
+        //    //else
+        //    //{
+
+        //    //    TempData["Error"] = "La respuesta ingresada no es correcta. Por favor, intente nuevamente.";
+        //    //    return RedirectToAction("PreguntasSeguridad", "Home");
+        //    //}
+        //}
 
 
     }

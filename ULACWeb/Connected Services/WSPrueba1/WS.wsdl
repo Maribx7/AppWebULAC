@@ -235,8 +235,7 @@
       </s:element>
       <s:complexType name="Actividad">
         <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="IDEmpresa" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Identificacion" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="TipoActividad" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Detalles" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="FechaHora" type="s:dateTime" />
@@ -249,7 +248,7 @@
       <s:element name="actividadLoginFallido">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="identificacion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="intentosMaximosFallidos" type="s:int" />
           </s:sequence>
         </s:complexType>
@@ -414,7 +413,11 @@
         </s:complexType>
       </s:element>
       <s:element name="EnviarInstruccion">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Correo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="EnviarInstruccionResponse">
         <s:complexType>

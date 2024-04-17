@@ -23,8 +23,8 @@
     }
     <style>
         .form-group1 .form-control {
-            width: 100%; 
-            max-width: 100%; 
+            width: 100%;
+            max-width: 100%;
             box-sizing: border-box;
         }
     </style>
@@ -33,6 +33,12 @@
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <!-- Incluyendo jQuery y Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
     <div class="container-xxl py-5">
         <div class="container py-5">
@@ -61,140 +67,140 @@
                             </div>
                         }
 
-                    <form action="@Url.Action("Registrar", "Registro")" method="post">
+                        <form action="@Url.Action("Registrar", "Registro")" method="post">
 
-
-                        <div class="form-group">
-                            <label for="IDEmpresa">ID Empresa:<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" name="IDEmpresa" id="IDEmpresa" placeholder="ID Empresa" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Identificacion">Identificacion/Cédula:<span style="color: red;">*Este será su usuario*</span></label>
-                            <input type="text" class="form-control" name="Identificacion" id="Identificacion" placeholder="x-xxxx-xxxx" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Nombre">Nombre Completo:<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre Completo" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Apellidos">Apellidos:<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" name="Apellidos" id="Apellidos" placeholder="Apellidos" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Correol">Correo Electrónico:<span style="color: red;">*</span></label>
-                            <input type="email" class="form-control" name="Correo" id="Correo" placeholder="Correo Electrónico" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Telefono">Número de Teléfono:<span style="color: red;">*</span></label>
-                            <input type="tel" class="form-control" name="Telefono" id="Telefono" placeholder="Número de Teléfono" required>
-                        </div>
-
-                        <div class="form-group">
 
                             <div class="form-group">
-                                <label for="pais-dropdown">País:<span style="color: red;">*</span></label>
-                                <select id="pais-dropdown" name="NombrePais" class="form-control"><option value="">Seleccione un país</option></select>
+                                <label for="IDEmpresa">ID Empresa:<span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" name="IDEmpresa" id="IDEmpresa" placeholder="ID Empresa" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="provincia-dropdown">Provincia:<span style="color: red;">*</span></label>
-                                <select id="provincia-dropdown" name="NombreProvincia" class="form-control"><option value="">Primero seleccione un país</option></select>
+                                <label for="Identificacion">Identificacion/Cédula:<span style="color: red;">*Este será su usuario*</span></label>
+                                <input type="text" class="form-control" name="Identificacion" id="Identificacion" placeholder="x-xxxx-xxxx" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Nombre">Nombre Completo:<span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre Completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Apellidos">Apellidos:<span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" name="Apellidos" id="Apellidos" placeholder="Apellidos" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Correol">Correo Electrónico:<span style="color: red;">*</span></label>
+                                <input type="email" class="form-control" name="Correo" id="Correo" placeholder="Correo Electrónico" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Telefono">Número de Teléfono:<span style="color: red;">*</span></label>
+                                <input type="tel" class="form-control" name="Telefono" id="Telefono" placeholder="Número de Teléfono" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="canton-dropdown">Cantón:<span style="color: red;">*</span></label>
-                                <select id="canton-dropdown" name="NombreCanton" class="form-control"><option value="">Primero seleccione una provincia</option></select>
+
+                                <div class="form-group">
+                                    <label for="pais-dropdown">País:<span style="color: red;">*</span></label>
+                                    <select id="pais-dropdown" name="NombrePais" class="form-control"><option id="pais" value="">Seleccione un país</option></select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="provincia-dropdown">Provincia:<span style="color: red;">*</span></label>
+                                    <select id="provincia-dropdown" name="NombreProvincia" class="form-control"><option id="provincia" value="">Primero seleccione un país</option></select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="canton-dropdown">Cantón:<span style="color: red;">*</span></label>
+                                    <select id="canton-dropdown" name="NombreCanton" class="form-control"><option id="canton" value="">Primero seleccione una provincia</option></select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="distrito-dropdown">Distrito:<span style="color: red;">*</span></label>
+                                    <select id="distrito-dropdown" name="NombreDistrito" class="form-control"><option id="distrito" value="">Primero seleccione un cantón</option></select>
+                                </div>
+
+
                             </div>
 
                             <div class="form-group">
-                                <label for="distrito-dropdown">Distrito:<span style="color: red;">*</span></label>
-                                <select id="distrito-dropdown" name="NombreDistrito" class="form-control"><option value="">Primero seleccione un cantón</option></select>
-                            </div>
-
-
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Contraseña">Contraseña:<span style="color: red;">*</span></label>
-                            <div class="position-relative">
-                                <div class="input-group">
-                                    <input type="password" class="form-control" name="Contraseña" id="Contraseña" placeholder="Contraseña" required>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"><i class="fa fa-eye"></i></button>
+                                <label for="Contraseña">Contraseña:<span style="color: red;">*</span></label>
+                                <div class="position-relative">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" name="Contraseña" id="Contraseña" placeholder="Contraseña" required>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"><i class="fa fa-eye"></i></button>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div id="password-requirements" class="password-requirements d-none">
-                                    <ul>
-                                        <li id="length-requirement" class="text-danger"></li>
-                                        <li id="letter-requirement" class="text-danger"></li>
-                                        <li id="capital-requirement" class="text-danger"></li>
-                                        <li id="number-requirement" class="text-danger"></li>
-                                        <li id="special-requirement" class="text-danger"></li>
-                                    </ul>
-                                </div>
+                                    <div id="password-requirements" class="password-requirements d-none">
+                                        <ul>
+                                            <li id="length-requirement" class="text-danger"></li>
+                                            <li id="letter-requirement" class="text-danger"></li>
+                                            <li id="capital-requirement" class="text-danger"></li>
+                                            <li id="number-requirement" class="text-danger"></li>
+                                            <li id="special-requirement" class="text-danger"></li>
+                                        </ul>
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="ConfirmacionContraseña">Confirmar Contraseña:<span style="color: red;">*</span></label>
-                            <input type="password" class="form-control" id="ConfirmacionContraseña" placeholder="Confirmar Contraseña" required>
-                            <span class="error-contraseña" style="color:red; display:none;"></span>
-                        </div>
+                            <div class="form-group">
+                                <label for="ConfirmacionContraseña">Confirmar Contraseña:<span style="color: red;">*</span></label>
+                                <input type="password" class="form-control" id="ConfirmacionContraseña" placeholder="Confirmar Contraseña" required>
+                                <span class="error-contraseña" style="color:red; display:none;"></span>
+                            </div>
 
 
-                        <!-- Pregunta de seguridad y respuesta 1 -->
-                        <div class="form-group1">
-                            <label for="Pregunta1">Pregunta de Seguridad 1:<span style="color: red;">*</span></label>
-                            <select class="form-control" name="Pregunta1" id="Pregunta1" required>
-                                <option value="">Selecciona una pregunta</option>
-                                <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
-                                <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
-                                <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
-                                <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
-                                <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="Respuesta1" id="Respuesta1" placeholder="Respuesta 1" required>
-                        </div>
+                            <!-- Pregunta de seguridad y respuesta 1 -->
+                            <div class="form-group1">
+                                <label for="Pregunta1">Pregunta de Seguridad 1:<span style="color: red;">*</span></label>
+                                <select class="form-control" name="Pregunta1" id="Pregunta1" required>
+                                    <option value="">Selecciona una pregunta</option>
+                                    <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Respuesta1" id="Respuesta1" placeholder="Respuesta 1" required>
+                            </div>
 
-                        <!-- Pregunta de seguridad y respuesta 2 -->
-                        <div class="form-group1">
-                            <label for="Pregunta2">Pregunta de Seguridad 2:<span style="color: red;">*</span></label>
-                            <select class="form-control" name="Pregunta2" id="Pregunta2" required>
-                                <option value="">Selecciona una pregunta</option>
-                                <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
-                                <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
-                                <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
-                                <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
-                                <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="Respuesta2" id="Respuesta2" placeholder="Respuesta 2" required>
-                        </div>
+                            <!-- Pregunta de seguridad y respuesta 2 -->
+                            <div class="form-group1">
+                                <label for="Pregunta2">Pregunta de Seguridad 2:<span style="color: red;">*</span></label>
+                                <select class="form-control" name="Pregunta2" id="Pregunta2" required>
+                                    <option value="">Selecciona una pregunta</option>
+                                    <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Respuesta2" id="Respuesta2" placeholder="Respuesta 2" required>
+                            </div>
 
-                        <!-- Pregunta de seguridad y respuesta 3 -->
-                        <div class="form-group1">
-                            <label for="Pregunta3">Pregunta de Seguridad 3:<span style="color: red;">*</span></label>
-                            <select class="form-control" name="Pregunta3" id="Pregunta3" required>
-                                <option value="">Selecciona una pregunta</option>
-                                <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
-                                <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
-                                <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
-                                <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
-                                <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="Respuesta3" id="Respuesta3" placeholder="Respuesta 3" required>
-                        </div>
+                            <!-- Pregunta de seguridad y respuesta 3 -->
+                            <div class="form-group1">
+                                <label for="Pregunta3">Pregunta de Seguridad 3:<span style="color: red;">*</span></label>
+                                <select class="form-control" name="Pregunta3" id="Pregunta3" required>
+                                    <option value="">Selecciona una pregunta</option>
+                                    <option value="¿Cuál es el nombre de tu primera mascota?" style="width: 100%;">¿Cuál es el nombre de tu primera mascota?</option>
+                                    <option value="¿Cuál es tu comida favorita de la infancia?">¿Cuál es tu comida favorita de la infancia?</option>
+                                    <option value="¿Dónde conociste a tu pareja?">¿Dónde conociste a tu pareja?</option>
+                                    <option value="¿Cuál es el nombre de tu mejor amigo de la infancia?">¿Cuál es el nombre de tu mejor amigo de la infancia?</option>
+                                    <option value="¿Cuál es el nombre de tu abuelo materno?">¿Cuál es el nombre de tu abuelo materno?</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Respuesta3" id="Respuesta3" placeholder="Respuesta 3" required>
+                            </div>
 
 
-                        <button type="submit" class="btn btn-primary">Registrarse</button>
-                    </form>
+                            <button type="submit" class="btn btn-primary">Registrarse</button>
+                        </form>
 
                     </div>
                 </div>
@@ -204,18 +210,13 @@
 
     <!-- Sign-up End -->
     <!-- Modal de Bootstrap para confirmación -->
-
     <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Mensaje del Sistema</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
+                <div class="modal-header"> <h5 class="modal-title" id="modalLabel">Mensaje del Sistema</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body">
+                    Edit
+                    Full Screen
+                    Copy code
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -223,23 +224,24 @@
             </div>
         </div>
     </div>
-    <!-- Modal HTML -->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Campos Obligatorios</h4>
+    <!-- Modal -->
+
+    <div>
+        @if (ViewBag.ErrorRegistro != null)
+        {<div class="modal fade" id="errorModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Error al registrarse </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                        </div>
+                        <div class="modal-body"> <p>@ViewBag.ErrorRegistro</p> </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.href='@Url.Action("Login", "Home")'">Aceptar</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <p>Todos los campos son obligatorios.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
+            </div>}
     </div>
 
     @section footer{
@@ -248,11 +250,6 @@
 
     @section Scripts {
 
-        <!-- Incluyendo jQuery y Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
         <script>
             $(document).ready(function () {
@@ -273,6 +270,18 @@
                 });
             });
         </script>
+        <script>
+         $(document).ready(function () {
+                        var error = '@ViewBag.ErrorRegistro'; if (error)
+                        { $('#errorModal').modal({ backdrop: 'static', keyboard: false }); $('#errorModal').modal('show'); }
+         }); 
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('#successModal').modal('show');
+            });
+        </script>
 
         <script>
             document.getElementById('togglePassword').addEventListener('click', function (e) {
@@ -289,27 +298,28 @@
                 }
             });
         </script>
-        
+
         <script>
             //REGISTRO CIVIL
             $(document).ready(function () {
-               
+
                 $('#Identificacion').on('input', function () {
-                    var identificacion = $(this).val(); 
-                    if (identificacion.length > 0) { 
-                       
+                    var identificacion = $(this).val();
+                    if (identificacion.length > 0) {
+
                         $.ajax({
-                            url: '/Registro/BuscarPersona', 
+                            url: '/Registro/BuscarPersona',
                             type: 'POST',
                             data: { identificacion: identificacion },
                             success: function (data) {
 
-                                console.log("Nombre recibido:", data.Nombre);
-                                console.log("Apellidos recibidos:", data.Apellidos);
-                                console.log("Teléfono recibido:", data.Telefono);
                                 $('#Nombre').val(data.Nombre);
                                 $('#Apellidos').val(data.Apellidos);
                                 $('#Telefono').val(data.Telefono);
+                                $('#pais-dropdown').val(data.Pais).change();
+                                $('#provincia-dropdown').val(data.Provincia).change();
+                                $('#canton-dropdown').val(data.Canton).change();
+                                $('#distrito-dropdown').val(data.Distrito);
                             },
                             error: function (xhr, status, error) {
                                 // Manejar errores aquí
@@ -366,39 +376,39 @@
                     }
                 }
 
-                
+
                 $('#Contraseña, #ConfirmacionContraseña').on('input', function () {
                     verificarConfirmacionContraseña();
                 });
 
-                
+
                 verificarContraseñaSegura($('#Contraseña').val());
             });
         </script>
         <script>
             $(document).ready(function () {
                 $('#registrationForm').submit(function (event) {
-                    event.preventDefault(); 
-                    var formData = $(this).serialize(); 
+                    event.preventDefault();
+                    var formData = $(this).serialize();
 
                     $.ajax({
                         type: "POST",
-                        url: "/Registro/Registrar", 
+                        url: "/Registro/Registrar",
                         data: formData,
                         success: function (response) {
                             if (response.success) {
-                                
+
                                 $('.modal-body').text(response.message);
-                                $('#messageModal').modal('show'); 
+                                $('#messageModal').modal('show');
                             } else {
-                               
+
                                 $('.modal-body').text(response.message);
-                                $('#messageModal').modal('show'); 
+                                $('#messageModal').modal('show');
                             }
                         },
                         error: function (xhr, status, error) {
                             $('.modal-body').text('Hubo un error al procesar la solicitud.');
-                            $('#messageModal').modal('show'); 
+                            $('#messageModal').modal('show');
                         }
                     });
                 });
@@ -411,32 +421,47 @@
 
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
         <script>
+            //trae los paises, provincias, cantones y distritos
         $(function() {
-            
-            $.getJSON('@Url.Action("GetPaises", "Registro")', function(data) {
-                var items = "<option value=''>Seleccione un país</option>";
-                $.each(data, function(i, pais) {
-                    items += "<option value='" + pais.Value + "'>" + pais.Text + "</option>";
-                });
-                $("#pais-dropdown").html(items);
-            });
 
-            
-            $('#pais-dropdown').change(function() {
-                var paisId = $(this).val();
-                $.getJSON('@Url.Action("GetProvinciasByPaisId", "Registro")', { paisId: paisId }, function(data) {
-                    var items = "<option value=''>Seleccione una provincia</option>";
-                    $.each(data, function(i, provincia) {
-                        items += "<option value='" + provincia.Value + "'>" + provincia.Text + "</option>";
-                    });
-                    $("#provincia-dropdown").html(items);
-                    $("#canton-dropdown").html('<option value="">Primero seleccione una provincia</option>'); 
-                    $("#distrito-dropdown").html('<option value="">Primero seleccione un cantón</option>'); 
-                });
-            });
+               // Carga inicial de países
+    $.getJSON('@Url.Action("GetPaises", "Registro")', function(data) {
+        var items = "<option value=''>Seleccione un país</option>";
+        $.each(data, function(i, pais) {
+            items += "<option value='" + pais.Value + "'>" + pais.Text + "</option>";
+        });
+        $("#pais-dropdown").html(items);
+    });
 
-            
+    // Evento change para el dropdown de países
+    $('#pais-dropdown').change(function() {
+        var paisId = $(this).val();
+        if (paisId) {
+            $.getJSON('@Url.Action("GetProvinciasByPaisId", "Registro")', { paisId: paisId }, function(data) {
+                var items = "<option value=''>Seleccione una provincia</option>";
+                $.each(data, function(i, provincia) {
+                    items += "<option value='" + provincia.Value + "'>" + provincia.Text + "</option>";
+                });
+                $("#provincia-dropdown").html(items);
+                // Agregado: limpiar y resetear los dropdowns siguientes
+                $("#canton-dropdown").html('<option value="">Primero seleccione una provincia</option>');
+                $("#distrito-dropdown").html('<option value="">Primero seleccione un cantón</option>');
+
+                // Agregado: Dispara el evento change para cargar cantones automáticamente
+                // si hay una provincia preseleccionada (en caso de editar, por ejemplo)
+                $('#provincia-dropdown').change();
+            });
+        } else {
+            // Si no se selecciona país, limpia las provincias
+            $("#provincia-dropdown").html('<option value="">Seleccione un país primero</option>');
+            $("#canton-dropdown").html('<option value="">Primero seleccione una provincia</option>');
+            $("#distrito-dropdown").html('<option value="">Primero seleccione un cantón</option>');
+        }
+    });
+
+
             $('#provincia-dropdown').change(function() {
                 var provinciaId = $(this).val();
                 $.getJSON('@Url.Action("GetCantonesByProvinciaId", "Registro")', { provinciaId: provinciaId }, function(data) {
@@ -445,11 +470,11 @@
                         items += "<option value='" + canton.Value + "'>" + canton.Text + "</option>";
                     });
                     $("#canton-dropdown").html(items);
-                    $("#distrito-dropdown").html('<option value="">Primero seleccione un cantón</option>'); 
+                    $("#distrito-dropdown").html('<option value="">Primero seleccione un cantón</option>');
                 });
             });
 
-           
+
             $('#canton-dropdown').change(function() {
                 var cantonId = $(this).val();
                 $.getJSON('@Url.Action("GetDistritosByCantonId", "Registro")', { cantonId: cantonId }, function(data) {

@@ -28,13 +28,19 @@ namespace ULACWeb.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> ConfirmarServicio(int IDEmpresa, string Identificacion, string Origen, string Destino, string TiempoEstimado, string Industria, float Subtotal, string MetodoPago, string NumeroTarjeta, string FechaVencimiento, string CodigoSeguridad, float Total, int IDTipoPaquete)
+        public void ConfirmarServicio(int IDEmpresa, string Identificacion, string Origen, string Destino, string TiempoEstimado, float Subtotal, string MetodoPago, string NumeroTarjeta, string FechaVencimiento, string CodigoSeguridad, float Total, int IDTipoPaquete)
         {
-            // Preparar los datos para enviar en la solicitud POST
+            var wsClient = new WSPrueba1.WSSoapClient();
+            wsClient.Guardar(IDEmpresa, Identificacion, Origen, Destino, TiempoEstimado, Subtotal, MetodoPago, NumeroTarjeta, FechaVencimiento, CodigoSeguridad, Total, IDTipoPaquete);
+
+        }
+
+        private async Task<ActionResult> GuardarContrato(int IDEmpresa, int IDTipoPaquete, string Origen, string Destino, string TiempoEstimado, string Industria, float Subtotal, string MetodoPago, string NumeroTarjeta, string FechaVencimiento, string CodigoSeguridad, float Total)
+        {
             var requestData = new
             {
                 IDEmpresa,
-                Identificacion,
+                IDTipoPaquete,
                 Origen,
                 Destino,
                 TiempoEstimado,
@@ -44,33 +50,27 @@ namespace ULACWeb.Controllers
                 NumeroTarjeta,
                 FechaVencimiento,
                 CodigoSeguridad,
-                Total,
-                IDTipoPaquete
+                Total
             };
             var json = JsonConvert.SerializeObject(requestData);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            // Crear el HttpClient y hacer la solicitud al servicio web
             using (var client = new HttpClient())
             {
-                // Asegúrate de cambiar la URL al endpoint correcto de tu servicio web Python
-                var response = await client.PostAsync("http://localhost:5000/verificar_y_cargar_tarjeta", data);
-                string resultContent = await response.Content.ReadAsStringAsync();
-
-                // Aquí puedes manejar la respuesta. Por ejemplo, verificar si la solicitud fue exitosa
+                // Asegúrate que la URL apunte al método Guardar de tu servicio .asmx
+                var response = await client.PostAsync("http://localhost:port/NombreDelServicio.asmx/Guardar", data);
                 if (response.IsSuccessStatusCode)
                 {
-                    // Operación exitosa, haz algo aquí, como redirigir al usuario o mostrar un mensaje
                     return RedirectToAction("Inicio", "Home");
                 }
                 else
                 {
-                    // Manejar el caso de error
-                    ViewBag.ErrorMessage = "Hubo un problema al procesar el pago.";
+                    ViewBag.ErrorMessage = "No se pudo guardar el contrato.";
                     return View("Error");
                 }
             }
         }
+
         public async Task<ActionResult> ObtenerTipoCambio()
         {
             try

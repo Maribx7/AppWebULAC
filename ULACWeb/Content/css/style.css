@@ -52,6 +52,10 @@
 .btn.btn-secondary {
     color: #FFFFFF;
 }
+.my-button {
+    background-color: red;
+    color: white;
+}
 
 .btn-square {
     width: 38px;

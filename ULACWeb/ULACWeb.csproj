@@ -402,6 +402,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\BCCR\wsindicadoreseconomicos.wsdl" />
+    <Content Include="Connected Services\WSPrueba1\ULACWeb.WSPrueba1.EnviarInstruccionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\WSPrueba1\WS.disco" />
     <None Include="Connected Services\WSPrueba1\configuration91.svcinfo" />
     <None Include="Connected Services\WSPrueba1\configuration.svcinfo" />

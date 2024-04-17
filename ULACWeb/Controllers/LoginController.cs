@@ -16,15 +16,17 @@ namespace ULACWeb.Controllers
         {
             return View();
         }
+     
 
         [HttpPost]
         public ActionResult Index(string Usuario,string Contraseña, string Token)
         {
-
+            
             try
             {
                 if (ModelState.IsValid)
                 {
+                    
                     int idEmpresa = 0;
                     var wsClient = new WSPrueba1.WSSoapClient();
 
@@ -35,10 +37,10 @@ namespace ULACWeb.Controllers
                         Session["IDEmpresa"] = idEmpresa;
                         WSPrueba1.Actividad actividadLogin = new WSPrueba1.Actividad
                         {
-                            IDEmpresa = idEmpresa, // Necesitarás implementar este método
-                           
+                            Identificacion = Usuario,
                             TipoActividad = "Inicio de sesión",
                             Detalles = "Inicio de sesión exitoso",
+                            FechaHora = DateTime.Now,
                             IP = Request.UserHostAddress 
                         };
                         var IDEmpresa = idEmpresa.ToString();
@@ -51,15 +53,15 @@ namespace ULACWeb.Controllers
                         wsClient.VerificarNOCredenciales(Usuario, Contraseña, Token, out idEmpresa);
                         WSPrueba1.Actividad actividadLogin = new WSPrueba1.Actividad
                         {
-                            IDEmpresa = idEmpresa, // Necesitarás implementar este método
-
+                            Identificacion = Usuario, // Necesitarás implementar este método
+                            FechaHora = DateTime.Now,
                             TipoActividad = "Inicio de sesión fallido",
                             Detalles = "Inicio de sesión fallido. El nombre de usuario o la contraseña son incorrectos.",
                             IP = Request.UserHostAddress
                         };
 
                         var IDEmpresa = idEmpresa.ToString();
-                        wsClient.actividadLoginFallido(Usuario, 4);
+                        wsClient.actividadLoginFallido(Usuario.ToString(), 4);
                         wsClient.RegistrarActividad(actividadLogin);
                         if (wsClient.EstaUsuarioBloqueado(idEmpresa))
                         {

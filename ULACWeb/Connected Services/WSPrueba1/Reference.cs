@@ -403,10 +403,8 @@ namespace ULACWeb.WSPrueba1 {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private int IDEmpresaField;
-        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UsuarioField;
+        private string IdentificacionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TipoActividadField;
@@ -429,33 +427,20 @@ namespace ULACWeb.WSPrueba1 {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public int IDEmpresa {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Identificacion {
             get {
-                return this.IDEmpresaField;
+                return this.IdentificacionField;
             }
             set {
-                if ((this.IDEmpresaField.Equals(value) != true)) {
-                    this.IDEmpresaField = value;
-                    this.RaisePropertyChanged("IDEmpresa");
+                if ((object.ReferenceEquals(this.IdentificacionField, value) != true)) {
+                    this.IdentificacionField = value;
+                    this.RaisePropertyChanged("Identificacion");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string Usuario {
-            get {
-                return this.UsuarioField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsuarioField, value) != true)) {
-                    this.UsuarioField = value;
-                    this.RaisePropertyChanged("Usuario");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
         public string TipoActividad {
             get {
                 return this.TipoActividadField;
@@ -468,7 +453,7 @@ namespace ULACWeb.WSPrueba1 {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
         public string Detalles {
             get {
                 return this.DetallesField;
@@ -481,7 +466,7 @@ namespace ULACWeb.WSPrueba1 {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
         public System.DateTime FechaHora {
             get {
                 return this.FechaHoraField;
@@ -494,7 +479,7 @@ namespace ULACWeb.WSPrueba1 {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
         public string IP {
             get {
                 return this.IPField;
@@ -917,7 +902,7 @@ namespace ULACWeb.WSPrueba1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/RegistrarActividad", ReplyAction="*")]
         System.Threading.Tasks.Task<ULACWeb.WSPrueba1.RegistrarActividadResponse> RegistrarActividadAsync(ULACWeb.WSPrueba1.RegistrarActividadRequest request);
         
-        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento identificacion del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento Usuario del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/actividadLoginFallido", ReplyAction="*")]
         ULACWeb.WSPrueba1.actividadLoginFallidoResponse actividadLoginFallido(ULACWeb.WSPrueba1.actividadLoginFallidoRequest request);
         
@@ -979,11 +964,12 @@ namespace ULACWeb.WSPrueba1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ValidarRespuestaSeguridad", ReplyAction="*")]
         System.Threading.Tasks.Task<ULACWeb.WSPrueba1.ValidarRespuestaSeguridadResponse> ValidarRespuestaSeguridadAsync(ULACWeb.WSPrueba1.ValidarRespuestaSeguridadRequest request);
         
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento Correo del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EnviarInstruccion", ReplyAction="*")]
-        bool EnviarInstruccion();
+        ULACWeb.WSPrueba1.EnviarInstruccionResponse EnviarInstruccion(ULACWeb.WSPrueba1.EnviarInstruccionRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EnviarInstruccion", ReplyAction="*")]
-        System.Threading.Tasks.Task<bool> EnviarInstruccionAsync();
+        System.Threading.Tasks.Task<ULACWeb.WSPrueba1.EnviarInstruccionResponse> EnviarInstruccionAsync(ULACWeb.WSPrueba1.EnviarInstruccionRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1837,7 +1823,7 @@ namespace ULACWeb.WSPrueba1 {
     public partial class actividadLoginFallidoRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string identificacion;
+        public string Usuario;
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
         public int intentosMaximosFallidos;
@@ -1845,8 +1831,8 @@ namespace ULACWeb.WSPrueba1 {
         public actividadLoginFallidoRequestBody() {
         }
         
-        public actividadLoginFallidoRequestBody(string identificacion, int intentosMaximosFallidos) {
-            this.identificacion = identificacion;
+        public actividadLoginFallidoRequestBody(string Usuario, int intentosMaximosFallidos) {
+            this.Usuario = Usuario;
             this.intentosMaximosFallidos = intentosMaximosFallidos;
         }
     }
@@ -2404,6 +2390,74 @@ namespace ULACWeb.WSPrueba1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class EnviarInstruccionRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="EnviarInstruccion", Namespace="http://tempuri.org/", Order=0)]
+        public ULACWeb.WSPrueba1.EnviarInstruccionRequestBody Body;
+        
+        public EnviarInstruccionRequest() {
+        }
+        
+        public EnviarInstruccionRequest(ULACWeb.WSPrueba1.EnviarInstruccionRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class EnviarInstruccionRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string Correo;
+        
+        public EnviarInstruccionRequestBody() {
+        }
+        
+        public EnviarInstruccionRequestBody(string Correo) {
+            this.Correo = Correo;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class EnviarInstruccionResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="EnviarInstruccionResponse", Namespace="http://tempuri.org/", Order=0)]
+        public ULACWeb.WSPrueba1.EnviarInstruccionResponseBody Body;
+        
+        public EnviarInstruccionResponse() {
+        }
+        
+        public EnviarInstruccionResponse(ULACWeb.WSPrueba1.EnviarInstruccionResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class EnviarInstruccionResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool EnviarInstruccionResult;
+        
+        public EnviarInstruccionResponseBody() {
+        }
+        
+        public EnviarInstruccionResponseBody(bool EnviarInstruccionResult) {
+            this.EnviarInstruccionResult = EnviarInstruccionResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface WSSoapChannel : ULACWeb.WSPrueba1.WSSoap, System.ServiceModel.IClientChannel {
     }
@@ -2799,10 +2853,10 @@ namespace ULACWeb.WSPrueba1 {
             return base.Channel.actividadLoginFallido(request);
         }
         
-        public void actividadLoginFallido(string identificacion, int intentosMaximosFallidos) {
+        public void actividadLoginFallido(string Usuario, int intentosMaximosFallidos) {
             ULACWeb.WSPrueba1.actividadLoginFallidoRequest inValue = new ULACWeb.WSPrueba1.actividadLoginFallidoRequest();
             inValue.Body = new ULACWeb.WSPrueba1.actividadLoginFallidoRequestBody();
-            inValue.Body.identificacion = identificacion;
+            inValue.Body.Usuario = Usuario;
             inValue.Body.intentosMaximosFallidos = intentosMaximosFallidos;
             ULACWeb.WSPrueba1.actividadLoginFallidoResponse retVal = ((ULACWeb.WSPrueba1.WSSoap)(this)).actividadLoginFallido(inValue);
         }
@@ -2812,10 +2866,10 @@ namespace ULACWeb.WSPrueba1 {
             return base.Channel.actividadLoginFallidoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ULACWeb.WSPrueba1.actividadLoginFallidoResponse> actividadLoginFallidoAsync(string identificacion, int intentosMaximosFallidos) {
+        public System.Threading.Tasks.Task<ULACWeb.WSPrueba1.actividadLoginFallidoResponse> actividadLoginFallidoAsync(string Usuario, int intentosMaximosFallidos) {
             ULACWeb.WSPrueba1.actividadLoginFallidoRequest inValue = new ULACWeb.WSPrueba1.actividadLoginFallidoRequest();
             inValue.Body = new ULACWeb.WSPrueba1.actividadLoginFallidoRequestBody();
-            inValue.Body.identificacion = identificacion;
+            inValue.Body.Usuario = Usuario;
             inValue.Body.intentosMaximosFallidos = intentosMaximosFallidos;
             return ((ULACWeb.WSPrueba1.WSSoap)(this)).actividadLoginFallidoAsync(inValue);
         }
@@ -3033,12 +3087,29 @@ namespace ULACWeb.WSPrueba1 {
             return ((ULACWeb.WSPrueba1.WSSoap)(this)).ValidarRespuestaSeguridadAsync(inValue);
         }
         
-        public bool EnviarInstruccion() {
-            return base.Channel.EnviarInstruccion();
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ULACWeb.WSPrueba1.EnviarInstruccionResponse ULACWeb.WSPrueba1.WSSoap.EnviarInstruccion(ULACWeb.WSPrueba1.EnviarInstruccionRequest request) {
+            return base.Channel.EnviarInstruccion(request);
         }
         
-        public System.Threading.Tasks.Task<bool> EnviarInstruccionAsync() {
-            return base.Channel.EnviarInstruccionAsync();
+        public bool EnviarInstruccion(string Correo) {
+            ULACWeb.WSPrueba1.EnviarInstruccionRequest inValue = new ULACWeb.WSPrueba1.EnviarInstruccionRequest();
+            inValue.Body = new ULACWeb.WSPrueba1.EnviarInstruccionRequestBody();
+            inValue.Body.Correo = Correo;
+            ULACWeb.WSPrueba1.EnviarInstruccionResponse retVal = ((ULACWeb.WSPrueba1.WSSoap)(this)).EnviarInstruccion(inValue);
+            return retVal.Body.EnviarInstruccionResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ULACWeb.WSPrueba1.EnviarInstruccionResponse> ULACWeb.WSPrueba1.WSSoap.EnviarInstruccionAsync(ULACWeb.WSPrueba1.EnviarInstruccionRequest request) {
+            return base.Channel.EnviarInstruccionAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ULACWeb.WSPrueba1.EnviarInstruccionResponse> EnviarInstruccionAsync(string Correo) {
+            ULACWeb.WSPrueba1.EnviarInstruccionRequest inValue = new ULACWeb.WSPrueba1.EnviarInstruccionRequest();
+            inValue.Body = new ULACWeb.WSPrueba1.EnviarInstruccionRequestBody();
+            inValue.Body.Correo = Correo;
+            return ((ULACWeb.WSPrueba1.WSSoap)(this)).EnviarInstruccionAsync(inValue);
         }
     }
 }
